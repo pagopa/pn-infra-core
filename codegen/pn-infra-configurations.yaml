@@ -1,0 +1,121 @@
+
+envs:
+  dev:
+    vpcs:
+      - code: pn-core
+        idx: 1
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: dev.notifichedigitali.it
+
+accounts:
+  - code: pn-core
+    dns:
+      api:
+        - api
+        - webapi
+        - api-io
+        - api.radd
+        - api-selcpg
+      cdn:  
+        - portale-pa
+        - portale
+        - portale-login
+        - portale-pg
+        - status
+        - www
+    has_apigw: true
+    vpcs:
+      - code: pn-core
+        name: PN Core
+        primary_cidr: 10.<vpc_idx>.0.0/16
+        aws_svc:
+          net: aws
+          interfaces_endpoints:
+            - "sqs"
+            - "logs"
+            - "sns"
+            - "kms"
+            - "kinesis-streams"
+            - "elasticloadbalancing"
+            - "events"
+            - "ecr.api"
+            - "ecr.dkr"
+            - "ssmmessages"
+            - "ssm"
+            - "ec2messages"
+            - "ecs-agent"
+            - "ecs-telemetry"
+            - "ecs"
+        networks:
+          - code: public
+            name: Public
+            gateway: 
+              type: igw
+            has_nat: true
+            first_net_ip: 10.<vpc_idx>.1.0
+            net_size: 16
+
+          - code: api-gw
+            name: API-GW VpcLink
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.3.0
+            net_size: 16
+
+          - code: radd
+            name: RADD Ingress
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.5.0
+            net_size: 16
+
+          - code: core
+            name: PnCore
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.20.0
+            net_size: 256
+
+          - code: core-egress
+            name: PnCore Egress
+            gateway: 
+              type: nat
+              network: public
+            first_net_ip: 10.<vpc_idx>.40.0
+            net_size: 256
+
+          - code: conf-info
+            name: To Confidential Info
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.60.0
+            net_size: 256
+
+          - code: aws
+            name: AWS Services
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.70.0
+            net_size: 256
+            has_iface_endpoints: true
+            
+          - code: opensearch
+            name: OpenSearch
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.80.0
+            net_size: 256
+            
+        
+        # interconnections:
+        #   - from: api-gw
+        #     to: core
+        #   - from: radd
+        #     to: core
+        #   - from: core
+        #     to: core-egress
+        #   - from: core-egress
+        #     to: public
+        #   - from: core
+        #     to: conf-info
+        #   - from: core
+        #     to: conf-info
+        #   - from: core
+        #     to: opensearch
+  
