@@ -19,10 +19,10 @@ provider "aws" {
 # create an S3 bucket to store the state file in
 
 resource "aws_s3_bucket" "terraform_states" {
-  bucket = "terraform-backend-eu-south-1-${data.aws_caller_identity.current.account_id}-001"
+  bucket = "terraform-backend-eu-south-1-${data.aws_caller_identity.current.account_id}"
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = merge(var.tags, {
