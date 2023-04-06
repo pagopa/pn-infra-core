@@ -16,6 +16,16 @@ variable "how_many_az" {
   description = "How many Availability Zone we have to use"
 }
 
+variable "pn_core_aws_account_id" {
+  type        = string
+  description = "pn-core current environment AWS Account id"
+}
+
+variable "pn_confinfo_aws_account_id" {
+  type        = string
+  description = "pn-confidential current environment AWS Account id"
+}
+
 
 variable "dns_zone" {
   type        = string
