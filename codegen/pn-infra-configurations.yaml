@@ -12,6 +12,8 @@ envs:
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
+      - code: pn-radd
+        aws_id: "830192246553"  # Stringhe non numeri
 
 accounts:
   - code: pn-core
@@ -23,10 +25,10 @@ accounts:
         - api.radd
         - api-selcpg
       cdn:  
-        - portale-pa
-        - portale
+        #- enti
+        #- cittadini
         - portale-login
-        - portale-pg
+        #- imprese
         - status
         - www
     has_apigw: true
@@ -52,6 +54,9 @@ accounts:
             - "ecs-agent"
             - "ecs-telemetry"
             - "ecs"
+            - "secretsmanager"
+            - "monitoring"
+            - "xray"
         networks:
           - code: public
             name: Public
@@ -66,18 +71,21 @@ accounts:
             gateway: null
             first_net_ip: 10.<vpc_idx>.3.0
             net_size: 16
+            nlb: true
 
           - code: radd
             name: RADD Ingress
             gateway: null
             first_net_ip: 10.<vpc_idx>.5.0
             net_size: 16
+            nlb: true
 
           - code: core
             name: PnCore
             gateway: null
             first_net_ip: 10.<vpc_idx>.20.0
             net_size: 256
+            export_cidrs: true
 
           - code: core-egress
             name: PnCore Egress
@@ -86,12 +94,14 @@ accounts:
               network: public
             first_net_ip: 10.<vpc_idx>.40.0
             net_size: 256
+            export_cidrs: true
 
-          - code: conf-info
+          - code: to_confinfo
             name: To Confidential Info
             gateway: null
             first_net_ip: 10.<vpc_idx>.60.0
             net_size: 256
+            export_cidrs: true
 
           - code: aws
             name: AWS Services
@@ -105,6 +115,7 @@ accounts:
             gateway: null
             first_net_ip: 10.<vpc_idx>.80.0
             net_size: 256
+            export_cidrs: true
             
         
         # interconnections:

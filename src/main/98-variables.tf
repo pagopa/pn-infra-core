@@ -26,6 +26,11 @@ variable "pn_confinfo_aws_account_id" {
   description = "pn-confidential current environment AWS Account id"
 }
 
+variable "pn_radd_aws_account_id" {
+  type        = string
+  description = "pn-radd current environment AWS Account id"
+}
+
 
 variable "dns_zone" {
   type        = string
@@ -105,4 +110,34 @@ variable "vpc_endpoints_pn_core" {
   description = "Endpoint List"
 }
 
+
+variable "vpc_pn_core_core_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of core subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_core_egress_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of core_egres subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_api_gw_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of API-GW ingress NLB subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_radd_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of RADD ingress NLB subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_opensearch_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of OpenSearch subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_to_confinfo_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of subnets containing connectivity to confinfo account in VPC pn-core"
+}
 
