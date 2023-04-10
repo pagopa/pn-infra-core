@@ -113,6 +113,18 @@ resource "aws_lb_target_group" "pn_core_api_gw_nlb_8080_to_alb_8080" {
   tags = {
     "Description": "PN Core - Web Api GW Ingress NLB to ALB - Target Group"
   }
+
+  health_check {
+    enabled = true
+    matcher = "200-499"
+  }
+}
+# - API-GW (Web) NLB target group for HTTP attachement
+resource "aws_lb_target_group_attachment" "pn_core_api_gw_nlb_8080_to_alb_8080" {
+  target_group_arn  = aws_lb_target_group.pn_core_api_gw_nlb_8080_to_alb_8080.arn
+  port              = 8080
+
+  target_id         = aws_lb.pn_core_ecs_alb.arn
 }
 
 
@@ -176,5 +188,60 @@ resource "aws_lb_target_group" "pn_core_radd_nlb_8080_to_alb_8080" {
   tags = {
     "Description": "PN Core - RADD NLB to ALB - Target Group"
   }
+
+  health_check {
+    enabled = true
+    matcher = "200-499"
+  }
+}
+# - RADD NLB target group for HTTP attachmet
+resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_8080_to_alb_8080" {
+  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_8080_to_alb_8080.arn
+  port              = 8080
+
+  target_id         = aws_lb.pn_core_ecs_alb.arn
 }
 
+# - RADD NLB listener for HTTPS
+resource "aws_lb_listener" "pn_core_radd_nlb_8443_to_nlb_8080" {
+  load_balancer_arn = aws_lb.pn_core_radd_nlb.arn
+  protocol = "TLS"
+  port     = 8443
+  
+  alpn_policy = "None"
+  ssl_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn = module.acm_api["api.radd"].acm_certificate_arn
+  
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_8443_to_nlb_8080.arn
+  }
+}
+# - RADD NLB target group for HTTPS
+resource "aws_lb_target_group" "pn_core_radd_nlb_8443_to_nlb_8080" {
+  name_prefix = "RaddT-"
+  vpc_id      = module.vpc_pn_core.vpc_id
+
+  port        = 8080
+  protocol    = "TCP"
+  target_type = "ip"
+  
+  tags = {
+    "Description": "PN Core - RADD NLB TLS termination - Target Group"
+  }
+
+  health_check {
+    enabled = true
+    path = "/"
+    matcher = "200-499"
+  }
+}
+resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_8443_to_nlb_8080" {
+  count = var.how_many_az
+
+  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_8443_to_nlb_8080.arn
+  port              = 8080
+
+  target_id         = cidrhost( local.Core_NlbRadd_SubnetsCidrs[count.index], 8)
+  availability_zone = local.azs_names[count.index]
+}
