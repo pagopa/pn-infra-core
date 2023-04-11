@@ -101,22 +101,3 @@ output "Core_SandboxSafeStorageBaseUrl" {
   description = "EndpointUrl to reach SafeStorage"
 }
 
-output "Core_CognitoUserPoolArn" {
-  value = ""
-  description = ""
-}
-
-output "Core_CognitoClientId" {
-  value = ""
-  description = ""
-}
-
-output "Core_OpenSearchArn" {
-  value = ""
-  description = ""
-}
-
-output "OpenSearchClusterEndpoint" {
-  value = ""
-  description = ""
-}
