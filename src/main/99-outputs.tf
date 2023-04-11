@@ -77,5 +77,46 @@ output "Core_NetworkLoadBalancerLink" {
 
 output "Core_CustomDomainsRequired" {
   value = "false"
+  description = "Cloudformation neet to build API-GW custom domain"
 }
 
+
+output "Core_SafeStorageAccountId" {
+  value = var.pn_confinfo_aws_account_id
+  description = "Safe Storage will be deployed into confinfo account"
+}
+
+output "Core_ConfidentialInfoAccountId" {
+  value = var.pn_confinfo_aws_account_id
+  description = "Confidential Information account id"
+}
+
+output "Core_HelpdeskAccountId" {
+  value = var.pn_core_aws_account_id
+  description = "Helpdesk will be merged into pn-core"
+}
+
+output "Core_SandboxSafeStorageBaseUrl" {
+  value = "http://${aws_vpc_endpoint.to_safestorage_extch.dns_entry[0].dns_name}:8080/"
+  description = "EndpointUrl to reach SafeStorage"
+}
+
+output "Core_CognitoUserPoolArn" {
+  value = ""
+  description = ""
+}
+
+output "Core_CognitoClientId" {
+  value = ""
+  description = ""
+}
+
+output "Core_OpenSearchArn" {
+  value = ""
+  description = ""
+}
+
+output "OpenSearchClusterEndpoint" {
+  value = ""
+  description = ""
+}
