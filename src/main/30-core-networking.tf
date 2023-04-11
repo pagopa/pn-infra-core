@@ -105,13 +105,36 @@ module "vpc_endpoints_pn_core" {
 
 
 
+resource "aws_security_group" "vpc_pn_core__secgrp_toconfidentialinfo" {
+  
+  name_prefix = "pn-core_vpc-toconfinfo-secgrp"
+  description = "Allow HTTP_8080 inbound traffic"
+  vpc_id      = module.vpc_pn_core.vpc_id
+
+  ingress {
+    description = "8080 from VPC"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_pn_core_primary_cidr]
+  }
+  
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
+
 # PRIVATE LINK ENDPOINTS TO DataVault
 resource "aws_vpc_endpoint" "to_data_vault" {
   vpc_id            = module.vpc_pn_core.vpc_id
   service_name      = var.pn_core_to_data_vault_vpcse
   vpc_endpoint_type = "Interface"
 
-  security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_tls.id ]
+  security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_toconfidentialinfo.id ]
 
   subnet_ids          = local.Core_ToConfinfo_SubnetsIds
   private_dns_enabled = false
@@ -125,7 +148,7 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
   service_name      = var.pn_core_to_extch_safestorage_vpcse
   vpc_endpoint_type = "Interface"
 
-  security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_tls.id ]
+  security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_toconfidentialinfo.id ]
 
   subnet_ids          = local.Core_ToConfinfo_SubnetsIds
   private_dns_enabled = false
