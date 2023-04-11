@@ -9,6 +9,10 @@ envs:
       - code: pn-core
         base_dns: dev.notifichedigitali.it
         aws_id: "830192246553" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
+
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri

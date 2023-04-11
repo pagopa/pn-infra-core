@@ -7,6 +7,8 @@ cdn_domains = ["portale-login","status","www"]
 apigw_custom_domains = ["api","webapi","api-io","api.radd","api-selcpg"]
   
 pn_core_aws_account_id = "830192246553"
+pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
+pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
 pn_confinfo_aws_account_id = "089813480515"
 pn_radd_aws_account_id = "830192246553"
 

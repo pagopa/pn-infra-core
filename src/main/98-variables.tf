@@ -32,6 +32,19 @@ variable "pn_radd_aws_account_id" {
 }
 
 
+variable "pn_core_to_data_vault_vpcse" {
+  type        = string
+  description = "Confinfo VPC Service endpoint exposing DataVault services"
+}
+
+variable "pn_core_to_extch_safestorage_vpcse" {
+  type        = string
+  description = "Confinfo VPC Service endpoint exposing SafeStorage and External Channel services"
+}
+
+
+
+
 variable "dns_zone" {
   type        = string
   description = "Dns zone used for the environment"

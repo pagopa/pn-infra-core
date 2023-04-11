@@ -103,3 +103,32 @@ module "vpc_endpoints_pn_core" {
   )
 }
 
+
+
+# PRIVATE LINK ENDPOINTS TO DataVault
+resource "aws_vpc_endpoint" "to_data_vault" {
+  vpc_id            = module.vpc_pn_core.vpc_id
+  service_name      = var.pn_core_to_data_vault_vpcse
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_tls.id ]
+
+  subnet_ids          = local.Core_ToConfinfo_SubnetsIds
+  private_dns_enabled = false
+
+  tags                = { Name = "Endpoint to pn-data-vault"}
+}
+
+# PRIVATE LINK ENDPOINTS TO SafeStorage, EternalChannel
+resource "aws_vpc_endpoint" "to_safestorage_extch" {
+  vpc_id            = module.vpc_pn_core.vpc_id
+  service_name      = var.pn_core_to_extch_safestorage_vpcse
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_tls.id ]
+
+  subnet_ids          = local.Core_ToConfinfo_SubnetsIds
+  private_dns_enabled = false
+
+  tags                = { Name = "Endpoint to pn-safestorage and pn-external-channel"}
+}
