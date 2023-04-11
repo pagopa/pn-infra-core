@@ -71,3 +71,7 @@ output "Core_WebappSecurityGroupArn" {
   description = "WebApp security group ARN"
 }
 
+output "Core_CustomDomainsRequired" {
+  value = "false"
+}
+
