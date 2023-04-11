@@ -71,6 +71,10 @@ output "Core_WebappSecurityGroupArn" {
   description = "WebApp security group ARN"
 }
 
+output "Core_NetworkLoadBalancerLink" {
+  value = aws_api_gateway_vpc_link.pn_core_api_gw_vpc_lik.id
+}
+
 output "Core_CustomDomainsRequired" {
   value = "false"
 }
