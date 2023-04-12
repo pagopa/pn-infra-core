@@ -158,3 +158,8 @@ variable "pn_safestorage_data_bucket_name" {
   type        = string
   description = "Nome del bucket in cui il FE dovrà caricare gli allegati delle notifiche"
 }
+
+variable "pn_cors_addictive_sources" {
+  type        = string
+  description = "Elementi aggiuntivi da aggiungere agli allowed cors"
+}

@@ -163,6 +163,5 @@ output "Core_ReactAppUrlApi" {
 
 output "Core_CorsAllowedDomains" {
   value = join(", ", local.Core_CorsAllowedDomains)
-  # TODO aggiungere un preambolo se presente parametrizzazioen non vuota
 }
 
