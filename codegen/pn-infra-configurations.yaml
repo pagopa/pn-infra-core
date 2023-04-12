@@ -27,12 +27,13 @@ accounts:
         - webapi
         - api-io
         - api.radd
+        - api.bo
         - api-selcpg
       cdn:  
-        #- enti
-        #- cittadini
+        - enti
+        - cittadini
         - portale-login
-        #- imprese
+        - imprese
         - status
         - www
     has_apigw: true

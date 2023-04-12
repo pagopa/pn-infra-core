@@ -2,9 +2,9 @@
 environment = "dev"
 how_many_az = 3
 dns_zone = "dev.notifichedigitali.it"
-api_domains = ["api","webapi","api-io","api.radd","api-selcpg"]
-cdn_domains = ["portale-login","status","www"]
-apigw_custom_domains = ["api","webapi","api-io","api.radd","api-selcpg"]
+api_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"]
+cdn_domains = ["enti","cittadini","portale-login","imprese","status","www"]
+apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"]
   
 pn_core_aws_account_id = "830192246553"
 pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
