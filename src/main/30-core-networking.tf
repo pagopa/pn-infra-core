@@ -155,3 +155,26 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
 
   tags                = { Name = "Endpoint to pn-safestorage and pn-external-channel"}
 }
+
+
+# FIXME Creo una zona per risolvere alb.confidential.pn.internal allo scopo di raggiungere pn-data-vault
+#   Andrebbero parametrizzati gli URL nei microservizi ma in attesa della parametrizzazione creiamo 
+#   in pn-core una zona DNS privata per creare degli alias verso pn-confinfo
+resource "aws_route53_zone" "fake_confidential_pn_internal" {
+  name = "confidential.pn.internal"
+  
+  vpc {
+    vpc_id = module.vpc_pn_core.vpc_id
+  }
+}
+
+resource "aws_route53_record" "dev-ns" {
+  zone_id = aws_route53_zone.fake_confidential_pn_internal.zone_id
+  name    = "alb.confidential.pn.internal"
+  type    = "CNAME"
+  ttl     = "60"
+  records = [ aws_vpc_endpoint.to_data_vault.dns_entry[0].dns_name ]
+}
+
+
+
