@@ -101,3 +101,29 @@ output "Core_SandboxSafeStorageBaseUrl" {
   description = "EndpointUrl to reach SafeStorage"
 }
 
+
+
+
+output "Core_ApiDnsName" {
+  value = "api.${var.dns_zone}"
+}
+
+output "Core_SelcpgApiDnsName" {
+  value = "api-selcpg.${var.dns_zone}"
+}
+
+output "Core_WebApiDnsName" {
+  value = "webapi.${var.dns_zone}"
+}
+
+output "Core_IoApiDnsName" {
+  value = "api-io.${var.dns_zone}"
+}
+
+output "Core_RaddApiDnsName" {
+  value = "api.radd.${var.dns_zone}"
+}
+
+output "Core_BoApiDnsName" {
+  value = "api.bo.${var.dns_zone}"
+}
