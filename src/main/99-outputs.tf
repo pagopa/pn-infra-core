@@ -127,3 +127,37 @@ output "Core_RaddApiDnsName" {
 output "Core_BoApiDnsName" {
   value = "api.bo.${var.dns_zone}"
 }
+
+
+
+output "Core_CdnZoneId" {
+  value = local.account_root_dns_zone_id
+}
+
+output "Core_PortalePaCertificateArn" {
+  value = module.acm_cdn["selfcare"].acm_certificate_arn
+}
+
+output "Core_PortalePfCertificateArn" {
+  value = module.acm_cdn["cittadini"].acm_certificate_arn
+}
+
+output "Core_PortalePfLoginCertificateArn" {
+  value = module.acm_cdn["login"].acm_certificate_arn
+}
+
+output "Core_LandingCertificateArn" {
+  value = module.acm_cdn["www"].acm_certificate_arn
+}
+
+output "Core_PortalePgCertificateArn" {
+  value = module.acm_cdn["imprese"].acm_certificate_arn
+}
+
+output "Core_PortaleStatusCertificateArn" {
+  value = module.acm_cdn["status"].acm_certificate_arn
+}
+
+output "Core_ReactAppUrlApi" {
+  value = "https://webapi.${var.dns_zone}/ https://s3.eu-south-1.amazonaws.com/pagopasafestoragesandbox-nonlegal-input-eu-south-1/ https://pn-ss-storage-dev-pnssbucket-9znf9ge7935e.s3.eu-south-1.amazonaws.com/"
+}

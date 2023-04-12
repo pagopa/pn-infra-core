@@ -3,7 +3,7 @@ environment = "dev"
 how_many_az = 3
 dns_zone = "dev.notifichedigitali.it"
 api_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"]
-cdn_domains = ["enti","cittadini","portale-login","imprese","status","www"]
+cdn_domains = ["selfcare","cittadini","login","imprese","status","www","helpdesk"]
 apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"]
   
 pn_core_aws_account_id = "830192246553"

@@ -30,12 +30,13 @@ accounts:
         - api.bo
         - api-selcpg
       cdn:  
-        - enti
+        - selfcare
         - cittadini
-        - portale-login
+        - login
         - imprese
         - status
         - www
+        - helpdesk
     has_apigw: true
     vpcs:
       - code: pn-core
