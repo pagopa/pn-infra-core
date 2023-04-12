@@ -12,10 +12,11 @@ envs:
         vpcse:
           to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
-
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-ss-storage-dev-pnssbucket-9znf9ge7935e"
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
 

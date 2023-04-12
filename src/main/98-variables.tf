@@ -154,3 +154,7 @@ variable "vpc_pn_core_to_confinfo_subnets_cidrs" {
   description = "Cidr list of subnets containing connectivity to confinfo account in VPC pn-core"
 }
 
+variable "pn_safestorage_data_bucket_name" {
+  type        = string
+  description = "Nome del bucket in cui il FE dovrà caricare gli allegati delle notifiche"
+}

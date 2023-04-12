@@ -76,4 +76,9 @@ locals {
           cidr
             if contains( var.vpc_pn_core_to_confinfo_subnets_cidrs, cidr)
     ]
+  
+  Core_CorsAllowedDomains = [
+      for idx, cdn in var.cdn_domains:
+          "https://${cdn}.${var.dns_zone}"
+   ]
 }

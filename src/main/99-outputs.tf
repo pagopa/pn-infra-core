@@ -103,7 +103,6 @@ output "Core_SandboxSafeStorageBaseUrl" {
 
 
 
-
 output "Core_ApiDnsName" {
   value = "api.${var.dns_zone}"
 }
@@ -159,5 +158,11 @@ output "Core_PortaleStatusCertificateArn" {
 }
 
 output "Core_ReactAppUrlApi" {
-  value = "https://webapi.${var.dns_zone}/ https://s3.eu-south-1.amazonaws.com/pagopasafestoragesandbox-nonlegal-input-eu-south-1/ https://pn-ss-storage-dev-pnssbucket-9znf9ge7935e.s3.eu-south-1.amazonaws.com/"
+  value = "https://webapi.${var.dns_zone}/ https://${var.pn_safestorage_data_bucket_name}.s3.${local.region}.amazonaws.com/"
 }
+
+output "Core_CorsAllowedDomains" {
+  value = join(", ", local.Core_CorsAllowedDomains)
+  # TODO aggiungere un preambolo se presente parametrizzazioen non vuota
+}
+
