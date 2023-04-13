@@ -157,6 +157,34 @@ output "Core_PortaleStatusCertificateArn" {
   value = module.acm_cdn["status"].acm_certificate_arn
 }
 
+
+
+output "Core_PortalePaDomain" {
+  value = "selfcare.${var.dns_zone}"
+}
+
+output "Core_PortalePfDomain" {
+  value = "cittadini.${var.dns_zone}"
+}
+
+output "Core_PortalePfLoginDomain" {
+  value = "login.${var.dns_zone}"
+}
+
+output "Core_LandingDomain" {
+  value = "www.${var.dns_zone}"
+}
+
+output "Core_PortalePgDomain" {
+  value = "imprese.${var.dns_zone}"
+}
+
+output "Core_PortaleStatusDomain" {
+  value = "status.${var.dns_zone}"
+}
+
+
+
 output "Core_ReactAppUrlApi" {
   value = "https://webapi.${var.dns_zone}/ https://${var.pn_safestorage_data_bucket_name}.s3.${local.region}.amazonaws.com/"
 }
