@@ -157,6 +157,9 @@ output "Core_PortaleStatusCertificateArn" {
   value = module.acm_cdn["status"].acm_certificate_arn
 }
 
+output "Core_PortaleHelpdeskCertificateArn" {
+  value = module.acm_cdn["helpdesk"].acm_certificate_arn
+}
 
 
 output "Core_PortalePaDomain" {
@@ -183,6 +186,9 @@ output "Core_PortaleStatusDomain" {
   value = "status.${var.dns_zone}"
 }
 
+output "Core_PortaleHelpdeskDomain" {
+  value = "helpdesk.${var.dns_zone}"
+}
 
 
 output "Core_ReactAppUrlApi" {
