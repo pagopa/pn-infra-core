@@ -84,4 +84,11 @@ locals {
   
   Core_CorsAllowedDomains = (var.pn_cors_addictive_sources != "" ) ? flatten([ var.pn_cors_addictive_sources , local.Core_CorsAllowedDomains_base]) : local.Core_CorsAllowedDomains_base
 
+
+  Core_CdnDomains = [
+      for idx, cdn in var.cdn_domains:
+          "${cdn}.${var.dns_zone}"
+   ]
+  
+  
 }

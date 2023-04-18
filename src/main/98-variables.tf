@@ -163,3 +163,8 @@ variable "pn_cors_addictive_sources" {
   type        = string
   description = "Elementi aggiuntivi da aggiungere agli allowed cors"
 }
+
+variable "pn_auth_fleet_addictive_allowed_issuer" {
+  type        = string
+  description = "Allowed issuer for PN authentication sources"
+}

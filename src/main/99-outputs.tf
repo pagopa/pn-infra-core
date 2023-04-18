@@ -199,3 +199,28 @@ output "Core_CorsAllowedDomains" {
   value = join(", ", local.Core_CorsAllowedDomains)
 }
 
+
+output "Core_TokenExchangeLambdaEnvironmentIssuer" {
+  value = "https://webapi.${var.dns_zone}"
+}
+
+output "Core_TokenExchangeLambdaEnvironmentAllowedIssuer" {
+  value = "https://hub-login.spid.${var.dns_zone},${var.pn_auth_fleet_addictive_allowed_issuer}"
+}
+
+output "Core_TokenExchangeLambdaEnvironmentAllowedOrigin" {
+  value = join(", ", local.Core_CorsAllowedDomains)
+}
+
+output "Core_TokenExchangeLambdaEnvironmentAcceptedAudience" {
+  value = join(", ", local.Core_CdnDomains)
+}
+
+output "Core_TokenExchangeLambdaEnvironmentAudience" {
+  value = "webapi.${var.dns_zone}"
+}
+
+output "Core_TokenExchangeLambdaEnvironmentJwksMapping" {
+  value = jsonencode({ })
+}
+
