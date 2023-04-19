@@ -1,0 +1,146 @@
+
+envs:
+  dev:
+    vpcs:
+      - code: pn-core
+        idx: 1
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: dev.notifichedigitali.it
+        aws_id: "830192246553" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
+        params:
+          pn_cors_addictive_sources: "http://localhost:8090"
+          pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it"
+      - code: pn-confinfo
+        base_dns: spid.dev.notifichedigitali.it
+        aws_id: "089813480515"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-ss-storage-dev-pnssbucket-9znf9ge7935e"
+      - code: pn-radd
+        aws_id: "830192246553"  # Stringhe non numeri
+
+accounts:
+  - code: pn-core
+    dns:
+      api:
+        - api
+        - webapi
+        - api-io
+        - api.radd
+        - api.bo
+        - api-selcpg
+      cdn:  
+        - selfcare
+        - cittadini
+        - login
+        - imprese
+        - status
+        - www
+        - helpdesk
+    has_apigw: true
+    vpcs:
+      - code: pn-core
+        name: PN Core
+        primary_cidr: 10.<vpc_idx>.0.0/16
+        aws_svc:
+          net: aws
+          interfaces_endpoints:
+            - "sqs"
+            - "logs"
+            - "sns"
+            - "kms"
+            - "kinesis-streams"
+            - "elasticloadbalancing"
+            - "events"
+            - "ecr.api"
+            - "ecr.dkr"
+            - "ssmmessages"
+            - "ssm"
+            - "ec2messages"
+            - "ecs-agent"
+            - "ecs-telemetry"
+            - "ecs"
+            - "secretsmanager"
+            - "monitoring"
+            - "xray"
+        networks:
+          - code: public
+            name: Public
+            gateway: 
+              type: igw
+            has_nat: true
+            first_net_ip: 10.<vpc_idx>.1.0
+            net_size: 16
+
+          - code: api-gw
+            name: API-GW VpcLink
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.3.0
+            net_size: 16
+            nlb: true
+
+          - code: radd
+            name: RADD Ingress
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.5.0
+            net_size: 16
+            nlb: true
+
+          - code: core
+            name: PnCore
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.20.0
+            net_size: 256
+            export_cidrs: true
+
+          - code: core-egress
+            name: PnCore Egress
+            gateway: 
+              type: nat
+              network: public
+            first_net_ip: 10.<vpc_idx>.40.0
+            net_size: 256
+            export_cidrs: true
+
+          - code: to_confinfo
+            name: To Confidential Info
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.60.0
+            net_size: 256
+            export_cidrs: true
+
+          - code: aws
+            name: AWS Services
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.70.0
+            net_size: 256
+            has_iface_endpoints: true
+            
+          - code: opensearch
+            name: OpenSearch
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.80.0
+            net_size: 256
+            export_cidrs: true
+            
+        
+        # interconnections:
+        #   - from: api-gw
+        #     to: core
+        #   - from: radd
+        #     to: core
+        #   - from: core
+        #     to: core-egress
+        #   - from: core-egress
+        #     to: public
+        #   - from: core
+        #     to: conf-info
+        #   - from: core
+        #     to: conf-info
+        #   - from: core
+        #     to: opensearch
+  

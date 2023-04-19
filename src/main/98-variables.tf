@@ -4,74 +4,167 @@ variable "aws_region" {
   default     = "eu-south-1"
 }
 
-variable "app_name" {
-  type        = string
-  description = "App name."
-}
-
 variable "environment" {
   type        = string
   default     = "dev"
   description = "Environment"
 }
 
-variable "env_short" {
+variable "how_many_az" {
+  type        = number
+  default     = 3
+  description = "How many Availability Zone we have to use"
+}
+
+variable "pn_core_aws_account_id" {
   type        = string
-  default     = "d"
-  description = "Evnironment short."
+  description = "pn-core current environment AWS Account id"
 }
 
-variable "vpc_cidr" {
+variable "pn_confinfo_aws_account_id" {
   type        = string
-  default     = "10.0.0.0/16"
-  description = "VPC cidr."
+  description = "pn-confidential current environment AWS Account id"
 }
 
-variable "azs" {
-  type        = list(string)
-  description = "Availability zones"
-  default     = ["eu-south-1a", "eu-south-1b", "eu-south-1c"]
+variable "pn_radd_aws_account_id" {
+  type        = string
+  description = "pn-radd current environment AWS Account id"
 }
 
-variable "vpc_private_subnets_cidr" {
-  type        = list(string)
-  description = "Private subnets list of cidr."
-  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+
+variable "pn_core_to_data_vault_vpcse" {
+  type        = string
+  description = "Confinfo VPC Service endpoint exposing DataVault services"
 }
 
-variable "vpc_public_subnets_cidr" {
-  type        = list(string)
-  description = "Private subnets list of cidr."
-  default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+variable "pn_core_to_extch_safestorage_vpcse" {
+  type        = string
+  description = "Confinfo VPC Service endpoint exposing SafeStorage and External Channel services"
 }
 
-variable "vpc_internal_subnets_cidr" {
-  type        = list(string)
-  description = "Internal subnets list of cidr. Mainly for private endpoints"
-  default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
+
+
+
+variable "dns_zone" {
+  type        = string
+  description = "Dns zone used for the environment"
 }
 
-variable "enable_nat_gateway" {
-  type        = bool
-  description = "Enable/Create nat gateway"
-  default     = false
+variable "api_domains" {
+  type        = set(string)
+  description = "List of regional api endpoint, entry in the dns zone. This parameter is used for ACM certificate creation"
 }
 
-## Public Dns zones
-variable "public_dns_zones" {
-  type        = map(any)
-  description = "Route53 Hosted Zone"
+variable "cdn_domains" {
+  type        = set(string)
+  description = "List of CDN domains"
 }
+
+variable "apigw_custom_domains" {
+  type        = set(string)
+  description = "List of API-GW custom domains"
+}
+
 
 variable "dns_record_ttl" {
   type        = number
   description = "Dns record ttl (in sec)"
-  default     = 86400 # 24 hours
+  default     = 60 # 1 minute
 }
 
-variable "tags" {
-  type = map(any)
-  default = {
-    CreatedBy = "Terraform"
-  }
+
+
+
+variable "vpc_pn_core_aws_services_interface_endpoints_subnets_cidr" {
+  type        = list(string)
+  description = "AWS services interfaces endpoints list of cidr."
+}
+
+variable "vpc_pn_core_name" {
+  type        = string
+  description = "Name of the PN Core VPC"
+}
+
+variable "vpc_pn_core_primary_cidr" {
+  type        = string
+  description = "Primary CIDR of the PN Core VPC"
+}
+
+
+variable "vpc_pn_core_private_subnets_cidr" {
+  type        = list(string)
+  description = "Private subnets list of cidr."
+}
+variable "vpc_pn_core_private_subnets_names" {
+  type        = list(string)
+  description = "Private subnets list of names."
+}
+
+variable "vpc_pn_core_public_subnets_cidr" {
+  type        = list(string)
+  description = "Private subnets list of cidr."
+}
+variable "vpc_pn_core_public_subnets_names" {
+  type        = list(string)
+  description = "Private subnets list of names."
+}
+
+variable "vpc_pn_core_internal_subnets_cidr" {
+  type        = list(string)
+  description = "Internal subnets list of cidr"
+}
+variable "vpc_pn_core_internal_subnets_names" {
+  type        = list(string)
+  description = "Internal subnets list of names"
+}
+
+variable "vpc_endpoints_pn_core" {
+  type        = list(string)
+  description = "Endpoint List"
+}
+
+
+variable "vpc_pn_core_core_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of core subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_core_egress_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of core_egres subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_api_gw_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of API-GW ingress NLB subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_radd_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of RADD ingress NLB subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_opensearch_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of OpenSearch subnets in VPC pn-core"
+}
+
+variable "vpc_pn_core_to_confinfo_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of subnets containing connectivity to confinfo account in VPC pn-core"
+}
+
+variable "pn_safestorage_data_bucket_name" {
+  type        = string
+  description = "Nome del bucket in cui il FE dovrà caricare gli allegati delle notifiche"
+}
+
+variable "pn_cors_addictive_sources" {
+  type        = string
+  description = "Elementi aggiuntivi da aggiungere agli allowed cors"
+}
+
+variable "pn_auth_fleet_addictive_allowed_issuer" {
+  type        = string
+  description = "Allowed issuer for PN authentication sources"
 }
