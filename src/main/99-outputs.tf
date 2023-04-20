@@ -224,3 +224,7 @@ output "Core_TokenExchangeLambdaEnvironmentJwksMapping" {
   value = jsonencode({ })
 }
 
+output "Core_HubLoginDomain" {
+  value = "hub-login.spid.${var.dns_zone}"
+}
+
