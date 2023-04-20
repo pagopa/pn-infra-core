@@ -209,11 +209,11 @@ output "Core_TokenExchangeLambdaEnvironmentAllowedIssuer" {
 }
 
 output "Core_TokenExchangeLambdaEnvironmentAllowedOrigin" {
-  value = join(", ", local.Core_CorsAllowedDomains)
+  value = join(",", local.Core_CorsAllowedDomains)
 }
 
 output "Core_TokenExchangeLambdaEnvironmentAcceptedAudience" {
-  value = join(", ", local.Core_CdnDomains)
+  value = join(",", local.Core_CdnDomains)
 }
 
 output "Core_TokenExchangeLambdaEnvironmentAudience" {
