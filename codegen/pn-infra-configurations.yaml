@@ -3,14 +3,18 @@ envs:
   dev:
     vpcs:
       - code: pn-core
-        idx: 1
+        idx: 1 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
       - code: pn-core
         base_dns: dev.notifichedigitali.it
         aws_id: "830192246553" # Stringhe non numeri
         vpcse:
-          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
+          # - Va valorizzato con l'output "ConfInfo_ServiceEndpoint_ToDataVault" del terraform "main" 
+          #   dell'account pn-confinfo dello stesso ambiente
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903" 
+          # - Va valorizzato con l'output "ConfInfo_ServiceEndpoint_ToExternalChannelSafeStorage" del 
+          #   terraform "main" dell'account pn-confinfo dello stesso ambiente
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
         params:
           pn_cors_addictive_sources: "http://localhost:8090"
@@ -19,7 +23,8 @@ envs:
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
         params:
-          pn_safestorage_data_bucket_name: "pn-ss-storage-dev-pnssbucket-9znf9ge7935e"
+          # FIXME PN-5586: definire in formato fisso "pn-ss-storage-pnssbucket-<AWS::Region>-<AWS::AccountId>"
+          pn_safestorage_data_bucket_name: "pn-ss-storage-dev-pnssbucket-9znf9ge7935e" 
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
 
