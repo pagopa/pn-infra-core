@@ -86,18 +86,18 @@ resource "aws_api_gateway_vpc_link" "pn_core_api_gw_vpc_lik" {
   target_arns = [aws_lb.pn_core_api_gw_nlb.arn]
 }
 # - API-GW (Web) NLB listener for HTTP
-resource "aws_lb_listener" "pn_core_api_gw_nlb_8080_to_alb_8080" {
+resource "aws_lb_listener" "pn_core_api_gw_nlb_http_to_alb_http" {
   load_balancer_arn = aws_lb.pn_core_api_gw_nlb.arn
   protocol = "TCP"
   port     = 8080
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.pn_core_api_gw_nlb_8080_to_alb_8080.arn
+    target_group_arn = aws_lb_target_group.pn_core_api_gw_nlb_http_to_alb_http.arn
   }
 }
 # - API-GW (Web) NLB target group for HTTP
-resource "aws_lb_target_group" "pn_core_api_gw_nlb_8080_to_alb_8080" {
+resource "aws_lb_target_group" "pn_core_api_gw_nlb_http_to_alb_http" {
   name_prefix = "WebI-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
@@ -120,8 +120,8 @@ resource "aws_lb_target_group" "pn_core_api_gw_nlb_8080_to_alb_8080" {
   }
 }
 # - API-GW (Web) NLB target group for HTTP attachement
-resource "aws_lb_target_group_attachment" "pn_core_api_gw_nlb_8080_to_alb_8080" {
-  target_group_arn  = aws_lb_target_group.pn_core_api_gw_nlb_8080_to_alb_8080.arn
+resource "aws_lb_target_group_attachment" "pn_core_api_gw_nlb_http_to_alb_http" {
+  target_group_arn  = aws_lb_target_group.pn_core_api_gw_nlb_http_to_alb_http.arn
   port              = 8080
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
@@ -161,18 +161,18 @@ resource "aws_vpc_endpoint_service" "pn_core_radd_endpoint_svc" {
   }
 }
 # - RADD NLB listener for HTTP
-resource "aws_lb_listener" "pn_core_radd_nlb_8080_to_alb_8080" {
+resource "aws_lb_listener" "pn_core_radd_nlb_http_to_alb_http" {
   load_balancer_arn = aws_lb.pn_core_radd_nlb.arn
   protocol = "TCP"
   port     = 8080
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_8080_to_alb_8080.arn
+    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_http_to_alb_http.arn
   }
 }
 # - RADD NLB target group for HTTP
-resource "aws_lb_target_group" "pn_core_radd_nlb_8080_to_alb_8080" {
+resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_alb_http" {
   name_prefix = "RaddI-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
@@ -195,15 +195,15 @@ resource "aws_lb_target_group" "pn_core_radd_nlb_8080_to_alb_8080" {
   }
 }
 # - RADD NLB target group for HTTP attachmet
-resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_8080_to_alb_8080" {
-  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_8080_to_alb_8080.arn
+resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_alb_http" {
+  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_http_to_alb_http.arn
   port              = 8080
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
 }
 
 # - RADD NLB listener for HTTPS
-resource "aws_lb_listener" "pn_core_radd_nlb_8443_to_nlb_8080" {
+resource "aws_lb_listener" "pn_core_radd_nlb_https_to_nlb_http" {
   load_balancer_arn = aws_lb.pn_core_radd_nlb.arn
   protocol = "TLS"
   port     = 8443
@@ -214,11 +214,11 @@ resource "aws_lb_listener" "pn_core_radd_nlb_8443_to_nlb_8080" {
   
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_8443_to_nlb_8080.arn
+    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_https_to_nlb_http.arn
   }
 }
 # - RADD NLB target group for HTTPS
-resource "aws_lb_target_group" "pn_core_radd_nlb_8443_to_nlb_8080" {
+resource "aws_lb_target_group" "pn_core_radd_nlb_https_to_nlb_http" {
   name_prefix = "RaddT-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
@@ -236,12 +236,75 @@ resource "aws_lb_target_group" "pn_core_radd_nlb_8443_to_nlb_8080" {
     matcher = "200-499"
   }
 }
-resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_8443_to_nlb_8080" {
+resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_https_to_nlb_http" {
   count = var.how_many_az
 
-  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_8443_to_nlb_8080.arn
+  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_https_to_nlb_http.arn
   port              = 8080
 
   target_id         = cidrhost( local.Core_NlbRadd_SubnetsCidrs[count.index], 8)
   availability_zone = local.azs_names[count.index]
+}
+
+
+
+resource "aws_network_acl" "call_8080_do_not_receive" {
+  vpc_id = module.vpc_pn_core.vpc_id
+
+  dynamic "egress" {
+    for_each = local.Core_SubnetsCidrs
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 1000 + 100 * egress.key
+      action     = "allow"
+      cidr_block = egress.value
+      from_port  = 8080
+      to_port    = 8080
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = local.Core_SubnetsCidrs
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 1000 + 100 * ingress.key
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 1024
+      to_port    = 8079
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = local.Core_SubnetsCidrs
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 2000 + 100 * ingress.key
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 8081
+      to_port    = 65535
+    }
+  }
+
+  tags = {
+    Name = "Outbound 8080 to ALB not inbound"
+  }
+}
+
+resource "aws_network_acl_association" "nlb_web" {
+  count = length( local.Core_NlbWeb_SubnetsIds )
+
+  network_acl_id = aws_network_acl.call_8080_do_not_receive.id
+  subnet_id      = local.Core_NlbWeb_SubnetsIds[ count.index ]
+}
+
+resource "aws_network_acl_association" "nlb_radd" {
+  count = length( local.Core_NlbRadd_SubnetsIds )
+
+  network_acl_id = aws_network_acl.call_8080_do_not_receive.id
+  subnet_id      = local.Core_NlbRadd_SubnetsIds[ count.index ]
 }
