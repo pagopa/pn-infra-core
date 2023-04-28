@@ -24,7 +24,7 @@ envs:
         aws_id: "089813480515"  # Stringhe non numeri
         params:
           # FIXME PN-5586: definire in formato fisso "pn-ss-storage-pnssbucket-<AWS::Region>-<AWS::AccountId>"
-          pn_safestorage_data_bucket_name: "pn-ss-storage-dev-pnssbucket-9znf9ge7935e" 
+          pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-089813480515" 
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
 
