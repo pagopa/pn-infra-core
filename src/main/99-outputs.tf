@@ -224,6 +224,10 @@ output "Core_TokenExchangeLambdaEnvironmentJwksMapping" {
   value = jsonencode({ })
 }
 
+output "Core_ApikeyAuthorizerV2PDNDAudience" {
+  value = "https://api.${var.dns_zone}"
+}
+
 output "Core_HubLoginDomain" {
   value = "hub-login.spid.${var.dns_zone}"
 }
