@@ -12,7 +12,7 @@ pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-07d
 pn_cors_addictive_sources = "http://localhost:8090"
 pn_auth_fleet_addictive_allowed_issuer = "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
 pn_confinfo_aws_account_id = "089813480515"
-pn_safestorage_data_bucket_name = "pn-ss-storage-dev-pnssbucket-9znf9ge7935e"
+pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-089813480515"
 pn_radd_aws_account_id = "830192246553"
 
 
