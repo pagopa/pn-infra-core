@@ -73,6 +73,7 @@ In the repository two github actions are already provided:
 New releases are created every time PR are merged with main. A github action is responsible to create the release and it relires on the title of the PR as described in the [official repository](https://github.com/cycjimmy/semantic-release-action)
 
 
+
 ## Referencees
 
 * [Confluence page](https://pagopa.atlassian.net/wiki/spaces/DEVOPS/pages/467894592/AWS+Setup+new+project)
