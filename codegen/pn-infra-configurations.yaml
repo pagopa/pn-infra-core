@@ -28,6 +28,29 @@ envs:
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
 
+  test:
+    vpcs:
+      - code: pn-core
+        idx: 6
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: test.notifichedigitali.it
+        aws_id: "151559006927" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-0c61021a745c4c6c7"
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-06e9167128c810a62"
+        params:
+          pn_cors_addictive_sources: "http://localhost:8090"
+          pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+      - code: pn-confinfo
+        base_dns: spid.test.notifichedigitali.it
+        aws_id: "771887334808"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-771887334808"
+      - code: pn-radd
+        aws_id: "830192246553"  # Stringhe non numeri
+
 accounts:
   - code: pn-core
     dns:
