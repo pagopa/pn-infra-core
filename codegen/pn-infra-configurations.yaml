@@ -50,6 +50,29 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-771887334808"
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
+        
+  uat:
+    vpcs:
+      - code: pn-core
+        idx: 7
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: uat.notifichedigitali.it
+        aws_id: "644374009812" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-0137ff603c40224ec" 
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-0d3e538b0b0956de4"
+        params:
+          pn_cors_addictive_sources: ""
+          pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+      - code: pn-confinfo
+        base_dns: spid.uat.notifichedigitali.it
+        aws_id: "956319218727"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-956319218727" 
+      - code: pn-radd
+        aws_id: "830192246553"  # Stringhe non numeri
 
 accounts:
   - code: pn-core
