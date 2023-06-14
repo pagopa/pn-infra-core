@@ -63,7 +63,10 @@ resource "aws_route53_record" "caa_dns_entry" {
   ttl     = 120
   zone_id = data.aws_route53_zone.base_domain_name.zone_id
 
-  records        = ["0 issue \"amazonaws.com\""]
+  records        = [
+      "0 issue \"amazonaws.com\"",
+      "0 issue \"letsencrypt.org\""
+    ]
 }
 
 module "acm_cdn" {
