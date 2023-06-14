@@ -36,6 +36,7 @@ resource "aws_api_gateway_domain_name" "apigw_custom_domain" {
 
   domain_name = "${each.key}.${var.dns_zone}"
   regional_certificate_arn = module.acm_api[each.key].acm_certificate_arn
+  security_policy = "TLS_1_2"
 
   endpoint_configuration {
     types = ["REGIONAL"]
@@ -54,6 +55,18 @@ resource "aws_route53_record" "apigw_custom_domain_dns" {
     name                   = aws_api_gateway_domain_name.apigw_custom_domain[each.key].regional_domain_name
     zone_id                = aws_api_gateway_domain_name.apigw_custom_domain[each.key].regional_zone_id
   }
+}
+
+resource "aws_route53_record" "caa_dns_entry" {
+  name    = "${var.dns_zone}"
+  type    = "CAA"
+  ttl     = 120
+  zone_id = data.aws_route53_zone.base_domain_name.zone_id
+
+  records        = [
+      "0 issue \"amazonaws.com\"",
+      "0 issue \"letsencrypt.org\""
+    ]
 }
 
 module "acm_cdn" {
