@@ -107,7 +107,7 @@ accounts:
         - api.radd
         - api.bo
         - api-selcpg
-        - api-ext
+        - api.cn
       cdn:  
         - selfcare
         - cittadini

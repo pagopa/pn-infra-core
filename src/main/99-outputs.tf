@@ -111,8 +111,8 @@ output "Core_SelcpgApiDnsName" {
   value = "api-selcpg.${var.dns_zone}"
 }
 
-output "Core_ExtApiDnsName" {
-  value = "api-ext.${var.dns_zone}"
+output "Core_CNApiDnsName" {
+  value = "api.cn.${var.dns_zone}"
 }
 
 output "Core_WebApiDnsName" {
