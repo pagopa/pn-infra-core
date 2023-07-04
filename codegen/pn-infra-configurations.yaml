@@ -17,7 +17,7 @@ envs:
           #   terraform "main" dell'account pn-confinfo dello stesso ambiente
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
         params:
-          pn_cors_addictive_sources: "http://localhost:8090,https://develop.d19zh2gqugqm5d.amplifyapp.com"
+          pn_cors_addictive_sources: "http://localhost:8090,https://develop.dsd2y68dbsoga.amplifyapp.com"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
