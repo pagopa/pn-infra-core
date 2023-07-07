@@ -100,7 +100,7 @@ envs:
   hotfix:
     vpcs:
       - code: pn-core
-        idx: 14
+        idx: 15
     azs: 3
     accounts:
       - code: pn-core
