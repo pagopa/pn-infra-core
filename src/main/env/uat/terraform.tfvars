@@ -14,6 +14,7 @@ pn_auth_fleet_addictive_allowed_issuer = "https://uat.selfcare.pagopa.it,https:/
 pn_confinfo_aws_account_id = "956319218727"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-956319218727"
 pn_radd_aws_account_id = "554102482368"
+pn_servicedesk_aws_account_id = "533236674075"
 
 
 vpc_pn_core_name = "PN Core"
@@ -25,15 +26,15 @@ vpc_pn_core_private_subnets_cidr = ["10.7.40.0/24","10.7.41.0/24","10.7.42.0/24"
 vpc_pn_core_private_subnets_names = ["PN Core - PnCore Egress Subnet (uat) AZ 0","PN Core - PnCore Egress Subnet (uat) AZ 1","PN Core - PnCore Egress Subnet (uat) AZ 2"]
 vpc_pn_core_public_subnets_cidr = ["10.7.1.0/28","10.7.1.16/28","10.7.1.32/28"]
 vpc_pn_core_public_subnets_names = ["PN Core - Public Subnet (uat) AZ 0","PN Core - Public Subnet (uat) AZ 1","PN Core - Public Subnet (uat) AZ 2"]
-vpc_pn_core_internal_subnets_cidr = ["10.7.3.0/28","10.7.3.16/28","10.7.3.32/28","10.7.5.0/28","10.7.5.16/28","10.7.5.32/28","10.7.7.0/28","10.7.7.16/28","10.7.7.32/28","10.7.20.0/24","10.7.21.0/24","10.7.22.0/24","10.7.60.0/24","10.7.61.0/24","10.7.62.0/24","10.7.70.0/24","10.7.71.0/24","10.7.72.0/24","10.7.80.0/24","10.7.81.0/24","10.7.82.0/24"]
-vpc_pn_core_internal_subnets_names = ["PN Core - API-GW VpcLink Subnet (uat) AZ 0","PN Core - API-GW VpcLink Subnet (uat) AZ 1","PN Core - API-GW VpcLink Subnet (uat) AZ 2","PN Core - RADD Ingress Subnet (uat) AZ 0","PN Core - RADD Ingress Subnet (uat) AZ 1","PN Core - RADD Ingress Subnet (uat) AZ 2","PN Core - Service Desk Ingress Subnet (uat) AZ 0","PN Core - Service Desk Ingress Subnet (uat) AZ 1","PN Core - Service Desk Ingress Subnet (uat) AZ 2","PN Core - PnCore Subnet (uat) AZ 0","PN Core - PnCore Subnet (uat) AZ 1","PN Core - PnCore Subnet (uat) AZ 2","PN Core - To Confidential Info Subnet (uat) AZ 0","PN Core - To Confidential Info Subnet (uat) AZ 1","PN Core - To Confidential Info Subnet (uat) AZ 2","PN Core - AWS Services Subnet (uat) AZ 0","PN Core - AWS Services Subnet (uat) AZ 1","PN Core - AWS Services Subnet (uat) AZ 2","PN Core - OpenSearch Subnet (uat) AZ 0","PN Core - OpenSearch Subnet (uat) AZ 1","PN Core - OpenSearch Subnet (uat) AZ 2"]
+vpc_pn_core_internal_subnets_cidr = ["10.7.3.0/28","10.7.3.16/28","10.7.3.32/28","10.7.5.0/28","10.7.5.16/28","10.7.5.32/28","10.7.20.0/24","10.7.21.0/24","10.7.22.0/24","10.7.60.0/24","10.7.61.0/24","10.7.62.0/24","10.7.70.0/24","10.7.71.0/24","10.7.72.0/24","10.7.80.0/24","10.7.81.0/24","10.7.82.0/24","10.7.7.0/28","10.7.7.16/28","10.7.7.32/28"]
+vpc_pn_core_internal_subnets_names = ["PN Core - API-GW VpcLink Subnet (uat) AZ 0","PN Core - API-GW VpcLink Subnet (uat) AZ 1","PN Core - API-GW VpcLink Subnet (uat) AZ 2","PN Core - RADD Ingress Subnet (uat) AZ 0","PN Core - RADD Ingress Subnet (uat) AZ 1","PN Core - RADD Ingress Subnet (uat) AZ 2","PN Core - PnCore Subnet (uat) AZ 0","PN Core - PnCore Subnet (uat) AZ 1","PN Core - PnCore Subnet (uat) AZ 2","PN Core - To Confidential Info Subnet (uat) AZ 0","PN Core - To Confidential Info Subnet (uat) AZ 1","PN Core - To Confidential Info Subnet (uat) AZ 2","PN Core - AWS Services Subnet (uat) AZ 0","PN Core - AWS Services Subnet (uat) AZ 1","PN Core - AWS Services Subnet (uat) AZ 2","PN Core - OpenSearch Subnet (uat) AZ 0","PN Core - OpenSearch Subnet (uat) AZ 1","PN Core - OpenSearch Subnet (uat) AZ 2","PN Core - Service Desk Ingress Subnet (uat) AZ 0","PN Core - Service Desk Ingress Subnet (uat) AZ 1","PN Core - Service Desk Ingress Subnet (uat) AZ 2"]
 
 vpc_pn_core_api_gw_subnets_cidrs = ["10.7.3.0/28","10.7.3.16/28","10.7.3.32/28"]
 vpc_pn_core_radd_subnets_cidrs = ["10.7.5.0/28","10.7.5.16/28","10.7.5.32/28"]
-vpc_pn_core_servicedesk_subnets_cidrs = ["10.7.7.0/28","10.7.7.16/28","10.7.7.32/28"]
 vpc_pn_core_core_subnets_cidrs = ["10.7.20.0/24","10.7.21.0/24","10.7.22.0/24"]
 vpc_pn_core_core_egress_subnets_cidrs = ["10.7.40.0/24","10.7.41.0/24","10.7.42.0/24"]
 vpc_pn_core_to_confinfo_subnets_cidrs = ["10.7.60.0/24","10.7.61.0/24","10.7.62.0/24"]
 vpc_pn_core_opensearch_subnets_cidrs = ["10.7.80.0/24","10.7.81.0/24","10.7.82.0/24"]
+vpc_pn_core_servicedesk_subnets_cidrs = ["10.7.7.0/28","10.7.7.16/28","10.7.7.32/28"]
 
 

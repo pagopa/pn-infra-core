@@ -312,7 +312,7 @@ resource "aws_network_acl_association" "nlb_radd" {
 # service desk
 # - NLB Di ingresso per le invocazioni da rete Service Desk
 resource "aws_lb" "pn_core_servicedesk_nlb" {
-  name_prefix = "ServiceDeskI-"
+  name_prefix = "SeDeI-"
 
   internal = true
   ip_address_type = "ipv4"
@@ -322,8 +322,8 @@ resource "aws_lb" "pn_core_servicedesk_nlb" {
     for_each = range(var.how_many_az)
 
     content {
-      private_ipv4_address = cidrhost( local.Core_NlbServicedesk_SubnetsCidrs[subnet_mapping.key], 8)
-      subnet_id = local.Core_NlbServicedesk_SubnetsIds[subnet_mapping.key]
+      private_ipv4_address = cidrhost( local.Core_NlbServiceDesk_SubnetsCidrs[subnet_mapping.key], 8)
+      subnet_id = local.Core_NlbServiceDesk_SubnetsIds[subnet_mapping.key]
     }
   }
 
@@ -332,7 +332,7 @@ resource "aws_lb" "pn_core_servicedesk_nlb" {
   }
 }
 
-# - ServiceEndpoint ingresso per le invocazioni a ExternalChannel e SafeStorage
+# - ServiceEndpoint ingresso per le invocazioni a Service Desk
 resource "aws_vpc_endpoint_service" "pn_core_servicedesk_endpoint_svc" {
   acceptance_required        = false
   network_load_balancer_arns = [aws_lb.pn_core_servicedesk_nlb.arn]
@@ -355,7 +355,7 @@ resource "aws_lb_listener" "pn_core_servicedesk_nlb_http_to_alb_http" {
 }
 # - Service Desk NLB target group for HTTP
 resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
-  name_prefix = "ServiceDeskI-"
+  name_prefix = "SeDeI-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
   port        = 8080

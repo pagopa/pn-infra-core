@@ -149,6 +149,12 @@ variable "vpc_pn_core_radd_subnets_cidrs" {
   description = "Cidr list of RADD ingress NLB subnets in VPC pn-core"
 }
 
+
+variable "vpc_pn_core_servicedesk_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of Service Desk ingress NLB subnets in VPC pn-core"
+}
+
 variable "vpc_pn_core_opensearch_subnets_cidrs" {
   type        = list(string)
   description = "Cidr list of OpenSearch subnets in VPC pn-core"

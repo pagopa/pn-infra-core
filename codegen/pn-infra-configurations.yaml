@@ -52,6 +52,8 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-771887334808"
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "533236674075"  # Stringhe non numeri
         
   uat:
     vpcs:
@@ -75,6 +77,9 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-956319218727" 
       - code: pn-radd
         aws_id: "554102482368"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "533236674075"  # Stringhe non numeri
+
 
   prod:
     vpcs:
@@ -98,6 +103,9 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-350578575906"
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "277345554283"  # Stringhe non numeri
+
 
   hotfix:
     vpcs:
@@ -121,6 +129,9 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-839620963891" 
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "533236674075"  # Stringhe non numeri
+
 
 accounts:
   - code: pn-core
@@ -190,13 +201,6 @@ accounts:
             net_size: 16
             nlb: true
 
-          - code: servicedesk
-            name: Service Desk Ingress
-            gateway: null
-            first_net_ip: 10.<vpc_idx>.7.0
-            net_size: 16
-            nlb: true
-
           - code: core
             name: PnCore
             gateway: null
@@ -234,7 +238,13 @@ accounts:
             net_size: 256
             export_cidrs: true
             
-        
+          - code: servicedesk
+            name: Service Desk Ingress
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.7.0
+            net_size: 16
+            nlb: true   
+
         # interconnections:
         #   - from: api-gw
         #     to: core
