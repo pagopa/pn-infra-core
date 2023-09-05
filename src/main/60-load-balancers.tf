@@ -308,3 +308,77 @@ resource "aws_network_acl_association" "nlb_radd" {
   network_acl_id = aws_network_acl.call_8080_do_not_receive.id
   subnet_id      = local.Core_NlbRadd_SubnetsIds[ count.index ]
 }
+
+# service desk
+# - NLB Di ingresso per le invocazioni da rete Service Desk
+resource "aws_lb" "pn_core_servicedesk_nlb" {
+  name_prefix = "ServiceDeskI-"
+
+  internal = true
+  ip_address_type = "ipv4"
+  load_balancer_type = "network"
+
+  dynamic "subnet_mapping" {
+    for_each = range(var.how_many_az)
+
+    content {
+      private_ipv4_address = cidrhost( local.Core_NlbServicedesk_SubnetsCidrs[subnet_mapping.key], 8)
+      subnet_id = local.Core_NlbServicedesk_SubnetsIds[subnet_mapping.key]
+    }
+  }
+
+  tags = {
+    "Name": "PN Core - Service Desk Ingress - NLB"
+  }
+}
+
+# - ServiceEndpoint ingresso per le invocazioni a ExternalChannel e SafeStorage
+resource "aws_vpc_endpoint_service" "pn_core_servicedesk_endpoint_svc" {
+  acceptance_required        = false
+  network_load_balancer_arns = [aws_lb.pn_core_servicedesk_nlb.arn]
+  allowed_principals         = ["arn:aws:iam::${var.pn_servicedesk_aws_account_id}:root"]
+
+  tags = {
+    "Name": "PN Core - Service Desk - SVC endpoint"
+  }
+}
+# - ServiceDesk NLB listener for HTTP
+resource "aws_lb_listener" "pn_core_servicedesk_nlb_http_to_alb_http" {
+  load_balancer_arn = aws_lb.pn_core_servicedesk_nlb.arn
+  protocol = "TCP"
+  port     = 8080
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.pn_core_servicedeskin_nlb_http_to_alb_http.arn
+  }
+}
+# - Service Desk NLB target group for HTTP
+resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
+  name_prefix = "ServiceDeskI-"
+  vpc_id      = module.vpc_pn_core.vpc_id
+
+  port        = 8080
+  protocol    = "TCP"
+  target_type = "alb"
+  
+  depends_on = [
+    aws_lb.pn_core_servicedesk_nlb,
+    aws_lb.pn_core_ecs_alb
+  ]
+
+  tags = {
+    "Description": "PN Core - Service Desk NLB to ALB - Target Group"
+  }
+
+  health_check {
+    enabled = true
+    matcher = "200-499"
+  }
+}
+resource "aws_lb_target_group_attachment" "pn_core_servicedeskin_nlb_http_to_alb_http" {
+  target_group_arn  = aws_lb_target_group.pn_core_servicedeskin_nlb_http_to_alb_http.arn
+  port              = 8080
+
+  target_id         = aws_lb.pn_core_ecs_alb.arn
+}

@@ -27,6 +27,8 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-089813480515" 
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "911845998067"  # Stringhe non numeri
 
   test:
     vpcs:
@@ -185,6 +187,13 @@ accounts:
             name: RADD Ingress
             gateway: null
             first_net_ip: 10.<vpc_idx>.5.0
+            net_size: 16
+            nlb: true
+
+          - code: servicedesk
+            name: Service Desk Ingress
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.7.0
             net_size: 16
             nlb: true
 

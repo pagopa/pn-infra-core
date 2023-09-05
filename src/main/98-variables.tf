@@ -31,6 +31,11 @@ variable "pn_radd_aws_account_id" {
   description = "pn-radd current environment AWS Account id"
 }
 
+variable "pn_servicedesk_aws_account_id" {
+  type        = string
+  description = "pn-servicedesk current environment AWS Account id"
+}
+
 
 variable "pn_core_to_data_vault_vpcse" {
   type        = string
