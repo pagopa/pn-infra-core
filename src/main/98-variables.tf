@@ -31,6 +31,11 @@ variable "pn_radd_aws_account_id" {
   description = "pn-radd current environment AWS Account id"
 }
 
+variable "pn_servicedesk_aws_account_id" {
+  type        = string
+  description = "pn-servicedesk current environment AWS Account id"
+}
+
 
 variable "pn_core_to_data_vault_vpcse" {
   type        = string
@@ -142,6 +147,12 @@ variable "vpc_pn_core_api_gw_subnets_cidrs" {
 variable "vpc_pn_core_radd_subnets_cidrs" {
   type        = list(string)
   description = "Cidr list of RADD ingress NLB subnets in VPC pn-core"
+}
+
+
+variable "vpc_pn_core_servicedesk_subnets_cidrs" {
+  type        = list(string)
+  description = "Cidr list of Service Desk ingress NLB subnets in VPC pn-core"
 }
 
 variable "vpc_pn_core_opensearch_subnets_cidrs" {
