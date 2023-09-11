@@ -137,6 +137,9 @@ output "Core_BoApiDnsName" {
   value = "api.bo.${var.dns_zone}"
 }
 
+output "Core_ServicedeskApiDnsName" {
+  value = "api.servicedesk.${var.dns_zone}"
+}
 
 
 output "Core_CdnZoneId" {
