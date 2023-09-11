@@ -144,6 +144,7 @@ accounts:
         - api.bo
         - api-selcpg
         - api.cn
+        - api.servicedesk
       cdn:  
         - selfcare
         - cittadini
