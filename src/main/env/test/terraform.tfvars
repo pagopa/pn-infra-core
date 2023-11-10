@@ -13,7 +13,7 @@ pn_cors_addictive_sources = "http://localhost:8090"
 pn_auth_fleet_addictive_allowed_issuer = "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
 pn_confinfo_aws_account_id = "771887334808"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-771887334808"
-pn_radd_aws_account_id = "830192246553"
+pn_radd_aws_account_id = "654090169999"
 pn_servicedesk_aws_account_id = "533236674075"
 
 
