@@ -51,7 +51,7 @@ envs:
         params:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-771887334808"
       - code: pn-radd
-        aws_id: "830192246553"  # Stringhe non numeri
+        aws_id: "654090169999"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
         
