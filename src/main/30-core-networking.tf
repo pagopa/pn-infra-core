@@ -39,7 +39,7 @@ module "vpc_pn_core" {
     "Terraform" = "true",
     "Environment" = var.environment,
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = "^Interface for NAT Gateway.*$"
+    "pn-eni-related-groupName-regexp" = base64encode("^Interface for NAT Gateway.*$")
   }
 }
 
@@ -75,7 +75,7 @@ module "vpc_endpoints_pn_core" {
   
   tags = {
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = "^pn-core_vpc-tls-.*$"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-tls-.*$")
   }
 
   endpoints = merge(
@@ -149,7 +149,7 @@ resource "aws_vpc_endpoint" "to_data_vault" {
   tags                = { 
     Name = "Endpoint to pn-data-vault"
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = "^pn-core_vpc-toconfinfo-.*$"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-toconfinfo-.*$")
   }
 }
 
@@ -167,7 +167,7 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
   tags                = { 
     Name = "Endpoint to pn-safestorage and pn-external-channel"
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = "^pn-core_vpc-toconfinfo-.*$"  
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-toconfinfo-.*$")
   }
 }
 
