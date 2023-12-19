@@ -80,7 +80,7 @@ resource "aws_lb" "pn_core_api_gw_nlb" {
   tags = {
     "Name": "PN Core - Web Api GW Ingress - NLB"
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = base64encode("^ELB net/WebI-.*$")
+    "pn-eni-related-description-regexp" = base64encode("^ELB net/WebI-.*$")
   }
 }
 # - API GW (Web) VPC Link
@@ -153,7 +153,7 @@ resource "aws_lb" "pn_core_radd_nlb" {
   tags = {
     "Name": "PN Core - Radd Ingress - NLB"
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = base64encode("^ELB net/RaddI-.*$")
+    "pn-eni-related-description-regexp" = base64encode("^ELB net/RaddI-.*$")
   }
 }
 # - ServiceEndpoint ingresso per le invocazioni a ExternalChannel e SafeStorage
@@ -336,7 +336,7 @@ resource "aws_lb" "pn_core_servicedesk_nlb" {
   tags = {
     "Name": "PN Core - Service Desk Ingress - NLB"
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = base64encode("^ELB net/SeDeI-.*$")
+    "pn-eni-related-description-regexp" = base64encode("^ELB net/SeDeI-.*$")
   }
 }
 

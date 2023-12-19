@@ -39,7 +39,7 @@ module "vpc_pn_core" {
     "Terraform" = "true",
     "Environment" = var.environment,
     "pn-eni-related" = "true"
-    "pn-eni-related-groupName-regexp" = base64encode("^Interface for NAT Gateway.*$")
+    "pn-eni-related-description-regexp" = base64encode("^Interface for NAT Gateway.*$")
   }
 }
 
