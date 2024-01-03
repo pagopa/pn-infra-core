@@ -37,7 +37,9 @@ module "vpc_pn_core" {
   tags = { 
     "Code" = "pn-core",
     "Terraform" = "true",
-    "Environment" = var.environment
+    "Environment" = var.environment,
+    "pn-eni-related" = "true"
+    "pn-eni-related-description-regexp" = base64encode("^Interface for NAT Gateway.*$")
   }
 }
 
@@ -71,6 +73,11 @@ module "vpc_endpoints_pn_core" {
             ]
       ]
   
+  tags = {
+    "pn-eni-related" = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-tls-.*$")
+  }
+
   endpoints = merge(
     {
       for svc_name in var.vpc_endpoints_pn_core:
@@ -139,7 +146,11 @@ resource "aws_vpc_endpoint" "to_data_vault" {
   subnet_ids          = local.Core_ToConfinfo_SubnetsIds
   private_dns_enabled = false
 
-  tags                = { Name = "Endpoint to pn-data-vault"}
+  tags                = { 
+    Name = "Endpoint to pn-data-vault"
+    "pn-eni-related" = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-toconfinfo-.*$")
+  }
 }
 
 # PRIVATE LINK ENDPOINTS TO SafeStorage, EternalChannel
@@ -153,7 +164,11 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
   subnet_ids          = local.Core_ToConfinfo_SubnetsIds
   private_dns_enabled = false
 
-  tags                = { Name = "Endpoint to pn-safestorage and pn-external-channel"}
+  tags                = { 
+    Name = "Endpoint to pn-safestorage and pn-external-channel"
+    "pn-eni-related" = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-toconfinfo-.*$")
+  }
 }
 
 
