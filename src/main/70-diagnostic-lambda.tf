@@ -3,7 +3,7 @@ locals {
   confinfo_data_proxy_function_name = "diagnostic-data-proxy"
   confinfo_data_proxy_region        = var.aws_region
 
-  alb_confidential_base_url = "http://${aws_route53_record.dev-ns}:8080"
+  alb_confidential_base_url = "http://${aws_route53_record.dev-ns.name}:8080"
 
   diagnostic_tools_function_name = "diagnostic-tools"
   diagnostic_tools_filename      = "${path.root}/../../functions/diagnostic-tools/function.zip"
@@ -22,7 +22,7 @@ module "diagnostic_tools" {
   diagnostic_data_proxy_lambda_region = local.confinfo_data_proxy_region
   diagnostic_assumerole_arn           = local.confinfo_assumerole_arn
   diagnostic_data_proxy_function_name = local.confinfo_data_proxy_function_name
-  alb_confidential_base_url              = local.alb_confidential_base_url
+  alb_confidential_base_url           = local.alb_confidential_base_url
   vpc_subnet_ids                      = module.vpc_pn_core.private_subnets
   vpc_id                              = module.vpc_pn_core.vpc_id
 }
