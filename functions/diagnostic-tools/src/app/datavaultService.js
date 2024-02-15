@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { getPnDataVaultBaseUrl } from './config.js';
 
+const datavaultRecipientsPath = '/datavault-private/v1/recipients/internal';
+const datavaultNotificationPath = '/datavault-private/v1/notifications';
 /**
  * Fetches the denominations of recipients based on their internal IDs.
  *
@@ -13,7 +15,7 @@ import { getPnDataVaultBaseUrl } from './config.js';
 export const getRecipientDenomination = async (internalIds) => {
   const pnDataVaultBaseUrl = getPnDataVaultBaseUrl();
 
-  const url = `${pnDataVaultBaseUrl}/datavault-private/v1/recipients/internal`;
+  const url = `${pnDataVaultBaseUrl}${datavaultRecipientsPath}`;
 
   try {
     const response = await axios.get(url, {
@@ -40,7 +42,7 @@ export const getRecipientDenomination = async (internalIds) => {
 export const getNotificationAddresses = async (iun) => {
   const pnDataVaultBaseUrl = getPnDataVaultBaseUrl();
 
-  const url = `${pnDataVaultBaseUrl}/datavault-private/v1/notifications/${iun}/addresses`;
+  const url = `${pnDataVaultBaseUrl}${datavaultNotificationPath}/${iun}/addresses`;
 
   try {
     const response = await axios.get(url);
@@ -63,7 +65,7 @@ export const getNotificationAddresses = async (iun) => {
 export const getRecipientAddresses = async (internalId) => {
   const pnDataVaultBaseUrl = getPnDataVaultBaseUrl();
 
-  const url = `${pnDataVaultBaseUrl}/datavault-private/v1/recipients/internal/${internalId}/addresses`;
+  const url = `${pnDataVaultBaseUrl}${datavaultRecipientsPath}/${internalId}/addresses`;
 
   try {
     const response = await axios.get(url);
@@ -85,7 +87,7 @@ export const getRecipientAddresses = async (internalId) => {
 export const getConfidentialTimeline = async (iun) => {
   const pnDataVaultBaseUrl = getPnDataVaultBaseUrl();
 
-  const url = `${pnDataVaultBaseUrl}/datavault-private/v1/notifications/${iun}/timeline`;
+  const url = `${pnDataVaultBaseUrl}${datavaultNotificationPath}/${iun}/timeline`;
 
   try {
     const response = await axios.get(url);
