@@ -4,7 +4,7 @@ import {
   getNotificationAddresses,
 } from './datavaultService.js';
 import { getNotification, getTimeline } from './dynamoDataAccess.js';
-import { extractSafestorageURIs } from './timeline.js';
+import { addUIActions } from './utils.js';
 
 export class IunNotFoundError extends Error {}
 export class DeanonymizeError extends Error {}
@@ -33,43 +33,6 @@ const deanonymizeNotification = async (notification) => {
   });
 
   notification.confidentialDetails.timeline = await getConfidentialTimeline(notification.iun);
-};
-
-/**
- * Enhances a notification object with UI-related actions based on its timeline
- * elements. This function iterates over each timeline element of the
- * notification, extracting file URIs, and determining actions related to files,
- * events, and paper errors based on the category of the timeline element.
- *
- * @param {Object} notification - The notification object to enhance. It must
- * have a `timeline` property with a `category`.
- */
-const addUIActions = (notification) => {
-  notification.uiTimelineActions = notification.timeline.map((element) => {
-    const files = extractSafestorageURIs(element);
-    const actionFiles = files.length !== 0;
-    let actionEvents = false;
-    let actionTimelineId;
-    const actionPaperErrors = element.category === 'SEND_ANALOG_DOMICILE';
-    switch(element.category) {
-      case 'SEND_DIGITAL_DOMICILE':
-        actionEvents = true;
-        actionTimelineId = element.timelineElementId;
-        break;
-      case 'SEND_ANALOG_DOMICILE':
-        actionEvents = true;
-        actionTimelineId = element.details.prepareRequestId;
-        break;
-    }
-    //const actionTimelineId = element.category === 'SEND_DIGITAL_DOMICILE'
-    return {
-      files,
-      actionFiles,
-      actionEvents,
-      actionTimelineId,
-      actionPaperErrors,
-    };
-  });
 };
 
 /**
