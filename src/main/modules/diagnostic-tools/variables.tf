@@ -64,15 +64,17 @@ variable "diagnostic_data_proxy_lambda_region" {
   description = "AWS region of diagnostic_data_proxy Lambda"
 }
 
-variable "pn_data_vault_base_url" {
+variable "alb_confidential_base_url" {
   type        = string
-  description = "Base url of pn-datavault service"
+  description = "Base url of confidential ALB"
 }
 
 variable "vpc_id" {
   type        = string
+  description = "VPC id"
 }
 
 variable "vpc_subnet_ids" {
   type        = list(string)
+  description = "VPC subent ids"
 }
