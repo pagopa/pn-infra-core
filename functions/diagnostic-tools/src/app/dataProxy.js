@@ -21,11 +21,10 @@ const invoke = async (funcName, payload) => {
 
   const command = new InvokeCommand({
     FunctionName: funcName,
-    Payload: JSON.stringify(payload),
-    LogType: LogType.Tail,
+    Payload: JSON.stringify(payload)
   });
 
-  const { Payload, LogResult } = await client.send(command);
+  const { Payload } = await client.send(command);
   const parsedPayload = JSON.parse(Buffer.from(Payload).toString());
   parsedPayload.body = JSON.parse(parsedPayload.body);
   return parsedPayload;
