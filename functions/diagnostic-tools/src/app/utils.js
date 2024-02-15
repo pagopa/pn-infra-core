@@ -1,5 +1,3 @@
-import { extractSafestorageURIs } from './timeline.js';
-
 export class CheckKeysError extends Error {}
 
 /**
@@ -46,6 +44,46 @@ export const makeResponse = (statusCode, body) => {
     statusCode,
     body: JSON.stringify(body)
   };
+};
+
+/**
+ * Recursively searches an object and its nested structures for URIs that begin
+ * with "safestorage://". This function is designed to navigate through arrays
+ * and objects, identifying any string values that match the specified URI
+ * scheme. These URIs are collected and returned in an array, providing a means
+ * to extract all safestorage links from complex data structures.
+ *
+ * @param {Object|Array} obj The object or array to search through for
+ * safestorage URIs.
+ * @return {Array} An array of strings, each representing a safestorage URI
+ * found within the object.
+ */
+export const extractSafestorageURIs = (obj) => {
+  let uris = [];
+
+  const search = (value) => {
+    if (Array.isArray(value)) {
+      // If the value is an array, search each element
+      value.forEach((item) => search(item));
+    } else if (typeof value === 'object' && value !== null) {
+      // If the value is an object, search each property
+      for (let key in value) {
+        if (value.hasOwnProperty(key)) {
+          search(value[key]);
+        }
+      }
+    } else if (
+      typeof value === 'string' &&
+      value.startsWith('safestorage://')
+    ) {
+      // If the value is a string that starts with "safestorage://", add it to
+      // the array
+      uris.push(value);
+    }
+  };
+
+  search(obj);
+  return uris;
 };
 
 /**
