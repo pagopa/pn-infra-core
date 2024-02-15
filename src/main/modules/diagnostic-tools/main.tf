@@ -27,7 +27,7 @@ resource "aws_lambda_function" "diagnostic_tools_lambda" {
       DATA_PROXY_REGION          = var.aws_region
       DIAGNOSTIC_ASSUME_ROLE_ARN = var.diagnostic_assumerole_arn
       DYNAMO_AWS_REGION          = var.aws_region
-      PN_DATA_VAULT_BASEURL      = var.pn_data_vault_base_url
+      PN_DATA_VAULT_BASEURL      = var.alb_confidential_base_url
     }
   }
 
@@ -131,6 +131,7 @@ resource "aws_iam_role_policy_attachment" "attach-vpc" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
+# Security group to query pn-datavault
 resource "aws_security_group" "lambda_security_group" {
   name        = "${var.function_name}-sec-group"
   description = "${var.function_name}-sec-group"
