@@ -1,0 +1,20 @@
+{
+    "name": "diagnostic-tools",
+    "version": "1.0.0",
+    "description": "diagnostic-tools",
+    "main": "index.js",
+    "type": "module",
+    "author": "Giacomo Vallorani",
+    "license": "ISC",
+    "scripts": {
+        "test-build": "npm run-script build",
+        "build": "npm prune --production && rm -f ./function.zip && zip -r ./function.zip . -x './src/test/*' -x '*.md' -x '*.env'  -x '*.gitignore'"
+    },
+    "dependencies": {
+        "axios": ">=1.6.0",
+        "@aws-sdk/client-lambda": "^3.490.0",
+        "@aws-sdk/client-sts": "^3.490.0",
+        "@aws-sdk/client-dynamodb": "^3.507.0",
+        "@aws-sdk/lib-dynamodb": "^3.507.0"
+    }
+}

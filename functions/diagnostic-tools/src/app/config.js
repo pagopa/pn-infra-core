@@ -1,0 +1,55 @@
+/**
+ * Retrieves the value of an environment variable.
+ *
+ * @param {string} env - The name of the environment variable to retrieve.
+ * @return {string} The value of the specified environment variable.
+ * @throws {Error} When the environment variable is not defined.
+ */
+const getEnvironmentVariable = (env) => {
+  const value = process.env[env];
+  if (!value) {
+    throw new Error(`Environment variable ${env} is not defined.`);
+  }
+  return value;
+};
+
+/**
+ * Gets the DiagnosticAssumeRole from environment variables.
+ *
+ * @return {string} The DiagnosticAssumeRole arn.
+ */
+export const getDiagnosticAssumeRoleArn = () =>
+  getEnvironmentVariable('DIAGNOSTIC_ASSUME_ROLE_ARN');
+
+/**
+ * Get the AWS region for `diagnostic-data-proxy` Lambda.
+ *
+ * @return {string} The AWS region for diagnostic-data-proxy.
+ */
+export const getDataProxyRegion = () =>
+  getEnvironmentVariable('DATA_PROXY_REGION');
+
+/**
+ * Get the AWS function name for `diagnostic-data-proxy` Lambda.
+ *
+ * @return {string} The function name for diagnostic-data-proxy.
+ */
+export const getDataProxyName = () =>
+  getEnvironmentVariable('DATA_PROXY_NAME');
+
+/**
+ * Get the AWS region for DynamoDB from environment variables.
+ *
+ * @return {string} The AWS region for DynamoDB.
+ */
+export const getDynamoAWSRegion = () =>
+  getEnvironmentVariable('DYNAMO_AWS_REGION');
+
+/**
+ * Get pn-data-vault base url.
+ *
+ * @return {string} pn-data-vault base url.
+ */
+export const getPnDataVaultBaseUrl = () =>
+getEnvironmentVariable('PN_DATA_VAULT_BASEURL');
+
