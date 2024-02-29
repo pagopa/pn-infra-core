@@ -19,6 +19,8 @@ envs:
         params:
           pn_cors_addictive_sources: "http://localhost:8090,https://develop.dsd2y68dbsoga.amplifyapp.com,https://feat-migrazioni.d2marv3iiokct8.amplifyapp.com"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "30"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
