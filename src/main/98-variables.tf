@@ -179,3 +179,13 @@ variable "pn_auth_fleet_addictive_allowed_issuer" {
   type        = string
   description = "Allowed issuer for PN authentication sources"
 }
+
+variable "pn_cost_anomaly_detection_email" {
+  type        = string
+  description = "pn-core cost anomaly detection email"
+}
+
+variable "pn_cost_anomaly_detection_threshold" {
+  type        = string
+  description = "pn-core cost anomaly detection threshold (percentage)"
+}
