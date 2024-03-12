@@ -102,5 +102,6 @@ locals {
           "${cdn}.${var.dns_zone}"
    ]
   
+  Core_Tags = merge(var.pn_tags, { environment: var.environment})
   
 }

@@ -47,8 +47,16 @@ variable "pn_core_to_extch_safestorage_vpcse" {
   description = "Confinfo VPC Service endpoint exposing SafeStorage and External Channel services"
 }
 
-
-
+variable "pn_tags" {
+  type = map(any)
+  default = {
+    CreatedBy   = "Terraform"
+    Owner       = "Piattaforma Notifiche"
+    Environment = "dev"
+    Source      = "https://github.com/pagopa/pn-infra-core"
+    CostCenter  = "TS610 PIATTAFORMA NOTIFICHE"
+  }
+}
 
 variable "dns_zone" {
   type        = string
