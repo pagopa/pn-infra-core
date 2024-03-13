@@ -11,11 +11,13 @@ locals {
   alb_confidential_base_url = "http://${aws_route53_record.dev-ns.name}:8080"
 
   diagnostic_tools_function_name = "diagnostic-tools"
-  diagnostic_tools_filename      = "${path.root}/../../functions/diagnostic-tools/function.zip"
+  diagnostic_tools_current_build = file("${path.root}/../../functions/diagnostic-tools/.current_build")
+  diagnostic_tools_filename      = "${path.root}/../../functions/diagnostic-tools/${local.diagnostic_tools_current_build}"
   diagnostic_tools_runtime       = "nodejs18.x"
 
   list_lambda_function_name = "diagnostic-list-lambda"
-  list_lambda_filename      = "${path.root}/../../functions/diagnostic-list-lambda/function.zip"
+  list_lambda_current_build = file("${path.root}/../../functions/diagnostic-list-lambda/.current_build")
+  list_lambda_filename      = "${path.root}/../../functions/diagnostic-list-lambda/${local.list_lambda_current_build}"
   list_lambda_runtime       = "nodejs18.x"
 }
 
