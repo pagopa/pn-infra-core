@@ -28,6 +28,12 @@ variable "memory_size" {
   description = "The memory of the lambda."
 }
 
+variable "timeout" {
+  type        = number
+  default     = 3
+  description = "The timeout of the lambda."
+}
+
 variable "aws_region" {
   type        = string
   description = "AWS region to create resources"
@@ -77,4 +83,10 @@ variable "vpc_id" {
 variable "vpc_subnet_ids" {
   type        = list(string)
   description = "VPC subent ids"
+}
+
+variable "lambda_tags" {
+  type        = map(string)
+  default     = {}
+  description = "Tags for Lambda resource"
 }
