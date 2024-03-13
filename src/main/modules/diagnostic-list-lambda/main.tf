@@ -13,7 +13,7 @@ resource "aws_lambda_function" "diagnostic_list_lambda" {
 
   # Dynamically calculates source code hash based on if the code is uploaded as a file or from S3
   source_code_hash = (var.filename != null ? filebase64sha256(var.filename) : sha256(var.s3_code_key))
-
+ 
   # Environment variables for the Lambda function
   environment {
     variables = {
@@ -22,15 +22,6 @@ resource "aws_lambda_function" "diagnostic_list_lambda" {
       CONFINFO_LAMBDA_NAME     = var.confinfo_lambda_name
       CONFINFO_LAMBDA_REGION   = var.aws_region
       CONFINFO_ASSUME_ROLE_ARN = var.confinfo_asuume_role_arn
-    }
-  }
-
-  # Add vpc_config only if vpc_id is defined
-  dynamic "vpc_config" {
-    for_each = var.vpc_id != null ? [1] : []
-    content {
-      subnet_ids         = var.vpc_subnet_ids
-      security_group_ids = [aws_security_group.lambda_security_group[0].id]
     }
   }
 
@@ -118,28 +109,4 @@ resource "aws_iam_role_policy" "lambda_invoke_function_policy" {
       }
     ],
   })
-}
-
-resource "aws_iam_role_policy_attachment" "attach_vpc" {
-  # Make resource only if vpc_id is defined
-  count       = var.vpc_id != null ? 1 : 0
-  role      = aws_iam_role.lambda_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-}
-
-# Security group to query pn-datavault
-resource "aws_security_group" "lambda_security_group" {
-  # Make resource only if vpc_id is defined
-  count       = var.vpc_id != null ? 1 : 0
-  name        = "${var.function_name}-sec-group"
-  description = "${var.function_name}-sec-group"
-  vpc_id      = var.vpc_id
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
 }

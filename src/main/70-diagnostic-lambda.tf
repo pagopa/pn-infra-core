@@ -51,6 +51,4 @@ module "diagnostic_list_lambda" {
   lambda_tags              = local.oncall_tag
   confinfo_lambda_name     = local.confinfo_list_lambda_function_name
   confinfo_asuume_role_arn = local.confinfo_assumerole_arn
-  vpc_subnet_ids           = module.vpc_pn_core.private_subnets
-  vpc_id                   = module.vpc_pn_core.vpc_id
 }
