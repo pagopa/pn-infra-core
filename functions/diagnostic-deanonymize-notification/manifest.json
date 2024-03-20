@@ -1,0 +1,27 @@
+{
+  "name": "diagnostic-deanonymize-notification",
+  "description": "Deanonymize a notification given the IUN.",
+  "input": {
+    "type": "object",
+    "required": ["iun"],
+    "properties": {
+      "iun": {
+        "description": "The IUN of the notification.",
+        "type": "string",
+        "dataClassification": "PUBLIC"
+      }
+    }
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "statusCode": {
+        "description": "Result code of the computation.",
+        "type": "number"
+      },
+      "body": {
+        "type": "string"
+      }
+    }
+  }
+}
