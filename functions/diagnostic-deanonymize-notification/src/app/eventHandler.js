@@ -45,7 +45,6 @@ export const handleEvent = async (event) => {
   const { iun } = event;
   try {
     const result = await deanonymizeNotification(iun);
-    console.log('ciaoaaa');
     return makeResponse(200, result);
   } catch (e) {
     return makeErrorResponse(e); 

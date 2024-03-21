@@ -21,6 +21,9 @@
       },
       "body": {
         "type": "string"
+      },
+      "errorMessage": {
+        "type": "string"
       }
     }
   }
