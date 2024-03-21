@@ -1,7 +1,7 @@
 import { STSClient, AssumeRoleCommand } from '@aws-sdk/client-sts';
 import { getDiagnosticAssumeRoleArn, getDataProxyRegion } from './config.js';
 
-let regionSts = 'core';
+let regionSts = 'eu-south-1';
 
 /**
  * Gets temporary security credentials by assuming DiagnosticAssumeRole IAM
@@ -14,7 +14,7 @@ export const getAssumeRoleCredentials = async () => {
   const stsClient = new STSClient({ region: regionSts });
   const assumeRoleCommand = new AssumeRoleCommand({
     RoleArn: getDiagnosticAssumeRoleArn(),
-    RoleSessionName: 'DiagnosticLambdaSession',
+    RoleSessionName: 'DiagnosticHeadObjectSession',
   });
 
   const { Credentials } = await stsClient.send(assumeRoleCommand);
