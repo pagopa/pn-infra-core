@@ -13,7 +13,7 @@ const datavaultNotificationPath = '/datavault-private/v1/notifications';
  * @throws {Error} If the HTTP request fails for any reason.
  */
 export const getRecipientDenomination = async (internalIds) => {
-  const pnDataVaultBaseUrl = getPnDataVaultBaseUrl() ?? "";
+  const pnDataVaultBaseUrl = getPnDataVaultBaseUrl();
 
   const url = `${pnDataVaultBaseUrl}${datavaultRecipientsPath}`;
 
