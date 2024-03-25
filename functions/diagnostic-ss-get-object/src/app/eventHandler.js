@@ -1,5 +1,5 @@
-import { headObject } from "./dataProxy.js";
-import { makeResponse, makeErrorResponse } from "./utils.js";
+import { getObject } from "./dataProxy.js";
+import { makeErrorResponse, makeResponse } from "./utils.js";
 
 /**
  * Handles an incoming event, attempting to generate a  presigned url of a
@@ -13,7 +13,7 @@ import { makeResponse, makeErrorResponse } from "./utils.js";
 export const handleEvent = async (event) => {
   const { objectKey } = event;
   try {
-    const res = await headObject(objectKey);
+    const res = await getObject(objectKey);
     return makeResponse(res.statusCode, res.body);
   } catch (e) {
     return makeErrorResponse(e);
