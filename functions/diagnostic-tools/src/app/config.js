@@ -44,12 +44,3 @@ export const getDataProxyName = () =>
  */
 export const getDynamoAWSRegion = () =>
   getEnvironmentVariable('DYNAMO_AWS_REGION');
-
-/**
- * Get pn-data-vault base url.
- *
- * @return {string} pn-data-vault base url.
- */
-export const getPnDataVaultBaseUrl = () =>
-getEnvironmentVariable('PN_DATA_VAULT_BASEURL');
-
