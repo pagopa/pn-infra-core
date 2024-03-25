@@ -1,11 +1,10 @@
-import { headObject, getObject } from './dataProxy.js';
+import { headObject, restoreObject } from './dataProxy.js';
 import { getPaperErrors } from './dynamoDataAccess.js';
 import { getEvents } from './timeline.js';
 import { checkKeys, makeResponse } from './utils.js';
 import {
   packNotification,
   IunNotFoundError,
-  DeanonymizeError,
 } from './notification.js';
 
 /**
@@ -28,33 +27,26 @@ export const handleEvent = async (event) => {
   }
 
   switch (event.action) {
-    case 'HEAD_OBJECT':
-    case 'GET_OBJECT':
-      try {
-        const { fileKey } = checkKeys(event, [['fileKey', 'string']]);
-        const res =
-          event.action === 'HEAD_OBJECT'
-            ? await headObject(fileKey)
-            : await getObject(fileKey);
-        return makeResponse(res.statusCode, res.body);
-      } catch (e) {
-        return makeResponse(400, `Invalid request: ${e.message}`);
-      }
+    case 'RESTORE_OBJECT': {
+      const { objectKey } = checkKeys(event, [['objectKey', 'string']]);
+      const res = await restoreObject(objectKey);
+      return makeResponse(res.statusCode, res.body);
+    }
+    case 'HEAD_OBJECT': {
+      const { objectKey } = checkKeys(event, [['objectKey', 'string']]);
+      const res = await headObject(objectKey);
+      return makeResponse(res.statusCode, res.body);
+    }
     case 'GET_NOTIFICATION':
       try {
         const { iun } = checkKeys(event, [['iun', 'string']]);
-        const { deanonymize = false } = event;
         try {
-          const res = await packNotification(iun, deanonymize);
+          const res = await packNotification(iun);
           return makeResponse(200, res);
         } catch (e) {
           // Handle specific errors related to notifications.
           if (e instanceof IunNotFoundError) {
             return makeResponse(404, {
-              message: e.message,
-            });
-          } else if (e instanceof DeanonymizeError) {
-            return makeResponse(500, {
               message: e.message,
             });
           }
@@ -68,7 +60,7 @@ export const handleEvent = async (event) => {
         const { timelineElementId } = checkKeys(event, [
           ['timelineElementId', 'string'],
         ]);
-        const res = await getPaperErrors(timelineElementId)
+        const res = await getPaperErrors(timelineElementId);
         return makeResponse(200, res);
       } catch (e) {
         return makeResponse(400, `Invalid request: ${e.message}`);
