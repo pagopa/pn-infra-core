@@ -23,18 +23,11 @@ resource "aws_lambda_function" "diagnostic_tools_lambda" {
   environment {
     variables = {
       DATA_PROXY_NAME            = var.diagnostic_data_proxy_function_name
-      DATA_PROXY_REGION          = var.aws_region
+      DATA_PROXY_REGION          = var.diagnostic_data_proxy_lambda_region
       DIAGNOSTIC_ASSUME_ROLE_ARN = var.diagnostic_assumerole_arn
       DYNAMO_AWS_REGION          = var.aws_region
-      PN_DATA_VAULT_BASEURL      = var.alb_confidential_base_url
     }
   }
-
-  vpc_config {
-    subnet_ids         = var.vpc_subnet_ids
-    security_group_ids = [aws_security_group.lambda_security_group.id]
-  }
-
   # Ensures that either a direct upload filename or S3 location must be specified
   lifecycle {
     precondition {
@@ -123,24 +116,4 @@ resource "aws_iam_role_policy" "lambda_dynamo_policy" {
       }
     ],
   })
-}
-
-resource "aws_iam_role_policy_attachment" "attach-vpc" {
-  role      = aws_iam_role.diagnostic_tools_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-}
-
-# Security group to query pn-datavault
-resource "aws_security_group" "lambda_security_group" {
-  name        = "${var.function_name}-sec-group"
-  description = "${var.function_name}-sec-group"
-  vpc_id      = var.vpc_id
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
 }
