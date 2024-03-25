@@ -30,7 +30,7 @@ variable "memory_size" {
 
 variable "timeout" {
   type        = number
-  default     = 3
+  default     = 15
   description = "The timeout of the lambda."
 }
 
@@ -68,21 +68,6 @@ variable "diagnostic_data_proxy_function_name" {
 variable "diagnostic_data_proxy_lambda_region" {
   type        = string
   description = "AWS region of diagnostic_data_proxy Lambda"
-}
-
-variable "alb_confidential_base_url" {
-  type        = string
-  description = "Base url of confidential ALB"
-}
-
-variable "vpc_id" {
-  type        = string
-  description = "VPC id"
-}
-
-variable "vpc_subnet_ids" {
-  type        = list(string)
-  description = "VPC subent ids"
 }
 
 variable "lambda_tags" {
