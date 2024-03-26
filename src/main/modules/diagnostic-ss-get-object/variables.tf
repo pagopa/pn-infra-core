@@ -1,6 +1,6 @@
 variable "function_name" {
   type        = string
-  default     = "diagnostic-data-proxy"
+  default     = "diagnostic-ss-get-object"
   description = "The name of the Lambda"
 }
 
@@ -67,6 +67,7 @@ variable "diagnostic_data_proxy_function_name" {
 
 variable "diagnostic_data_proxy_lambda_region" {
   type        = string
+  default     = "eu-south-1"
   description = "AWS region of diagnostic_data_proxy Lambda"
 }
 

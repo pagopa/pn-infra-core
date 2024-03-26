@@ -30,7 +30,7 @@ variable "memory_size" {
 
 variable "timeout" {
   type        = number
-  default     = 3
+  default     = 15
   description = "The timeout of the lambda."
 }
 

@@ -1,0 +1,30 @@
+{
+  "name": "diagnostic-ss-head-object",
+  "description": "Get a presigned url of an object from pn-safestorage",
+  "input": {
+    "type": "object",
+    "required": ["objectKey"],
+    "properties": {
+      "objectKey": {
+        "description": "The object key",
+        "type": "string",
+        "dataClassification": "PUBLIC"
+      }
+    }
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "statusCode": {
+        "description": "Result code of the computation.",
+        "type": "number"
+      },
+      "body": {
+        "type": "string"
+      },
+      "errorMessage": {
+        "type": "string"
+      }
+    }
+  }
+}

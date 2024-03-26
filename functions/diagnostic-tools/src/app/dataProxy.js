@@ -26,7 +26,12 @@ const invoke = async (funcName, payload) => {
 
   const { Payload } = await client.send(command);
   const parsedPayload = JSON.parse(Buffer.from(Payload).toString());
-  parsedPayload.body = JSON.parse(parsedPayload.body);
+  if(parsedPayload.body !== undefined) {
+    parsedPayload.body = JSON.parse(parsedPayload.body);
+  }
+  if(parsedPayload.errorMessage !== undefined) {
+    parsedPayload.body = parsedPayload.errorMessage;
+  }
   return parsedPayload;
 };
 
@@ -35,7 +40,7 @@ const invoke = async (funcName, payload) => {
  * in Glacier. Generates a signed URL for accessing the object if it is
  * immediately available.
  *
- * @param {string} fileKey - The S3 object key, prefixed with "safestorage://".
+ * @param {string} fileKey - The S3 object key.
  * @return {Promise<Object>} An object containing the state of the object
  * retrieval or restore process.
  */
@@ -51,12 +56,26 @@ export const getObject = async (fileKey) => {
  * and restoration status. It also retrieves object tags and retention
  * information if available.
  *
- * @param {string} fileKey - The S3 object key, prefixed with "safestorage://".
+ * @param {string} fileKey - The S3 object key.
  * @return {Promise<Object>} An object containing metadata about the S3 object.
  */
 export const headObject = async (fileKey) => {
   return await invoke(dataProxyFunctionName, {
     action: 'HEAD_OBJECT',
+    fileKey
+  });
+};
+
+/**
+ * Initiates a restore process for an S3 object that is stored in
+ * `pn-safestorage`, which might be in Glacier.
+ *
+ * @param {string} fileKey - The S3 object key for the object to be restored.
+ * @return {Promise<Object>} An object with the statusCode.
+ */
+export const restoreObject = async (fileKey) => {
+  return await invoke(dataProxyFunctionName, {
+    action: 'RESTORE_OBJECT',
     fileKey
   });
 };

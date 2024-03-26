@@ -36,11 +36,3 @@ export const getDataProxyRegion = () =>
  */
 export const getDataProxyName = () =>
   getEnvironmentVariable('DATA_PROXY_NAME');
-
-/**
- * Get the AWS region for DynamoDB from environment variables.
- *
- * @return {string} The AWS region for DynamoDB.
- */
-export const getDynamoAWSRegion = () =>
-  getEnvironmentVariable('DYNAMO_AWS_REGION');

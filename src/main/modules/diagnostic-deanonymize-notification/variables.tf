@@ -1,6 +1,6 @@
 variable "function_name" {
   type        = string
-  default     = "diagnostic-data-proxy"
+  default     = "diagnostic-deanonymize-notification"
   description = "The name of the Lambda"
 }
 
@@ -55,19 +55,19 @@ variable "runtime" {
   description = "NodeJs runtime"
 }
 
-variable "diagnostic_assumerole_arn" {
+variable "alb_confidential_base_url" {
   type        = string
-  description = "Arn of role for calling diagnostic Lambda"
+  description = "Base url of confidential ALB"
 }
 
-variable "diagnostic_data_proxy_function_name" {
+variable "vpc_id" {
   type        = string
-  description = "diagnostic_data_proxy function name"
+  description = "VPC id"
 }
 
-variable "diagnostic_data_proxy_lambda_region" {
-  type        = string
-  description = "AWS region of diagnostic_data_proxy Lambda"
+variable "vpc_subnet_ids" {
+  type        = list(string)
+  description = "VPC subent ids"
 }
 
 variable "lambda_tags" {
