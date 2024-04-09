@@ -22,7 +22,7 @@ pn_servicedesk_aws_account_id = "533236674075"
 vpc_pn_core_name = "PN Core"
 vpc_pn_core_primary_cidr = "10.7.0.0/16"
 vpc_pn_core_aws_services_interface_endpoints_subnets_cidr = ["10.7.70.0/24","10.7.71.0/24","10.7.72.0/24"]
-vpc_endpoints_pn_core = ["sqs","logs","sns","kms","kinesis-streams","elasticloadbalancing","events","ecr.api","ecr.dkr","ssmmessages","ssm","ec2messages","ecs-agent","ecs-telemetry","ecs","secretsmanager","monitoring","xray"]
+vpc_endpoints_pn_core = ["sqs","logs","sns","kms","kinesis-streams","elasticloadbalancing","elasticache","events","ecr.api","ecr.dkr","ssmmessages","ssm","ec2messages","ecs-agent","ecs-telemetry","ecs","secretsmanager","monitoring","xray"]
 
 vpc_pn_core_private_subnets_cidr = ["10.7.40.0/24","10.7.41.0/24","10.7.42.0/24"]
 vpc_pn_core_private_subnets_names = ["PN Core - PnCore Egress Subnet (uat) AZ 0","PN Core - PnCore Egress Subnet (uat) AZ 1","PN Core - PnCore Egress Subnet (uat) AZ 2"]

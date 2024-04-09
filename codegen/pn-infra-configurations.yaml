@@ -176,6 +176,7 @@ accounts:
             - "kms"
             - "kinesis-streams"
             - "elasticloadbalancing"
+            - "elasticache"
             - "events"
             - "ecr.api"
             - "ecr.dkr"
