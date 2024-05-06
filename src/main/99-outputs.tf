@@ -162,9 +162,9 @@ output "Core_PortalePgCertificateArn" {
   value = module.acm_cdn["imprese"].acm_certificate_arn
 }
 
-output "Core_PortaleStatusCertificateArn" {
-  value = module.acm_cdn["status"].acm_certificate_arn
-}
+#output "Core_PortaleStatusCertificateArn" {
+#  value = module.acm_cdn["status"].acm_certificate_arn
+#}
 
 output "Core_PortaleHelpdeskCertificateArn" {
   value = module.acm_cdn["helpdesk"].acm_certificate_arn

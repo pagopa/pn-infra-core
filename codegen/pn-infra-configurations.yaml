@@ -159,7 +159,7 @@ accounts:
         - cittadini
         - login
         - imprese
-        - status
+        # - status
         - www
         - helpdesk
     has_apigw: true
