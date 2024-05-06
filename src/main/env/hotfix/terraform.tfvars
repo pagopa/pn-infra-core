@@ -3,7 +3,7 @@ environment = "hotfix"
 how_many_az = 3
 dns_zone = "hotfix.notifichedigitali.it"
 api_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn"]
-cdn_domains = ["selfcare","cittadini","login","imprese","status","www","helpdesk"]
+cdn_domains = ["selfcare","cittadini","login","imprese","www","helpdesk"]
 apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn"]
   
 pn_core_aws_account_id = "207905393513"
