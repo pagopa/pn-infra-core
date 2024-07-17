@@ -13,6 +13,6 @@
     "dependencies": {
         "@aws-sdk/client-lambda": "^3.490.0",
         "@aws-sdk/client-sts": "^3.490.0",
-        "compatibility-layer": "https://gitpkg.now.sh/pagopa/pn-troubleshooting/lambda-compatibility-layer?6ec38c9fd007c659ea33e66b30b8fc49180f98e3"
+        "compatibility-layer": "../diagnostic-compatibility-layer"
     }
 }
