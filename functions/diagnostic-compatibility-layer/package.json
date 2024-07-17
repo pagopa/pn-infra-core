@@ -3,6 +3,8 @@
     "version": "1.0.0",
     "description": "Compatibility layer of diagnostic functions.",
     "scripts": {
+        "test-build": "npm run-script build-zip",
+        "build-zip": "npm prune --production && rm -f ./*.zip && zip -r ./function.zip . -x './src/test/*' -x '*.md' -x '*.env'  -x '*.gitignore' -x '*.zip' -x '.current_build'",
         "build.cjs": "npx babel src --out-dir ./cjs/src --out-file-extension .cjs",
         "build": "npm run build.cjs"
     },
