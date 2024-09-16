@@ -137,7 +137,9 @@ output "Core_BoApiDnsName" {
   value = "api.bo.${var.dns_zone}"
 }
 
-
+output "Core_DestApiDnsName" {
+  value = "api.dest.${var.dns_zone}"
+}
 output "Core_CdnZoneId" {
   value = local.account_root_dns_zone_id
 }
