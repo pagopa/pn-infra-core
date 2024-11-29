@@ -104,6 +104,7 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://selfcare.pagopa.it,https://pnpg.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          pn_cname_dns_entries: '{"assistenza": "hc-send.zendesk.com"}'
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri

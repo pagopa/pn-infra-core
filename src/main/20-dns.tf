@@ -69,6 +69,18 @@ resource "aws_route53_record" "caa_dns_entry" {
     ]
 }
 
+# only in production add cname from assistenza.notifichedigitali.it to  hc-send.zendesk.com
+resource "aws_route53_record" "cname_dns_entry" {
+  for_each = jsondecode(var.pn_cname_dns_entries)
+
+  name    = each.key
+  type    = "CNAME"
+  ttl     = 300
+  zone_id = data.aws_route53_zone.base_domain_name.zone_id
+
+  records = [each.value]
+}
+
 module "acm_cdn" {
   source  = "terraform-aws-modules/acm/aws"
   version = "4.3.2"
@@ -84,7 +96,7 @@ module "acm_cdn" {
   domain_name = "${each.key}.${var.dns_zone}"
   zone_id     = data.aws_route53_zone.base_domain_name.zone_id
 
-  subject_alternative_names = []
+  subject_alternative_names = [] #cdn_alternate_domains[each.key]
 
   tags = {
     Name = "${each.key}.${var.dns_zone}"
