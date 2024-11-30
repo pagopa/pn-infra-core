@@ -69,9 +69,11 @@ resource "aws_route53_record" "caa_dns_entry" {
     ]
 }
 
-# only in production add cname from assistenza.notifichedigitali.it to  hc-send.zendesk.com
+# Add DNS CNAMEs to refer external products website. 
+# Example: add cname from assistenza.notifichedigitali.it to  hc-send.zendesk.com;
+# used only in production environment 
 resource "aws_route53_record" "cname_dns_entry" {
-  for_each = jsondecode(var.pn_cname_dns_entries)
+  for_each = jsondecode(var.pn_dns_extra_cname_entries)
 
   name    = each.key
   type    = "CNAME"
@@ -96,7 +98,7 @@ module "acm_cdn" {
   domain_name = "${each.key}.${var.dns_zone}"
   zone_id     = data.aws_route53_zone.base_domain_name.zone_id
 
-  subject_alternative_names = [] #cdn_alternate_domains[each.key]
+  subject_alternative_names = []
 
   tags = {
     Name = "${each.key}.${var.dns_zone}"
