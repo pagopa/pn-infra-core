@@ -36,6 +36,11 @@ variable "pn_servicedesk_aws_account_id" {
   description = "pn-servicedesk current environment AWS Account id"
 }
 
+variable "pn_dns_extra_cname_entries" {
+  type        = string
+  default     = "{}"
+  description = "Additional CNAME DNS entries"
+}
 
 variable "pn_core_to_data_vault_vpcse" {
   type        = string

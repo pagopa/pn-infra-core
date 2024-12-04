@@ -69,6 +69,20 @@ resource "aws_route53_record" "caa_dns_entry" {
     ]
 }
 
+# Add DNS CNAMEs to refer external products website. 
+# Example: add cname from assistenza.notifichedigitali.it to  hc-send.zendesk.com;
+# used only in production environment 
+resource "aws_route53_record" "cname_dns_entry" {
+  for_each = jsondecode(var.pn_dns_extra_cname_entries)
+
+  name    = each.key
+  type    = "CNAME"
+  ttl     = 300
+  zone_id = data.aws_route53_zone.base_domain_name.zone_id
+
+  records = [each.value]
+}
+
 module "acm_cdn" {
   source  = "terraform-aws-modules/acm/aws"
   version = "4.3.2"
