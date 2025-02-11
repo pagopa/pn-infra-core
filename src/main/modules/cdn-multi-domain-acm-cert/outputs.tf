@@ -17,6 +17,14 @@ output "cert_domains" {
   description = "List of all domains included in the certificate, with the primary domain first."
 }
 
+output "cert_domains_joined" {
+  value = join(",", concat(
+    [aws_acm_certificate.main.domain_name],
+    [for domain in tolist(aws_acm_certificate.main.subject_alternative_names) : domain if domain != aws_acm_certificate.main.domain_name]
+  ))
+  description = "List of all domains included in the certificate, with the primary domain first, in a comma separated string."
+}
+
 output "certificate_validation_records" {
   value = {
     for domain, record in aws_route53_record.validation : domain => {
