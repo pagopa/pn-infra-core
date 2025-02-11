@@ -1,33 +1,33 @@
 variable "domains" {
   type        = list(string)
-  description = "Lista dei domini per il certificato multidominio. Il primo è il dominio principale."
+  description = "List of domains for multidomain certificate, the first domain is the primary domain, the other are SANs"
   validation {
     condition     = length(var.domains) > 0
-    error_message = "Deve essere fornito almeno un dominio."
+    error_message = "At least one domain must be provided"
   }
   validation {
     condition = alltrue([
       for domain in var.domains :
       can(regex("^(\\*\\.)?[a-z0-9][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)*$", domain))  #wildcard support
     ])
-    error_message = "Formato dominio non valido: i domini devono essere minuscoli e contenere solo lettere, numeri, trattini e punti."
+    error_message = "Invalid domain format, domains must be lowercase and contain only letters, numbers, hyphens and dots"
   }
 }
 
 variable "allowed_internal_zones" {
   type        = list(string)
-  description = "Lista dei nomi delle zone Route53 interne consentite."
+  description = "List of allowed internal Route53 zone names"
   default     = []
 }
 
 variable "allowed_external_zones" {
   type        = list(string)
-  description = "Lista dei nomi delle zone cross-account (esterne). Se valorizzata, per i domini che non matchano le zone interne si tenterà il matching contro queste zone e verranno forniti in output i dettagli per la creazione manuale dei record di validazione."
+  description = "List of external, cross-account zone names, for these domains manual validation record details are provided via output"
   default     = []
 }
 
 variable "tags" {
   type        = map(string)
-  description = "Tags da applicare al certificato."
+  description = "Map of tags to apply to certificate"
   default     = {}
 }
