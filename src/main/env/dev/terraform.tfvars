@@ -5,13 +5,7 @@ dns_zone = "dev.notifichedigitali.it"
 api_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn","api.dest"]
 cdn_domains = ["selfcare","cittadini","login","imprese","www","helpdesk"]
 apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn","api.dest"]
-
-pagopa_zone_delegation_enabled = false
-generate_landing_multi_domain_cdn_cert = true
-landing_cdn_allowed_internal_zones = ["dev.notifichedigitali.it"]
-landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
-landing_multi_domain_cert_domains = ["showcase.dev.notifichedigitali.it", "dev.notifichedigitali.it", "dev.notifichedigitali.pagopa.it", "www.dev.notifichedigitali.pagopa.it"]
-
+  
 pn_core_aws_account_id = "830192246553"
 pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
 pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
@@ -19,6 +13,11 @@ pn_cors_addictive_sources = "http://localhost:8090,https://pg-webapp.fe-prototyp
 pn_auth_fleet_addictive_allowed_issuer = "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
 pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 pn_cost_anomaly_detection_threshold = "10"
+pagopa_zone_delegation_enabled = false
+generate_landing_multi_domain_cdn_cert = true
+landing_cdn_allowed_internal_zones = ["dev.notifichedigitali.it"]
+landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
+landing_multi_domain_cert_domains = ["showcase.dev.notifichedigitali.it","dev.notifichedigitali.it","dev.notifichedigitali.pagopa.it","www.dev.notifichedigitali.pagopa.it"]
 pn_confinfo_aws_account_id = "089813480515"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-089813480515"
 pn_radd_aws_account_id = "830192246553"
