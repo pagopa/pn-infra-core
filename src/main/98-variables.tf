@@ -42,6 +42,12 @@ variable "pn_dns_extra_cname_entries" {
   description = "Additional CNAME DNS entries"
 }
 
+variable "pagopa_dns_extra_cname_entries" {
+  type        = string
+  default     = "{}"
+  description = "Additional CNAME DNS entries for pagopa domain"
+}
+
 variable "pn_core_to_data_vault_vpcse" {
   type        = string
   description = "Confinfo VPC Service endpoint exposing DataVault services"
@@ -58,6 +64,18 @@ variable "pn_core_to_extch_safestorage_vpcse" {
 variable "dns_zone" {
   type        = string
   description = "Dns zone used for the environment"
+}
+
+variable "pagopa_zone_delegation_enabled" {
+  type        = bool
+  description = "If true, enables pagopa zone management (prod only)."
+  default     = false
+}
+
+variable "pagopa_dns_zone" {
+  type        = string
+  default     = ""
+  description = "Pagopa dns zone used for the environment"
 }
 
 variable "api_domains" {
@@ -82,6 +100,29 @@ variable "dns_record_ttl" {
   default     = 60 # 1 minute
 }
 
+variable "generate_landing_multi_domain_cdn_cert" {
+  type        = bool
+  description = "If false, module will not create certificate and related resources."
+  default     = false
+}
+
+variable "landing_cdn_allowed_internal_zones" {
+  type        = list(string)
+  description = "List of allowed internal Route53 zones for pn-showcase landing page multi domain certificate"
+  default     = []
+}
+
+variable "landing_cdn_allowed_external_zones" {
+  type        = list(string)
+  description = "External zones for pn-showcase landing page multi domain certificate, if set, the validation record for the domains belongign will NOT be auto-created and validation will not be awaited. Output includes manual record details."
+  default     = []
+}
+
+variable "landing_multi_domain_cert_domains" {
+  type        = list(string)
+  description = "List of domains for multi-domain certificate. The first is primary, others are SAN."
+  default     = []
+}
 
 
 

@@ -4,6 +4,12 @@ data "aws_route53_zone" "base_domain_name" {
   private_zone = false
 }
 
+data "aws_route53_zone" "pagopa_domain_name" {
+  count        = var.pagopa_zone_delegation_enabled ? 1 : 0
+  name         = "${var.pagopa_dns_zone}."
+  private_zone = false
+}
+
 provider "aws" {
   alias  = "aws-us-east-1"
   region = "us-east-1"
@@ -83,6 +89,15 @@ resource "aws_route53_record" "cname_dns_entry" {
   records = [each.value]
 }
 
+resource "aws_route53_record" "pagopa_cname_dns_entry" {
+  for_each = var.pagopa_zone_delegation_enabled ? jsondecode(var.pagopa_dns_extra_cname_entries) : {}
+  name     = each.key
+  type     = "CNAME"
+  ttl      = 300
+  zone_id  = data.aws_route53_zone.pagopa_domain_name[0].zone_id
+  records  = [each.value]
+}
+
 module "acm_cdn" {
   source  = "terraform-aws-modules/acm/aws"
   version = "4.3.2"
@@ -103,4 +118,15 @@ module "acm_cdn" {
   tags = {
     Name = "${each.key}.${var.dns_zone}"
   }
+}
+
+module "landing_cdn_multi_domain_acm_cert" {
+  count = var.generate_landing_multi_domain_cdn_cert ? 1 : 0
+  source = "./modules/cdn-multi-domain-acm-cert"
+  providers = {
+    aws.aws-us-east-1 = aws.aws-us-east-1
+  }
+  domains = var.landing_multi_domain_cert_domains
+  allowed_internal_zones = var.landing_cdn_allowed_internal_zones
+  allowed_external_zones = var.landing_cdn_allowed_external_zones
 }

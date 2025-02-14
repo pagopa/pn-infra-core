@@ -21,6 +21,18 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          pagopa_zone_delegation_enabled: false
+          generate_landing_multi_domain_cdn_cert: true
+          landing_cdn_allowed_internal_zones:
+            - "dev.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.dev.notifichedigitali.it"
+            - "dev.notifichedigitali.it"
+            - "dev.notifichedigitali.pagopa.it"
+            - "www.dev.notifichedigitali.pagopa.it"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -165,6 +177,7 @@ accounts:
         - www
         - helpdesk
     has_apigw: true
+    has_landing: true
     vpcs:
       - code: pn-core
         name: PN Core

@@ -189,6 +189,35 @@ output "Core_LandingDomain" {
   value = "www.${var.dns_zone}"
 }
 
+output "Core_LandingMultiDomainCertificateArn" {
+  value = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].certificate_arn : null
+}
+
+output "Core_LandingExternalZonesValidationRecords" {
+  description = "Validation records for domains belonging to external zones for showcase site, to create manually in the externa zone"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].external_zones_validation_records : null
+}
+
+output "Core_LandingMultiDomainCertDomains" {
+  description = "List of all domains included in the certificate, with the primary domain first"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].cert_domains : null
+}
+
+output "Core_LandingMultiDomainCertJoinedDomains" {
+  description = "List of all domains included in the certificate, with the primary domain first"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].cert_domains_joined : null
+}
+
+output "Core_LandingMultiDomainCertInternalDomainsZonesMap" {
+  description = "Comma delimited list, containing map of internal domains, and relative parent zone ID"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].internal_domains_with_zones : null
+}
+
+output "Core_LandingMultiDomainCertExternalDomainsZonesMap" {
+  description = "Comma delimited list, containing map of external domains, and relative parent zone name"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].external_domains_with_zones : null
+}
+
 output "Core_PortalePgDomain" {
   value = "imprese.${var.dns_zone}"
 }
