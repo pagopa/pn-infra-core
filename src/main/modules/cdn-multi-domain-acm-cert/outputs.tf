@@ -25,6 +25,22 @@ output "cert_domains_joined" {
   description = "List of all domains included in the certificate, with the primary domain first, in a comma separated string."
 }
 
+output "internal_domains_with_zones" {
+  value = join(",", [
+    for domain, zone in local.internal_domains : 
+    "${domain}|${local.zone_ids[zone]}"
+  ])
+  description = "Internal domains with their Route53 zone IDs in format 'domain|zoneid', comma separated"
+}
+
+output "external_domains_with_zones" {
+  value = join(",", [
+    for domain in keys(local.external_domains) : 
+    "${domain}|${local.final_parent_zone[domain]}"
+  ])
+  description = "External domains with their final parent zones in format 'domain|zone', comma separated"
+}
+
 output "certificate_validation_records" {
   value = {
     for domain, record in aws_route53_record.validation : domain => {
