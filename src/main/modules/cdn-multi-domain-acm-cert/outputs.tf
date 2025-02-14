@@ -60,15 +60,17 @@ output "domain_validation_options" {
 }
 
 output "external_zones_validation_records" {
-  value = {
-    for dvo in aws_acm_certificate.main.domain_validation_options :
-    trimsuffix(dvo.domain_name, ".") => {
-      name    = dvo.resource_record_name,
-      type    = dvo.resource_record_type,
-      records = [ dvo.resource_record_value ],
-      zone    = local.external_domains[trimsuffix(dvo.domain_name, ".")]
-    }
-    if contains(keys(local.external_domains), trimsuffix(dvo.domain_name, "."))
-  }
-  description = "Details of the DNS validation records for domains matching allowed_external_zones (to be created manually in the external account)."
+  value = flatten([
+    for dvo in aws_acm_certificate.main.domain_validation_options : (
+      contains(keys(local.external_domains), trimsuffix(dvo.domain_name, "."))
+      ? [
+          "DESCRIPTION: validation records to create manually in the external zone",
+          "TYPE: CNAME",
+          "NAME:${dvo.resource_record_name}",
+          "VALUE:${dvo.resource_record_value}",
+          "ZONE:${local.external_domains[trimsuffix(dvo.domain_name, ".")]}",
+        ]
+      : []
+    )
+  ])
 }
