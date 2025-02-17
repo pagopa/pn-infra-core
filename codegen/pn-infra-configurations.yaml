@@ -30,7 +30,7 @@ envs:
             - "notifichedigitali.pagopa.it"
           landing_multi_domain_cert_domains:
             - "showcase.dev.notifichedigitali.it"
-            - "dev.notifichedigitali.it"
+            - "www.dev.notifichedigitali.it"
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
       - code: pn-confinfo
