@@ -218,7 +218,7 @@ output "Core_LandingMultiDomainCertInternalDomainsZonesMap" {
     join(",", [
       for pair in split(",", module.landing_cdn_multi_domain_acm_cert[0].internal_domains_with_zones) : 
       pair
-      if split("|", pair)[0] != "www.${var.dns_zone}"
+      if split("|", pair)[0] != "${var.landing_single_domain}.${var.dns_zone}"
     ])
   ) : null
 }
