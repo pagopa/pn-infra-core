@@ -18,6 +18,7 @@ generate_landing_multi_domain_cdn_cert = true
 landing_cdn_allowed_internal_zones = ["dev.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.dev.notifichedigitali.it","www.dev.notifichedigitali.it","dev.notifichedigitali.pagopa.it","www.dev.notifichedigitali.pagopa.it"]
+landing_single_domain = "www"
 pn_confinfo_aws_account_id = "089813480515"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-089813480515"
 pn_radd_aws_account_id = "830192246553"
