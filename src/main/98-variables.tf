@@ -100,6 +100,12 @@ variable "dns_record_ttl" {
   default     = 60 # 1 minute
 }
 
+variable "landing_single_domain" {
+  type        = string
+  default     = "www"
+  description = "name of the label related to the primary domain of showcase site, relevant in the single-domain certificate setup"
+}
+
 variable "generate_landing_multi_domain_cdn_cert" {
   type        = bool
   description = "If false, module will not create certificate and related resources."

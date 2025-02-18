@@ -186,7 +186,11 @@ output "Core_PortalePfLoginDomain" {
 }
 
 output "Core_LandingDomain" {
-  value = "www.${var.dns_zone}"
+  value = "${var.landing_single_domain}.${var.dns_zone}"
+}
+
+output "Core_DnsZoneName" {
+  value = "${var.dns_zone}"
 }
 
 output "Core_LandingMultiDomainCertificateArn" {
@@ -209,9 +213,16 @@ output "Core_LandingMultiDomainCertJoinedDomains" {
 }
 
 output "Core_LandingMultiDomainCertInternalDomainsZonesMap" {
-  description = "Comma delimited list, containing map of internal domains, and relative parent zone ID"
-  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].internal_domains_with_zones : null
+  description = "Comma delimited list, containing map of showcase's internal domains, and relative parent zone ID, not including the primary single domain"
+  value = var.generate_landing_multi_domain_cdn_cert ? (
+    join(",", [
+      for pair in split(",", module.landing_cdn_multi_domain_acm_cert[0].internal_domains_with_zones) : 
+      pair
+      if split("|", pair)[0] != "${var.landing_single_domain}.${var.dns_zone}"
+    ])
+  ) : null
 }
+
 
 output "Core_LandingMultiDomainCertExternalDomainsZonesMap" {
   description = "Comma delimited list, containing map of external domains, and relative parent zone name"

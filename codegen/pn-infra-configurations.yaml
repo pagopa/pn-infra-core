@@ -33,6 +33,7 @@ envs:
             - "www.dev.notifichedigitali.it"
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
+          landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -61,6 +62,8 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
@@ -88,6 +91,8 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
         aws_id: "956319218727"  # Stringhe non numeri
@@ -145,6 +150,8 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
