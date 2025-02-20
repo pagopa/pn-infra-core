@@ -63,6 +63,16 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: true
+          landing_cdn_allowed_internal_zones:
+            - "test.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.test.notifichedigitali.it"
+            - "www.test.notifichedigitali.it"
+            - "test.notifichedigitali.pagopa.it"
+            - "www.test.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
@@ -92,6 +102,16 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: true
+          landing_cdn_allowed_internal_zones:
+            - "uat.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.uat.notifichedigitali.it"
+            - "www.uat.notifichedigitali.it"
+            - "uat.notifichedigitali.pagopa.it"
+            - "www.uat.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
@@ -122,6 +142,17 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           pn_dns_extra_cname_entries: '{\"assistenza\": \"hc-send.zendesk.com\"}'
+          #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: true
+          landing_cdn_allowed_internal_zones:
+            - "notifichedigitali.it"
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.notifichedigitali.it"
+            - "www.notifichedigitali.it"
+            - "notifichedigitali.pagopa.it"
+            - "www.notifichedigitali.pagopa.it"
+          landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri
@@ -151,6 +182,16 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: true
+          landing_cdn_allowed_internal_zones:
+            - "hotfix.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.hotfix.notifichedigitali.it"
+            - "www.hotfix.notifichedigitali.it"
+            - "hotfix.notifichedigitali.pagopa.it"
+            - "www.hotfix.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
