@@ -15,6 +15,7 @@ pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 pn_cost_anomaly_detection_threshold = "10"
 pn_dns_extra_cname_entries = "{\"assistenza\": \"hc-send.zendesk.com\"}"
 generate_landing_multi_domain_cdn_cert = true
+enable_landing_cdn_redirect_function = false
 landing_cdn_allowed_internal_zones = ["notifichedigitali.it","notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.notifichedigitali.it","www.notifichedigitali.it","notifichedigitali.pagopa.it","www.notifichedigitali.pagopa.it"]
 landing_single_domain = "www"

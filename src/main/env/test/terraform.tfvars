@@ -14,6 +14,7 @@ pn_auth_fleet_addictive_allowed_issuer = "https://dev.selfcare.pagopa.it,https:/
 pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 pn_cost_anomaly_detection_threshold = "10"
 generate_landing_multi_domain_cdn_cert = true
+enable_landing_cdn_redirect_function = false
 landing_cdn_allowed_internal_zones = ["test.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.test.notifichedigitali.it","www.test.notifichedigitali.it","test.notifichedigitali.pagopa.it","www.test.notifichedigitali.pagopa.it"]

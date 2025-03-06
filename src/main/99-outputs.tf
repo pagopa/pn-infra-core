@@ -223,10 +223,14 @@ output "Core_LandingMultiDomainCertInternalDomainsZonesMap" {
   ) : null
 }
 
-
 output "Core_LandingMultiDomainCertExternalDomainsZonesMap" {
   description = "Comma delimited list, containing map of external domains, and relative parent zone name"
   value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].external_domains_with_zones : null
+}
+
+output "Core_EnableLandingCdnRedirectFunction" {
+  value = var.enable_landing_cdn_redirect_function ? "true" : "false"
+  description = "Flag to enable redirect function in landing CDN"
 }
 
 output "Core_PortalePgDomain" {
