@@ -112,6 +112,12 @@ variable "generate_landing_multi_domain_cdn_cert" {
   default     = false
 }
 
+variable "enable_landing_cdn_redirect_function" {
+  type        = bool
+  description = "If true, enable the creation of the cloudfront fucntion for redirect in the web-landing-cdn cloudformation stack."
+  default     = false
+}
+
 variable "landing_cdn_allowed_internal_zones" {
   type        = list(string)
   description = "List of allowed internal Route53 zones for pn-showcase landing page multi domain certificate"
