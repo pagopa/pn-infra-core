@@ -23,8 +23,8 @@ envs:
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
           pagopa_zone_delegation_enabled: false
-          generate_landing_multi_domain_cdn_cert: true
-          enable_landing_cdn_redirect_function: true
+          generate_landing_multi_domain_cdn_cert: false
+          enable_landing_cdn_redirect_function: false
           landing_cdn_allowed_internal_zones:
             - "dev.notifichedigitali.it"
           landing_cdn_allowed_external_zones:
@@ -34,7 +34,7 @@ envs:
             - "www.dev.notifichedigitali.it"
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
-          landing_single_domain: "www"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -64,7 +64,7 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
-          generate_landing_multi_domain_cdn_cert: true
+          generate_landing_multi_domain_cdn_cert: false
           enable_landing_cdn_redirect_function: false
           landing_cdn_allowed_internal_zones:
             - "test.notifichedigitali.it"
@@ -75,7 +75,7 @@ envs:
             - "www.test.notifichedigitali.it"
             - "test.notifichedigitali.pagopa.it"
             - "www.test.notifichedigitali.pagopa.it"
-          landing_single_domain: "www"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
@@ -104,7 +104,7 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
-          generate_landing_multi_domain_cdn_cert: true
+          generate_landing_multi_domain_cdn_cert: false
           enable_landing_cdn_redirect_function: false
           landing_cdn_allowed_internal_zones:
             - "uat.notifichedigitali.it"
@@ -115,7 +115,7 @@ envs:
             - "www.uat.notifichedigitali.it"
             - "uat.notifichedigitali.pagopa.it"
             - "www.uat.notifichedigitali.pagopa.it"
-          landing_single_domain: "www"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
         aws_id: "956319218727"  # Stringhe non numeri
@@ -228,6 +228,7 @@ accounts:
         - imprese
         # - status
         - www
+        - showcase
         - helpdesk
     has_apigw: true
     has_landing: true
