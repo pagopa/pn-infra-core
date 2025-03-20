@@ -147,7 +147,7 @@ envs:
           pn_dns_extra_cname_entries: '{\"assistenza\": \"hc-send.zendesk.com\"}'
           #Landing (pn-showcase) conf.
           generate_landing_multi_domain_cdn_cert: true
-          enable_landing_cdn_redirect_function: false
+          enable_landing_cdn_redirect_function: true
           landing_cdn_allowed_internal_zones:
             - "notifichedigitali.it"
             - "notifichedigitali.pagopa.it"
