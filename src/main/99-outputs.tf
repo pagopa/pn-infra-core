@@ -157,7 +157,7 @@ output "Core_PortalePfLoginCertificateArn" {
 }
 
 output "Core_LandingCertificateArn" {
-  value = module.acm_cdn["www"].acm_certificate_arn
+  value = module.acm_cdn["${var.landing_single_domain}"].acm_certificate_arn
 }
 
 output "Core_PortalePgCertificateArn" {
