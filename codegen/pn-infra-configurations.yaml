@@ -186,7 +186,7 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
-          generate_landing_multi_domain_cdn_cert: true
+          generate_landing_multi_domain_cdn_cert: false
           enable_landing_cdn_redirect_function: false
           landing_cdn_allowed_internal_zones:
             - "hotfix.notifichedigitali.it"
@@ -197,7 +197,7 @@ envs:
             - "www.hotfix.notifichedigitali.it"
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
-          landing_single_domain: "www"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
