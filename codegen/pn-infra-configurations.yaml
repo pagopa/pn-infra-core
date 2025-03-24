@@ -197,7 +197,7 @@ envs:
             - "www.hotfix.notifichedigitali.it"
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
-          landing_single_domain: "www"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
