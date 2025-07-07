@@ -33,7 +33,6 @@ module "vpc_pn_core" {
   
   map_public_ip_on_launch = true
   
-  #create_egress_only_igw = false
 
   # VPC Flow Logs (Cloudwatch log group and IAM role will be created)
   enable_flow_log                      = false
