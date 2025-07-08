@@ -14,6 +14,10 @@ output "Core_VpcEndpointsRequired" {
   description = "AWS services endpoints already created"
 }
 
+output "Core_EnvironmentType" { 
+  value       = var.environment
+  description = "Execution environment"
+}
 
 output "Core_VpcSubnets" {
   value = local.Core_SubnetsIds
@@ -38,7 +42,6 @@ output "Core_VpcOpensearchSubnetsIds" {
 output "Core_VpcOpensearchSubnetsCidrs" {
   value = local.Core_OpenSearch_SubnetsCidrs
 }
-
 
 output "Core_ApplicationLoadBalancerArn" {
   value = aws_lb.pn_core_ecs_alb.arn
