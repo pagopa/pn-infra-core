@@ -229,6 +229,7 @@ accounts:
         # - status
         - www
         - showcase
+        - maps
         - helpdesk
     has_apigw: true
     has_landing: true

@@ -11,22 +11,22 @@ locals {
   diagnostic_tools_function_name = "diagnostic-tools"
   diagnostic_tools_current_build = file("${local.functions_path}/diagnostic-tools/.current_build")
   diagnostic_tools_filename      = "${local.functions_path}/diagnostic-tools/${local.diagnostic_tools_current_build}"
-  diagnostic_tools_runtime       = "nodejs18.x"
+  diagnostic_tools_runtime       = "nodejs22.x"
 
   list_lambda_function_name = "diagnostic-list-lambda"
   list_lambda_current_build = file("${local.functions_path}/diagnostic-list-lambda/.current_build")
   list_lambda_filename      = "${local.functions_path}/diagnostic-list-lambda/${local.list_lambda_current_build}"
-  list_lambda_runtime       = "nodejs18.x"
+  list_lambda_runtime       = "nodejs22.x"
 
   diagnostic_deanonymize_notification_function_name = "diagnostic-deanonymize-notification"
   diagnostic_deanonymize_notification_current_build = file("${local.functions_path}/diagnostic-deanonymize-notification/.current_build")
   diagnostic_deanonymize_notification_filename      = "${local.functions_path}/diagnostic-deanonymize-notification/${local.diagnostic_deanonymize_notification_current_build}"
-  diagnostic_deanonymize_notification_runtime       = "nodejs18.x"
+  diagnostic_deanonymize_notification_runtime       = "nodejs22.x"
 
   diagnostic_ss_get_object_function_name = "diagnostic-ss-get-object"
   diagnostic_ss_get_object_current_build = file("${local.functions_path}/diagnostic-ss-get-object/.current_build")
   diagnostic_ss_get_object_filename      = "${local.functions_path}/diagnostic-ss-get-object/${local.diagnostic_ss_get_object_current_build}"
-  diagnostic_ss_get_object_runtime       = "nodejs18.x"
+  diagnostic_ss_get_object_runtime       = "nodejs22.x"
 }
 
 # Configuring and deploying diagnostic-tools Lambda 

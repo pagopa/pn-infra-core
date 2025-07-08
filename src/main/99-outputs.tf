@@ -196,6 +196,16 @@ output "Core_DnsZoneName" {
   value = "${var.dns_zone}"
 }
 
+output "Core_MapsCertificateArn" {
+  description = "ACM Certificate ARN for the maps proxy endpoint."
+  value       = module.acm_cdn["maps"].acm_certificate_arn
+}
+
+output "Core_MapsDomain" {
+  description = "Domain for the maps proxy endpoint."
+  value       = "maps.${var.dns_zone}"
+}
+
 output "Core_LandingMultiDomainCertificateArn" {
   value = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].certificate_arn : null
 }
