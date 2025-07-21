@@ -2,6 +2,9 @@ name: static-analysis
 description: |
   This workflow runs static analysis on the infrastructure code using Trivy in IaC mode.
   It scans for vulnerabilities in the runtime infrastructure code and uploads the results to GitHub's Security tab.
+permissions:
+  contents: read
+  security-events: write
 on:
   push:
 jobs:
