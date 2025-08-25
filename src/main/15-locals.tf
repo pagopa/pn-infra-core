@@ -50,7 +50,19 @@ locals {
           cidr
             if contains( var.vpc_pn_core_radd_subnets_cidrs, cidr)
     ]
+
+  Core_NlbServiceDesk_SubnetsIds = [
+      for idx, cidr in module.vpc_pn_core.intra_subnets_cidr_blocks:
+          module.vpc_pn_core.intra_subnets[idx] 
+            if contains( var.vpc_pn_core_servicedesk_subnets_cidrs, cidr)
+    ]
   
+  Core_NlbServiceDesk_SubnetsCidrs = [
+      for idx, cidr in module.vpc_pn_core.intra_subnets_cidr_blocks:
+          cidr
+            if contains( var.vpc_pn_core_servicedesk_subnets_cidrs, cidr)
+    ]  
+
 
   Core_OpenSearch_SubnetsIds = [
       for idx, cidr in module.vpc_pn_core.intra_subnets_cidr_blocks:

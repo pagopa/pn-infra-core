@@ -1,7 +1,6 @@
-  
 module "vpc_pn_core" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.19.0"
+  version = "5.17.0"
 
   name = var.vpc_pn_core_name
   cidr = var.vpc_pn_core_primary_cidr
@@ -28,6 +27,13 @@ module "vpc_pn_core" {
 
   enable_dhcp_options              = false
 
+  manage_default_network_acl    = false
+  manage_default_route_table    = false
+  manage_default_security_group = false
+  
+  map_public_ip_on_launch = true
+  
+
   # VPC Flow Logs (Cloudwatch log group and IAM role will be created)
   enable_flow_log                      = false
   create_flow_log_cloudwatch_log_group = false
@@ -37,7 +43,9 @@ module "vpc_pn_core" {
   tags = { 
     "Code" = "pn-core",
     "Terraform" = "true",
-    "Environment" = var.environment
+    "Environment" = var.environment,
+    "pn-eni-related" = "true"
+    "pn-eni-related-description-regexp" = base64encode("^Interface for NAT Gateway.*$")
   }
 }
 
@@ -60,7 +68,7 @@ resource "aws_security_group" "vpc_pn_core__secgrp_tls" {
 
 module "vpc_endpoints_pn_core" {
   source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "3.19.0"
+  version = "5.17.0"
 
   vpc_id             = module.vpc_pn_core.vpc_id
   security_group_ids = [ aws_security_group.vpc_pn_core__secgrp_tls.id ]
@@ -71,6 +79,11 @@ module "vpc_endpoints_pn_core" {
             ]
       ]
   
+  tags = {
+    "pn-eni-related" = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-tls-.*$")
+  }
+
   endpoints = merge(
     {
       for svc_name in var.vpc_endpoints_pn_core:
@@ -139,7 +152,11 @@ resource "aws_vpc_endpoint" "to_data_vault" {
   subnet_ids          = local.Core_ToConfinfo_SubnetsIds
   private_dns_enabled = false
 
-  tags                = { Name = "Endpoint to pn-data-vault"}
+  tags                = { 
+    Name = "Endpoint to pn-data-vault"
+    "pn-eni-related" = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-toconfinfo-.*$")
+  }
 }
 
 # PRIVATE LINK ENDPOINTS TO SafeStorage, EternalChannel
@@ -153,7 +170,11 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
   subnet_ids          = local.Core_ToConfinfo_SubnetsIds
   private_dns_enabled = false
 
-  tags                = { Name = "Endpoint to pn-safestorage and pn-external-channel"}
+  tags                = { 
+    Name = "Endpoint to pn-safestorage and pn-external-channel"
+    "pn-eni-related" = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-toconfinfo-.*$")
+  }
 }
 
 

@@ -14,6 +14,10 @@ output "Core_VpcEndpointsRequired" {
   description = "AWS services endpoints already created"
 }
 
+output "Core_EnvironmentType" { 
+  value       = var.environment
+  description = "Execution environment"
+}
 
 output "Core_VpcSubnets" {
   value = local.Core_SubnetsIds
@@ -39,11 +43,16 @@ output "Core_VpcOpensearchSubnetsCidrs" {
   value = local.Core_OpenSearch_SubnetsCidrs
 }
 
-
 output "Core_ApplicationLoadBalancerArn" {
   value = aws_lb.pn_core_ecs_alb.arn
   description = "ECS cluster Application Load Balancer ARN, attach microservice listeners here"
 }
+
+output "Core_ApplicationLoadBalancerMetricsDimensionName" {
+  value = replace( aws_lb.pn_core_ecs_alb.arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1")
+  description = "ECS cluster Application Load Balancer name used for metrics"
+}
+
 
 output "Core_ApplicationLoadBalancerAwsDns" {
   value = aws_lb.pn_core_ecs_alb.dns_name 
@@ -111,6 +120,10 @@ output "Core_SelcpgApiDnsName" {
   value = "api-selcpg.${var.dns_zone}"
 }
 
+output "Core_CNApiDnsName" {
+  value = "api.cn.${var.dns_zone}"
+}
+
 output "Core_WebApiDnsName" {
   value = "webapi.${var.dns_zone}"
 }
@@ -127,8 +140,9 @@ output "Core_BoApiDnsName" {
   value = "api.bo.${var.dns_zone}"
 }
 
-
-
+output "Core_DestApiDnsName" {
+  value = "api.dest.${var.dns_zone}"
+}
 output "Core_CdnZoneId" {
   value = local.account_root_dns_zone_id
 }
@@ -146,16 +160,16 @@ output "Core_PortalePfLoginCertificateArn" {
 }
 
 output "Core_LandingCertificateArn" {
-  value = module.acm_cdn["www"].acm_certificate_arn
+  value = module.acm_cdn["${var.landing_single_domain}"].acm_certificate_arn
 }
 
 output "Core_PortalePgCertificateArn" {
   value = module.acm_cdn["imprese"].acm_certificate_arn
 }
 
-output "Core_PortaleStatusCertificateArn" {
-  value = module.acm_cdn["status"].acm_certificate_arn
-}
+#output "Core_PortaleStatusCertificateArn" {
+#  value = module.acm_cdn["status"].acm_certificate_arn
+#}
 
 output "Core_PortaleHelpdeskCertificateArn" {
   value = module.acm_cdn["helpdesk"].acm_certificate_arn
@@ -175,7 +189,61 @@ output "Core_PortalePfLoginDomain" {
 }
 
 output "Core_LandingDomain" {
-  value = "www.${var.dns_zone}"
+  value = "${var.landing_single_domain}.${var.dns_zone}"
+}
+
+output "Core_DnsZoneName" {
+  value = "${var.dns_zone}"
+}
+
+output "Core_MapsCertificateArn" {
+  description = "ACM Certificate ARN for the maps proxy endpoint."
+  value       = module.acm_cdn["maps"].acm_certificate_arn
+}
+
+output "Core_MapsDomain" {
+  description = "Domain for the maps proxy endpoint."
+  value       = "maps.${var.dns_zone}"
+}
+
+output "Core_LandingMultiDomainCertificateArn" {
+  value = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].certificate_arn : null
+}
+
+output "Core_LandingExternalZonesValidationRecords" {
+  description = "Validation records for domains belonging to external zones for showcase site, to create manually in the externa zone"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].external_zones_validation_records : null
+}
+
+output "Core_LandingMultiDomainCertDomains" {
+  description = "List of all domains included in the certificate, with the primary domain first"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].cert_domains : null
+}
+
+output "Core_LandingMultiDomainCertJoinedDomains" {
+  description = "List of all domains included in the certificate, with the primary domain first"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].cert_domains_joined : null
+}
+
+output "Core_LandingMultiDomainCertInternalDomainsZonesMap" {
+  description = "Comma delimited list, containing map of showcase's internal domains, and relative parent zone ID, not including the primary single domain"
+  value = var.generate_landing_multi_domain_cdn_cert ? (
+    join(",", [
+      for pair in split(",", module.landing_cdn_multi_domain_acm_cert[0].internal_domains_with_zones) : 
+      pair
+      if split("|", pair)[0] != "${var.landing_single_domain}.${var.dns_zone}"
+    ])
+  ) : null
+}
+
+output "Core_LandingMultiDomainCertExternalDomainsZonesMap" {
+  description = "Comma delimited list, containing map of external domains, and relative parent zone name"
+  value       = var.generate_landing_multi_domain_cdn_cert ? module.landing_cdn_multi_domain_acm_cert[0].external_domains_with_zones : null
+}
+
+output "Core_EnableLandingCdnRedirectFunction" {
+  value = var.enable_landing_cdn_redirect_function ? "true" : "false"
+  description = "Flag to enable redirect function in landing CDN"
 }
 
 output "Core_PortalePgDomain" {

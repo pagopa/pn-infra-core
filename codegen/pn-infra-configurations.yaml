@@ -17,8 +17,24 @@ envs:
           #   terraform "main" dell'account pn-confinfo dello stesso ambiente
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
         params:
-          pn_cors_addictive_sources: "http://localhost:8090,https://develop.d19zh2gqugqm5d.amplifyapp.com"
+          pn_cors_addictive_sources: "http://localhost:8090,https://pg-webapp.fe-prototype.dev.notifichedigitali.it,https://pa-webapp.fe-prototype.dev.notifichedigitali.it,https://pf-webapp.fe-prototype.dev.notifichedigitali.it"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          pagopa_zone_delegation_enabled: false
+          generate_landing_multi_domain_cdn_cert: false
+          enable_landing_cdn_redirect_function: false
+          landing_cdn_allowed_internal_zones:
+            - "dev.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.dev.notifichedigitali.it"
+            - "www.dev.notifichedigitali.it"
+            - "dev.notifichedigitali.pagopa.it"
+            - "www.dev.notifichedigitali.pagopa.it"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -27,6 +43,8 @@ envs:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-089813480515" 
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "911845998067"  # Stringhe non numeri
 
   test:
     vpcs:
@@ -43,13 +61,153 @@ envs:
         params:
           pn_cors_addictive_sources: "http://localhost:8090"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: false
+          enable_landing_cdn_redirect_function: false
+          landing_cdn_allowed_internal_zones:
+            - "test.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.test.notifichedigitali.it"
+            - "www.test.notifichedigitali.it"
+            - "test.notifichedigitali.pagopa.it"
+            - "www.test.notifichedigitali.pagopa.it"
+          landing_single_domain: "showcase"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
         params:
           pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-771887334808"
       - code: pn-radd
-        aws_id: "830192246553"  # Stringhe non numeri
+        aws_id: "654090169999"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "533236674075"  # Stringhe non numeri
+        
+  uat:
+    vpcs:
+      - code: pn-core
+        idx: 7
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: uat.notifichedigitali.it
+        aws_id: "644374009812" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-0137ff603c40224ec" 
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-0d3e538b0b0956de4"
+        params:
+          pn_cors_addictive_sources: ""
+          pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: false
+          enable_landing_cdn_redirect_function: false
+          landing_cdn_allowed_internal_zones:
+            - "uat.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.uat.notifichedigitali.it"
+            - "www.uat.notifichedigitali.it"
+            - "uat.notifichedigitali.pagopa.it"
+            - "www.uat.notifichedigitali.pagopa.it"
+          landing_single_domain: "showcase"
+      - code: pn-confinfo
+        base_dns: spid.uat.notifichedigitali.it
+        aws_id: "956319218727"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-956319218727" 
+      - code: pn-radd
+        aws_id: "554102482368"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "533236674075"  # Stringhe non numeri
+
+
+  prod:
+    vpcs:
+      - code: pn-core
+        idx: 10
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: notifichedigitali.it
+        aws_id: "510769970275" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-056fd08051998e388"
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-0c36fae336946e891"
+        params:
+          pn_cors_addictive_sources: ""
+          pn_auth_fleet_addictive_allowed_issuer: "https://selfcare.pagopa.it,https://pnpg.selfcare.pagopa.it"
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+          pn_dns_extra_cname_entries: '{\"assistenza\": \"hc-send.zendesk.com\"}'
+          #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: true
+          enable_landing_cdn_redirect_function: true
+          landing_cdn_allowed_internal_zones:
+            - "notifichedigitali.it"
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.notifichedigitali.it"
+            - "www.notifichedigitali.it"
+            - "notifichedigitali.pagopa.it"
+            - "www.notifichedigitali.pagopa.it"
+          landing_single_domain: "www"
+      - code: pn-confinfo
+        base_dns: spid.notifichedigitali.it
+        aws_id: "350578575906"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-350578575906"
+      - code: pn-radd
+        aws_id: "510769970275"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "277345554283"  # Stringhe non numeri
+
+
+  hotfix:
+    vpcs:
+      - code: pn-core
+        idx: 15
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: hotfix.notifichedigitali.it
+        aws_id: "207905393513" # Stringhe non numeri
+        vpcse:
+          to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-028e57d02dfd2ba53" 
+          to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-09f2a367f89a819f3"
+        params:
+          pn_cors_addictive_sources: ""
+          pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+          #Landing (pn-showcase) conf.
+          generate_landing_multi_domain_cdn_cert: false
+          enable_landing_cdn_redirect_function: false
+          landing_cdn_allowed_internal_zones:
+            - "hotfix.notifichedigitali.it"
+          landing_cdn_allowed_external_zones:
+            - "notifichedigitali.pagopa.it"
+          landing_multi_domain_cert_domains:
+            - "showcase.hotfix.notifichedigitali.it"
+            - "www.hotfix.notifichedigitali.it"
+            - "hotfix.notifichedigitali.pagopa.it"
+            - "www.hotfix.notifichedigitali.pagopa.it"
+          landing_single_domain: "showcase"
+      - code: pn-confinfo
+        base_dns: spid.hotfix.notifichedigitali.it
+        aws_id: "839620963891"  # Stringhe non numeri
+        params:
+          pn_safestorage_data_bucket_name: "pn-safestorage-eu-south-1-839620963891" 
+      - code: pn-radd
+        aws_id: "515674411184"  # Stringhe non numeri
+      - code: pn-servicedesk
+        aws_id: "533236674075"  # Stringhe non numeri
+
 
 accounts:
   - code: pn-core
@@ -61,15 +219,20 @@ accounts:
         - api.radd
         - api.bo
         - api-selcpg
+        - api.cn
+        - api.dest
       cdn:  
         - selfcare
         - cittadini
         - login
         - imprese
-        - status
+        # - status
         - www
+        - showcase
+        - maps
         - helpdesk
     has_apigw: true
+    has_landing: true
     vpcs:
       - code: pn-core
         name: PN Core
@@ -155,7 +318,13 @@ accounts:
             net_size: 256
             export_cidrs: true
             
-        
+          - code: servicedesk
+            name: Service Desk Ingress
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.7.0
+            net_size: 16
+            nlb: true   
+
         # interconnections:
         #   - from: api-gw
         #     to: core
