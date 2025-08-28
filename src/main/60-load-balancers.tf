@@ -34,6 +34,8 @@ resource "aws_lb" "pn_core_ecs_alb" {
 
   enable_deletion_protection = false
 
+  drop_invalid_header_fields = true
+
   tags = {
     "Name": "PN Core - ECS Cluster - ALB"
     "pn-eni-related" = "true"
