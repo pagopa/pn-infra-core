@@ -98,6 +98,17 @@ resource "aws_route53_record" "pagopa_cname_dns_entry" {
   records  = [each.value]
 }
 
+# DNS Records managed via pn_dns_records variable
+resource "aws_route53_record" "pn_dns_records" {
+  for_each = var.pn_dns_records
+
+  zone_id = data.aws_route53_zone.base_domain_name.zone_id
+  name    = each.key
+  type    = each.value.type
+  ttl     = each.value.ttl
+  records = each.value.value
+}
+
 module "acm_cdn" {
   source  = "terraform-aws-modules/acm/aws"
   version = "4.3.2"
