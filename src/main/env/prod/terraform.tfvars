@@ -19,6 +19,8 @@ enable_landing_cdn_redirect_function = true
 landing_cdn_allowed_internal_zones = ["notifichedigitali.it","notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.notifichedigitali.it","www.notifichedigitali.it","notifichedigitali.pagopa.it","www.notifichedigitali.pagopa.it"]
 landing_single_domain = "www"
+vpc_pn_simulator_is_enabled = true
+vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-prod.xml"
 pn_confinfo_aws_account_id = "350578575906"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-350578575906"
 pn_radd_aws_account_id = "510769970275"
@@ -36,8 +38,6 @@ vpc_pn_core_public_subnets_cidr = ["10.10.1.0/28","10.10.1.16/28","10.10.1.32/28
 vpc_pn_core_public_subnets_names = ["PN Core - Public Subnet (prod) AZ 0","PN Core - Public Subnet (prod) AZ 1","PN Core - Public Subnet (prod) AZ 2"]
 vpc_pn_core_internal_subnets_cidr = ["10.10.3.0/28","10.10.3.16/28","10.10.3.32/28","10.10.5.0/28","10.10.5.16/28","10.10.5.32/28","10.10.20.0/24","10.10.21.0/24","10.10.22.0/24","10.10.60.0/24","10.10.61.0/24","10.10.62.0/24","10.10.70.0/24","10.10.71.0/24","10.10.72.0/24","10.10.80.0/24","10.10.81.0/24","10.10.82.0/24","10.10.7.0/28","10.10.7.16/28","10.10.7.32/28"]
 vpc_pn_core_internal_subnets_names = ["PN Core - API-GW VpcLink Subnet (prod) AZ 0","PN Core - API-GW VpcLink Subnet (prod) AZ 1","PN Core - API-GW VpcLink Subnet (prod) AZ 2","PN Core - RADD Ingress Subnet (prod) AZ 0","PN Core - RADD Ingress Subnet (prod) AZ 1","PN Core - RADD Ingress Subnet (prod) AZ 2","PN Core - PnCore Subnet (prod) AZ 0","PN Core - PnCore Subnet (prod) AZ 1","PN Core - PnCore Subnet (prod) AZ 2","PN Core - To Confidential Info Subnet (prod) AZ 0","PN Core - To Confidential Info Subnet (prod) AZ 1","PN Core - To Confidential Info Subnet (prod) AZ 2","PN Core - AWS Services Subnet (prod) AZ 0","PN Core - AWS Services Subnet (prod) AZ 1","PN Core - AWS Services Subnet (prod) AZ 2","PN Core - OpenSearch Subnet (prod) AZ 0","PN Core - OpenSearch Subnet (prod) AZ 1","PN Core - OpenSearch Subnet (prod) AZ 2","PN Core - Service Desk Ingress Subnet (prod) AZ 0","PN Core - Service Desk Ingress Subnet (prod) AZ 1","PN Core - Service Desk Ingress Subnet (prod) AZ 2"]
-#vpc_pn_core_vpn_subnets_cidr = ["10.7.90.0/26", "10.7.90.64/26", "10.7.90.128/26"]
-#vpc_pn_core_vpn_subnets_names = ["PN Core - VPN Subnet (prod) AZ 0","PN Core - VPN Subnet (prod) AZ 1","PN Core - VPN Subnet (prod) AZ 2"]
 
 vpc_pn_core_api_gw_subnets_cidrs = ["10.10.3.0/28","10.10.3.16/28","10.10.3.32/28"]
 vpc_pn_core_radd_subnets_cidrs = ["10.10.5.0/28","10.10.5.16/28","10.10.5.32/28"]
@@ -46,5 +46,25 @@ vpc_pn_core_core_egress_subnets_cidrs = ["10.10.40.0/24","10.10.41.0/24","10.10.
 vpc_pn_core_to_confinfo_subnets_cidrs = ["10.10.60.0/24","10.10.61.0/24","10.10.62.0/24"]
 vpc_pn_core_opensearch_subnets_cidrs = ["10.10.80.0/24","10.10.81.0/24","10.10.82.0/24"]
 vpc_pn_core_servicedesk_subnets_cidrs = ["10.10.7.0/28","10.10.7.16/28","10.10.7.32/28"]
+
+
+
+
+
+vpc_pn_simulator_name = "PN Simulator"
+vpc_pn_simulator_primary_cidr = "10.23.0.0/16"
+vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24"]
+vpc_endpoints_pn_simulator = ["logs","elasticloadbalancing","ecr.api","ecr.dkr","lambda"]
+
+vpc_pn_simulator_private_subnets_cidr = ["10.23.40.0/24","10.23.41.0/24","10.23.42.0/24"]
+vpc_pn_simulator_private_subnets_names = ["PN Simulator - Pn Simulator Egress Subnet (prod) AZ 0","PN Simulator - Pn Simulator Egress Subnet (prod) AZ 1","PN Simulator - Pn Simulator Egress Subnet (prod) AZ 2"]
+vpc_pn_simulator_public_subnets_cidr = []
+vpc_pn_simulator_public_subnets_names = []
+vpc_pn_simulator_internal_subnets_cidr = ["10.23.20.0/24","10.23.21.0/24","10.23.22.0/24","10.23.70.0/24","10.23.71.0/24","10.23.72.0/24","10.23.3.0/28","10.23.3.16/28","10.23.3.32/28"]
+vpc_pn_simulator_internal_subnets_names = ["PN Simulator - PnSimulator Egress Subnet (prod) AZ 0","PN Simulator - PnSimulator Egress Subnet (prod) AZ 1","PN Simulator - PnSimulator Egress Subnet (prod) AZ 2","PN Simulator - AWS Services Subnet (prod) AZ 0","PN Simulator - AWS Services Subnet (prod) AZ 1","PN Simulator - AWS Services Subnet (prod) AZ 2","PN Simulator - API-GW VpcLink Subnet (prod) AZ 0","PN Simulator - API-GW VpcLink Subnet (prod) AZ 1","PN Simulator - API-GW VpcLink Subnet (prod) AZ 2"]
+
+vpc_pn_simulator_core_subnets_cidrs = ["10.23.20.0/24","10.23.21.0/24","10.23.22.0/24"]
+vpc_pn_simulator_core_egress_subnets_cidrs = ["10.23.40.0/24","10.23.41.0/24","10.23.42.0/24"]
+vpc_pn_simulator_api_gw_subnets_cidrs = ["10.23.3.0/28","10.23.3.16/28","10.23.3.32/28"]
 
 

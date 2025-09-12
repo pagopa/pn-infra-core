@@ -200,7 +200,7 @@ resource "aws_route53_record" "dev-ns" {
 
 
 module "vpc_pn_simulator" {
-  for_each = var.vpc_pn_simulator_vpn_enabled ? { "enabled" = true } : {}
+  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
 
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.17.0"
@@ -254,7 +254,8 @@ module "vpc_pn_simulator" {
 
 
 resource "aws_security_group" "vpc_pn_simulator_secgrp_tls" {
-  
+  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
+
   name_prefix = "pn-simulator_vpc-tls-secgrp"
   description = "Allow TLS inbound traffic"
   vpc_id      = module.vpc_pn_simulator["enabled"].vpc_id
@@ -271,11 +272,13 @@ resource "aws_security_group" "vpc_pn_simulator_secgrp_tls" {
 
 
 module "vpc_endpoints_pn_simulator" {
+  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
+
   source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
   version = "5.17.0"
 
   vpc_id             = module.vpc_pn_simulator["enabled"].vpc_id
-  security_group_ids = [ aws_security_group.vpc_pn_simulator_secgrp_tls.id ]
+  security_group_ids = [ aws_security_group.vpc_pn_simulator_secgrp_tls["enabled"].id ]
   subnet_ids         = [ 
         for idx, cidr in module.vpc_pn_simulator["enabled"].intra_subnets_cidr_blocks :
           module.vpc_pn_simulator["enabled"].intra_subnets[idx]

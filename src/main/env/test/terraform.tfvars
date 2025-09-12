@@ -19,6 +19,7 @@ landing_cdn_allowed_internal_zones = ["test.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.test.notifichedigitali.it","www.test.notifichedigitali.it","test.notifichedigitali.pagopa.it","www.test.notifichedigitali.pagopa.it"]
 landing_single_domain = "showcase"
+vpc_pn_simulator_is_enabled = false
 pn_confinfo_aws_account_id = "771887334808"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-771887334808"
 pn_radd_aws_account_id = "654090169999"
@@ -44,5 +45,25 @@ vpc_pn_core_core_egress_subnets_cidrs = ["10.6.40.0/24","10.6.41.0/24","10.6.42.
 vpc_pn_core_to_confinfo_subnets_cidrs = ["10.6.60.0/24","10.6.61.0/24","10.6.62.0/24"]
 vpc_pn_core_opensearch_subnets_cidrs = ["10.6.80.0/24","10.6.81.0/24","10.6.82.0/24"]
 vpc_pn_core_servicedesk_subnets_cidrs = ["10.6.7.0/28","10.6.7.16/28","10.6.7.32/28"]
+
+
+
+
+
+vpc_pn_simulator_name = "PN Simulator"
+vpc_pn_simulator_primary_cidr = "10.21.0.0/16"
+vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr = ["10.21.70.0/24","10.21.71.0/24","10.21.72.0/24"]
+vpc_endpoints_pn_simulator = ["logs","elasticloadbalancing","ecr.api","ecr.dkr","lambda"]
+
+vpc_pn_simulator_private_subnets_cidr = ["10.21.40.0/24","10.21.41.0/24","10.21.42.0/24"]
+vpc_pn_simulator_private_subnets_names = ["PN Simulator - Pn Simulator Egress Subnet (test) AZ 0","PN Simulator - Pn Simulator Egress Subnet (test) AZ 1","PN Simulator - Pn Simulator Egress Subnet (test) AZ 2"]
+vpc_pn_simulator_public_subnets_cidr = []
+vpc_pn_simulator_public_subnets_names = []
+vpc_pn_simulator_internal_subnets_cidr = ["10.21.20.0/24","10.21.21.0/24","10.21.22.0/24","10.21.70.0/24","10.21.71.0/24","10.21.72.0/24","10.21.3.0/28","10.21.3.16/28","10.21.3.32/28"]
+vpc_pn_simulator_internal_subnets_names = ["PN Simulator - PnSimulator Egress Subnet (test) AZ 0","PN Simulator - PnSimulator Egress Subnet (test) AZ 1","PN Simulator - PnSimulator Egress Subnet (test) AZ 2","PN Simulator - AWS Services Subnet (test) AZ 0","PN Simulator - AWS Services Subnet (test) AZ 1","PN Simulator - AWS Services Subnet (test) AZ 2","PN Simulator - API-GW VpcLink Subnet (test) AZ 0","PN Simulator - API-GW VpcLink Subnet (test) AZ 1","PN Simulator - API-GW VpcLink Subnet (test) AZ 2"]
+
+vpc_pn_simulator_core_subnets_cidrs = ["10.21.20.0/24","10.21.21.0/24","10.21.22.0/24"]
+vpc_pn_simulator_core_egress_subnets_cidrs = ["10.21.40.0/24","10.21.41.0/24","10.21.42.0/24"]
+vpc_pn_simulator_api_gw_subnets_cidrs = ["10.21.3.0/28","10.21.3.16/28","10.21.3.32/28"]
 
 

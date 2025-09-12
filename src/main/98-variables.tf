@@ -291,7 +291,7 @@ variable "vpc_pn_simulator_internal_subnets_names" {
   description = "Internal subnets list of names"
 }
 
-variable "vpc_pn_simulator_vpn_enabled" {
+variable "vpc_pn_simulator_is_enabled" {
   type        = bool
   description = "If true, enable the creation of vpc for simulator."
   default     = false
