@@ -103,12 +103,19 @@ locals {
    ]
   
   Simulator_VPN_SubnetsCidrs = var.vpc_pn_simulator_is_enabled ? [
-      for idx, cidr in module.vpc_pn_simulator["enabled"].private_subnets_cidr_blocks:
+      for idx, cidr in module.vpc_pn_simulator["enabled"].intra_subnets_cidr_blocks:
           cidr
-            if contains( var.vpc_pn_simulator_private_subnets_cidr, cidr)
+            if contains( var.vpc_pn_simulator_vpn_subnets_cidrs, cidr)
     ] : []
+  
+  Simulator_VPN_Subnet_IDs = var.vpc_pn_simulator_is_enabled ? [
+    for idx, cidr in module.vpc_pn_simulator["enabled"].intra_subnets_cidr_blocks :
+      module.vpc_pn_simulator["enabled"].intra_subnets[idx]
+      if contains(var.vpc_pn_simulator_vpn_subnets_cidrs, cidr)
+  ] : []
   
   Simulator_VPC_IP_No_CIDR = var.vpc_pn_simulator_is_enabled ? (split("/", module.vpc_pn_simulator["enabled"].vpc_cidr_block))[0] : ""
   
   Simulator_VPC_DNS_Server =  var.vpc_pn_simulator_is_enabled ? (replace(local.Simulator_VPC_IP_No_CIDR, "/.0$/", ".2")) : ""
+  
 }

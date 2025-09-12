@@ -55,15 +55,13 @@ vpc_pn_simulator_primary_cidr = "10.21.0.0/16"
 vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr = ["10.21.70.0/24","10.21.71.0/24","10.21.72.0/24"]
 vpc_endpoints_pn_simulator = ["logs","elasticloadbalancing","ecr.api","ecr.dkr","lambda"]
 
-vpc_pn_simulator_private_subnets_cidr = ["10.21.40.0/24","10.21.41.0/24","10.21.42.0/24"]
-vpc_pn_simulator_private_subnets_names = ["PN Simulator - Pn Simulator Egress Subnet (test) AZ 0","PN Simulator - Pn Simulator Egress Subnet (test) AZ 1","PN Simulator - Pn Simulator Egress Subnet (test) AZ 2"]
+vpc_pn_simulator_private_subnets_cidr = []
+vpc_pn_simulator_private_subnets_names = []
 vpc_pn_simulator_public_subnets_cidr = []
 vpc_pn_simulator_public_subnets_names = []
-vpc_pn_simulator_internal_subnets_cidr = ["10.21.20.0/24","10.21.21.0/24","10.21.22.0/24","10.21.70.0/24","10.21.71.0/24","10.21.72.0/24","10.21.3.0/28","10.21.3.16/28","10.21.3.32/28"]
-vpc_pn_simulator_internal_subnets_names = ["PN Simulator - PnSimulator Egress Subnet (test) AZ 0","PN Simulator - PnSimulator Egress Subnet (test) AZ 1","PN Simulator - PnSimulator Egress Subnet (test) AZ 2","PN Simulator - AWS Services Subnet (test) AZ 0","PN Simulator - AWS Services Subnet (test) AZ 1","PN Simulator - AWS Services Subnet (test) AZ 2","PN Simulator - API-GW VpcLink Subnet (test) AZ 0","PN Simulator - API-GW VpcLink Subnet (test) AZ 1","PN Simulator - API-GW VpcLink Subnet (test) AZ 2"]
+vpc_pn_simulator_internal_subnets_cidr = ["10.21.70.0/24","10.21.71.0/24","10.21.72.0/24","10.21.3.0/24","10.21.4.0/24","10.21.5.0/24"]
+vpc_pn_simulator_internal_subnets_names = ["PN Simulator - AWS Services Subnet (test) AZ 0","PN Simulator - AWS Services Subnet (test) AZ 1","PN Simulator - AWS Services Subnet (test) AZ 2","PN Simulator - VPN Subnet (test) AZ 0","PN Simulator - VPN Subnet (test) AZ 1","PN Simulator - VPN Subnet (test) AZ 2"]
 
-vpc_pn_simulator_core_subnets_cidrs = ["10.21.20.0/24","10.21.21.0/24","10.21.22.0/24"]
-vpc_pn_simulator_core_egress_subnets_cidrs = ["10.21.40.0/24","10.21.41.0/24","10.21.42.0/24"]
-vpc_pn_simulator_api_gw_subnets_cidrs = ["10.21.3.0/28","10.21.3.16/28","10.21.3.32/28"]
+vpc_pn_simulator_vpn_subnets_cidrs = ["10.21.3.0/24","10.21.4.0/24","10.21.5.0/24"]
 
 

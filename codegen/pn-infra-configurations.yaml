@@ -39,6 +39,7 @@ envs:
           landing_single_domain: "showcase"
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-dev.xml"
           vpc_pn_simulator_is_enabled: true
+          vpn_simulator_cidr: "10.100.0.0/22"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -171,6 +172,7 @@ envs:
           landing_single_domain: "www"
           vpc_pn_simulator_is_enabled: true
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
+          vpn_simulator_cidr: "10.100.0.0/22"
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri
@@ -370,32 +372,16 @@ accounts:
             - "ecr.dkr"
             - "lambda"
         networks:
-          - code: core
-            name: PnSimulator Egress
-            gateway: null
-            first_net_ip: 10.<vpc_idx>.20.0
-            net_size: 256
-            export_cidrs: true
-
           - code: aws
             name: AWS Services
             gateway: null
             first_net_ip: 10.<vpc_idx>.70.0
             net_size: 256
             has_iface_endpoints: true
-          
-          - code: core-egress
-            name: Pn Simulator Egress
-            gateway: 
-              type: nat
-              network: public
-            first_net_ip: 10.<vpc_idx>.40.0
-            net_size: 256
-            export_cidrs: true
 
-          - code: api-gw
-            name: API-GW VpcLink
+          - code: vpn
+            name: VPN
             gateway: null
             first_net_ip: 10.<vpc_idx>.3.0
-            net_size: 16
+            net_size: 256
             nlb: true

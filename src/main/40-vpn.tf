@@ -41,16 +41,12 @@ resource "aws_security_group" "vpc_pn_simulator_vpn_clients" {
 ###########################################################
 # Endpoint Client VPN
 ###########################################################
-locals {
-
-}
-
 resource "aws_ec2_client_vpn_endpoint" "vpn" {
   count = var.vpc_pn_simulator_is_enabled ? 1 : 0
 
   description            = format("pn-vpn-%s", var.environment)
   server_certificate_arn = aws_acm_certificate.vpn["enabled"].arn
-  client_cidr_block      = var.vpc_pn_simulator_primary_cidr
+  client_cidr_block      = var.vpn_simulator_cidr
 
   vpc_id             = module.vpc_pn_simulator["enabled"].vpc_id
   security_group_ids = [aws_security_group.vpc_pn_simulator_vpn_clients[0].id]
@@ -78,8 +74,8 @@ resource "aws_ec2_client_vpn_endpoint" "vpn" {
 # Client VPN - Subnet association
 ###########################################################
 resource "aws_ec2_client_vpn_network_association" "vpn_subnet" {
-  for_each = { for id in local.Simulator_VPN_SubnetsCidrs : id => id }
-
+  for_each = { for id in local.Simulator_VPN_Subnet_IDs : id => id }
+  
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn[0].id
   subnet_id              = each.value
 }

@@ -21,6 +21,7 @@ landing_multi_domain_cert_domains = ["showcase.notifichedigitali.it","www.notifi
 landing_single_domain = "www"
 vpc_pn_simulator_is_enabled = true
 vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-prod.xml"
+vpn_simulator_cidr = "10.100.0.0/22"
 pn_confinfo_aws_account_id = "350578575906"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-350578575906"
 pn_radd_aws_account_id = "510769970275"
@@ -56,15 +57,13 @@ vpc_pn_simulator_primary_cidr = "10.23.0.0/16"
 vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24"]
 vpc_endpoints_pn_simulator = ["logs","elasticloadbalancing","ecr.api","ecr.dkr","lambda"]
 
-vpc_pn_simulator_private_subnets_cidr = ["10.23.40.0/24","10.23.41.0/24","10.23.42.0/24"]
-vpc_pn_simulator_private_subnets_names = ["PN Simulator - Pn Simulator Egress Subnet (prod) AZ 0","PN Simulator - Pn Simulator Egress Subnet (prod) AZ 1","PN Simulator - Pn Simulator Egress Subnet (prod) AZ 2"]
+vpc_pn_simulator_private_subnets_cidr = []
+vpc_pn_simulator_private_subnets_names = []
 vpc_pn_simulator_public_subnets_cidr = []
 vpc_pn_simulator_public_subnets_names = []
-vpc_pn_simulator_internal_subnets_cidr = ["10.23.20.0/24","10.23.21.0/24","10.23.22.0/24","10.23.70.0/24","10.23.71.0/24","10.23.72.0/24","10.23.3.0/28","10.23.3.16/28","10.23.3.32/28"]
-vpc_pn_simulator_internal_subnets_names = ["PN Simulator - PnSimulator Egress Subnet (prod) AZ 0","PN Simulator - PnSimulator Egress Subnet (prod) AZ 1","PN Simulator - PnSimulator Egress Subnet (prod) AZ 2","PN Simulator - AWS Services Subnet (prod) AZ 0","PN Simulator - AWS Services Subnet (prod) AZ 1","PN Simulator - AWS Services Subnet (prod) AZ 2","PN Simulator - API-GW VpcLink Subnet (prod) AZ 0","PN Simulator - API-GW VpcLink Subnet (prod) AZ 1","PN Simulator - API-GW VpcLink Subnet (prod) AZ 2"]
+vpc_pn_simulator_internal_subnets_cidr = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24","10.23.3.0/24","10.23.4.0/24","10.23.5.0/24"]
+vpc_pn_simulator_internal_subnets_names = ["PN Simulator - AWS Services Subnet (prod) AZ 0","PN Simulator - AWS Services Subnet (prod) AZ 1","PN Simulator - AWS Services Subnet (prod) AZ 2","PN Simulator - VPN Subnet (prod) AZ 0","PN Simulator - VPN Subnet (prod) AZ 1","PN Simulator - VPN Subnet (prod) AZ 2"]
 
-vpc_pn_simulator_core_subnets_cidrs = ["10.23.20.0/24","10.23.21.0/24","10.23.22.0/24"]
-vpc_pn_simulator_core_egress_subnets_cidrs = ["10.23.40.0/24","10.23.41.0/24","10.23.42.0/24"]
-vpc_pn_simulator_api_gw_subnets_cidrs = ["10.23.3.0/28","10.23.3.16/28","10.23.3.32/28"]
+vpc_pn_simulator_vpn_subnets_cidrs = ["10.23.3.0/24","10.23.4.0/24","10.23.5.0/24"]
 
 

@@ -259,6 +259,11 @@ variable "vpc_pn_simulator_name" {
   description = "Name of the PN Simulator VPC"
 }
 
+variable "vpn_simulator_cidr" {
+  type        = string
+  description = "CIDR of the PN Simulator VPN"
+}
+
 variable "vpc_pn_simulator_primary_cidr" {
   type        = string
   description = "Primary CIDR of the PN Simulator VPC"
@@ -289,6 +294,11 @@ variable "vpc_pn_simulator_internal_subnets_cidr" {
 variable "vpc_pn_simulator_internal_subnets_names" {
   type        = list(string)
   description = "Internal subnets list of names"
+}
+
+variable "vpc_pn_simulator_vpn_subnets_cidrs" {
+  type        = list(string)
+  description = "Internal subnets list of cidr"
 }
 
 variable "vpc_pn_simulator_is_enabled" {

@@ -209,18 +209,18 @@ module "vpc_pn_simulator" {
   cidr = var.vpc_pn_simulator_primary_cidr
 
   azs                 = local.azs_names
+  intra_subnets       = var.vpc_pn_simulator_internal_subnets_cidr
   private_subnets     = var.vpc_pn_simulator_private_subnets_cidr
   public_subnets      = var.vpc_pn_simulator_public_subnets_cidr
-  intra_subnets       = var.vpc_pn_simulator_internal_subnets_cidr
-
+  
+  intra_subnet_names       = var.vpc_pn_simulator_internal_subnets_names
   private_subnet_names     = var.vpc_pn_simulator_private_subnets_names
   public_subnet_names      = var.vpc_pn_simulator_public_subnets_names
-  intra_subnet_names       = var.vpc_pn_simulator_internal_subnets_names
 
   create_database_subnet_group = false
 
-  enable_dns_hostnames = false
-  enable_dns_support   = false
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
   enable_nat_gateway = false
   single_nat_gateway = false
@@ -304,8 +304,7 @@ module "vpc_endpoints_pn_simulator" {
         service         = "s3"
         service_type    = "Gateway"
         route_table_ids = flatten([
-          module.vpc_pn_simulator["enabled"].intra_route_table_ids, 
-          module.vpc_pn_simulator["enabled"].private_route_table_ids 
+          module.vpc_pn_simulator["enabled"].intra_route_table_ids
         ])
         tags                = { Name = "AWS Endpoint s3 - pn-core - ${var.environment}"}
       },
