@@ -102,5 +102,10 @@ locals {
           "${cdn}.${var.dns_zone}"
    ]
   
+  Simulator_VPN_SubnetsCidrs = [
+      for idx, cidr in module.vpc_pn_simulator["enabled"].private_subnets_cidr_blocks:
+          cidr
+            if contains( var.vpc_pn_simulator_private_subnets_cidr, cidr)
+    ]
   
 }

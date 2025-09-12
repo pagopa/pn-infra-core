@@ -46,4 +46,18 @@ vpc_pn_core_to_confinfo_subnets_cidrs = ["10.1.60.0/24","10.1.61.0/24","10.1.62.
 vpc_pn_core_opensearch_subnets_cidrs = ["10.1.80.0/24","10.1.81.0/24","10.1.82.0/24"]
 vpc_pn_core_servicedesk_subnets_cidrs = ["10.1.7.0/28","10.1.7.16/28","10.1.7.32/28"]
 
+vpc_pn_simulator_name = "PN Simulator"
+vpc_pn_simulator_primary_cidr = "10.2.0.0/16"
+vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr = ["10.2.70.0/24","10.2.71.0/24","10.2.72.0/24"]
+vpc_endpoints_pn_simulator = ["logs","elasticloadbalancing","ecr.api","ecr.dkr"] #da rimuovere i servizi non utilizzati.
+vpc_pn_simulator_vpn_enabled = true
+vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-dev.xml"
 
+vpc_pn_simulator_private_subnets_cidr = ["10.2.40.0/24","10.2.41.0/24","10.12.42.0/24"]
+vpc_pn_simulator_private_subnets_names = ["PN Simulator - PnSimulator Egress Subnet (dev) AZ 0","PN Simulator - PnSimulator Egress Subnet (dev) AZ 1","PN Simulator - PnSimulator Egress Subnet (dev) AZ 2"]
+#vpc_pn_simulator_public_subnets_cidr = ["10.2.1.0/28"]
+#vpc_pn_simulator_public_subnets_names = ["PN Simulator - Public Subnet (dev) AZ 0"]
+vpc_pn_simulator_public_subnets_cidr = []
+vpc_pn_simulator_public_subnets_names = []
+vpc_pn_simulator_internal_subnets_cidr = ["10.2.3.0/28","10.2.3.16/28","10.2.3.32/28"]
+vpc_pn_simulator_internal_subnets_names = ["PN Simulator - API-GW VpcLink Subnet (dev) AZ 0","PN Simulator - API-GW VpcLink Subnet (dev) AZ 1","PN Simulator - API-GW VpcLink Subnet (dev) AZ 2"]

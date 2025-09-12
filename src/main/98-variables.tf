@@ -247,3 +247,62 @@ variable "pn_cost_anomaly_detection_threshold" {
   type        = string
   description = "pn-core cost anomaly detection threshold (percentage)"
 }
+
+variable "vpn_saml_metadata_path" {
+  description = "Path to the SAML metadata XML file. Used when federated authentication for VPN is enabled"
+  type        = string
+  default     = null
+}
+
+variable "vpc_pn_simulator_name" {
+  type        = string
+  description = "Name of the PN Simulator VPC"
+}
+
+variable "vpc_pn_simulator_primary_cidr" {
+  type        = string
+  description = "Primary CIDR of the PN Simulator VPC"
+}
+
+variable "vpc_pn_simulator_private_subnets_cidr" {
+  type        = list(string)
+  description = "Private subnets list of cidr."
+}
+variable "vpc_pn_simulator_private_subnets_names" {
+  type        = list(string)
+  description = "Private subnets list of names."
+}
+
+variable "vpc_pn_simulator_public_subnets_cidr" {
+  type        = list(string)
+  description = "Public subnets list of cidr."
+}
+variable "vpc_pn_simulator_public_subnets_names" {
+  type        = list(string)
+  description = "Public subnets list of names."
+}
+
+variable "vpc_pn_simulator_internal_subnets_cidr" {
+  type        = list(string)
+  description = "Internal subnets list of cidr"
+}
+variable "vpc_pn_simulator_internal_subnets_names" {
+  type        = list(string)
+  description = "Internal subnets list of names"
+}
+
+variable "vpc_pn_simulator_vpn_enabled" {
+  type        = bool
+  description = "If true, enable the creation of vpc for simulator."
+  default     = false
+}
+
+variable "vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr" {
+  type        = list(string)
+  description = "AWS services interfaces endpoints list of cidr."
+}
+
+variable "vpc_endpoints_pn_simulator" {
+  type        = list(string)
+  description = "Endpoint List"
+}
