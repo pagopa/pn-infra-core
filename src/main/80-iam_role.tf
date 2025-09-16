@@ -69,5 +69,12 @@ resource "aws_iam_role_policy" "inline" {
   name = each.value.policy_name
   role = aws_iam_role.external_role[each.value.role_name].id
 
-  policy = file(each.value.policy_file)
+  policy = jsonencode(
+    jsondecode(
+      templatefile(each.value.policy_file, {
+        aws_region     = var.aws_region
+        aws_account_id = var.pn_core_aws_account_id
+      })
+    )
+  )
 }
