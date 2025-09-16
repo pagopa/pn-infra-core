@@ -36,6 +36,11 @@ variable "pn_servicedesk_aws_account_id" {
   description = "pn-servicedesk current environment AWS Account id"
 }
 
+variable "pn_cicd_aws_account_id" {
+  description = "Cicd AWS Account id"
+  type        = string
+}
+
 variable "pn_dns_extra_cname_entries" {
   type        = string
   default     = "{}"
@@ -246,4 +251,16 @@ variable "pn_cost_anomaly_detection_email" {
 variable "pn_cost_anomaly_detection_threshold" {
   type        = string
   description = "pn-core cost anomaly detection threshold (percentage)"
+}
+
+variable "external_roles_config" {
+  description = "Roles Maps"
+  type = map(object({
+    managed_policies = optional(list(string), [])
+    inline_policies  = optional(list(object({
+      name = string
+      file = string
+    })), [])
+  }))
+  default = {}
 }
