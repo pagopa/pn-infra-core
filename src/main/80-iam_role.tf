@@ -1,20 +1,33 @@
 locals {
   managed_policy_attachments = {
-    for role_name, config in var.external_roles_config : {
-      for policy_name in config.managed_policies : "${role_name}.${policy_name}" => {
-        role_name   = role_name
-        policy_name = policy_name
-      }
+    for tuple in flatten([
+      for role_name, config in var.external_roles_config : [
+        for policy_name in config.managed_policies : {
+          key         = "${role_name}.${policy_name}"
+          role_name   = role_name
+          policy_name = policy_name
+        }
+      ]
+    ]) : tuple.key => {
+      role_name   = tuple.role_name
+      policy_name = tuple.policy_name
     }
   }
 
   inline_policy_attachments = {
-    for role_name, config in var.external_roles_config : {
-      for inline_policy in config.inline_policies : "${role_name}.${inline_policy.name}" => {
-        role_name   = role_name
-        policy_name = inline_policy.name
-        policy_file = inline_policy.file
-      }
+    for tuple in flatten([
+      for role_name, config in var.external_roles_config : [
+        for inline_policy in config.inline_policies : {
+          key         = "${role_name}.${inline_policy.name}"
+          role_name   = role_name
+          policy_name = inline_policy.name
+          policy_file = inline_policy.file
+        }
+      ]
+    ]) : tuple.key => {
+      role_name   = tuple.role_name
+      policy_name = tuple.policy_name
+      policy_file = tuple.policy_file
     }
   }
 }

@@ -43,8 +43,8 @@ envs:
               managed_policies:
                 - "ReadOnlyAccess"
               inline_policies:
-                - name: Kms_Decrypt.json
-                  file: "/src/main/policies/Kms_Decrypt.json"
+                - name: kms-decrypt.json
+                  file: "./policies/kms-decrypt.json"
             SendExtPowerUser:
               managed_policies:
                 - "ReadOnlyAccess"
@@ -54,10 +54,10 @@ envs:
                 - "AmazonDynamoDBFullAccess"
                 - "AWSLambda_FullAccess"
               inline_policies:
-                - name: Kms_Decrypt.json
-                  file: "/src/main/policies/Kms_Decrypt.json"
-                - name:  pn-CloudformationUpload.json
-                  file: "/src/main/policies/pn-CloudformationUpload.json"
+                - name: kms-decrypt.json
+                  file: "./policies/kms-decrypt.json"
+                - name: cfn-upload.json
+                  file: "./policies/cfn-upload.json"
           
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
