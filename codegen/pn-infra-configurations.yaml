@@ -106,6 +106,33 @@ envs:
             - "test.notifichedigitali.pagopa.it"
             - "www.test.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          external_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                  file: "./policies/kms-decrypt.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                  file: "./policies/kms-decrypt.json"
+                - name: CfnUpload
+                  file: "./policies/cfn-upload.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
@@ -115,6 +142,8 @@ envs:
         aws_id: "654090169999"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
+      - code: pn-cicd
+        aws_id: "911845998067"  # Stringhe non numeri
         
   uat:
     vpcs:
@@ -146,6 +175,33 @@ envs:
             - "uat.notifichedigitali.pagopa.it"
             - "www.uat.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          external_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                  file: "./policies/kms-decrypt.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                  file: "./policies/kms-decrypt.json"
+                - name: CfnUpload
+                  file: "./policies/cfn-upload.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
         aws_id: "956319218727"  # Stringhe non numeri
@@ -155,6 +211,8 @@ envs:
         aws_id: "554102482368"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
+      - code: pn-cicd
+        aws_id: "911845998067"  # Stringhe non numeri
 
 
   prod:
@@ -228,6 +286,33 @@ envs:
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          external_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                  file: "./policies/kms-decrypt.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                  file: "./policies/kms-decrypt.json"
+                - name: CfnUpload
+                  file: "./policies/cfn-upload.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
@@ -237,6 +322,8 @@ envs:
         aws_id: "515674411184"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
+      - code: pn-cicd
+        aws_id: "911845998067"  # Stringhe non numeri
 
 
 accounts:
