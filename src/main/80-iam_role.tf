@@ -1,5 +1,5 @@
-resource "aws_iam_role" "external_role" {
-  for_each = var.external_roles_config
+resource "aws_iam_role" "iam_ext_role" {
+  for_each = var.iam_ext_roles_config
 
   name = "${each.key}-core-${var.environment}"
 
@@ -25,7 +25,7 @@ resource "aws_iam_role" "external_role" {
 resource "aws_iam_role_policy_attachment" "managed" {
   for_each = local.iam_managed_policy_attachments
 
-  role       = aws_iam_role.external_role[each.value.role_name].name
+  role       = aws_iam_role.iam_ext_role[each.value.role_name].name
   policy_arn = "arn:aws:iam::aws:policy/${each.value.policy_name}"
 }
 
@@ -33,7 +33,7 @@ resource "aws_iam_role_policy" "inline" {
   for_each = local.iam_inline_policy_attachments
 
   name = each.value.policy_name
-  role = aws_iam_role.external_role[each.value.role_name].id
+  role = aws_iam_role.iam_ext_role[each.value.role_name].id
 
   policy = jsonencode(
     jsondecode(

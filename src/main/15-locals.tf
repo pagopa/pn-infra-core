@@ -104,7 +104,7 @@ locals {
   
   iam_managed_policy_attachments = {
     for tuple in flatten([
-      for role_name, config in var.external_roles_config : [
+      for role_name, config in var.iam_ext_roles_config : [
         for policy_name in config.managed_policies : {
           key         = "${role_name}.${policy_name}"
           role_name   = role_name
@@ -119,7 +119,7 @@ locals {
 
   iam_inline_policy_attachments = {
     for tuple in flatten([
-      for role_name, config in var.external_roles_config : [
+      for role_name, config in var.iam_ext_roles_config : [
         for inline_policy in lookup(config, "inline_policies", []) : {
           key         = "${role_name}.${inline_policy.name}"
           role_name   = role_name
