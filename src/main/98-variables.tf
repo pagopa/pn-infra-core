@@ -253,14 +253,11 @@ variable "pn_cost_anomaly_detection_threshold" {
   description = "pn-core cost anomaly detection threshold (percentage)"
 }
 
-variable "external_roles_config" {
-  description = "Roles Maps"
+variable "iam_ext_roles_config" {
   type = map(object({
-    managed_policies = optional(list(string), [])
+    managed_policies = list(string)
     inline_policies  = optional(list(object({
       name = string
-      file = string
     })), [])
   }))
-  default = {}
 }
