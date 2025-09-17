@@ -19,10 +19,12 @@ landing_cdn_allowed_internal_zones = ["uat.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.uat.notifichedigitali.it","www.uat.notifichedigitali.it","uat.notifichedigitali.pagopa.it","www.uat.notifichedigitali.pagopa.it"]
 landing_single_domain = "showcase"
+iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSLambda_FullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"CfnUpload"},{"name":"AthenaRead"}]}}
 pn_confinfo_aws_account_id = "956319218727"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-956319218727"
 pn_radd_aws_account_id = "554102482368"
 pn_servicedesk_aws_account_id = "533236674075"
+pn_cicd_aws_account_id = "911845998067"
 
 
 vpc_pn_core_name = "PN Core"
