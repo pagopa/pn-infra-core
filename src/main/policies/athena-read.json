@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "athena:BatchGetQueryExecution",
+        "athena:BatchGetNamedQuery",
+        "athena:GetQueryExecution",
+        "athena:GetQueryResults",
+        "athena:GetWorkGroup",
+        "athena:List*",
+        "athena:StartQueryExecution",
+        "athena:StopQueryExecution"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::pn-cdc-analytics-athena-results-${aws_region}-${aws_account_id_core}-001",
+        "arn:aws:s3:::pn-cdc-analytics-athena-results-${aws_region}-${aws_account_id_core}-001/*",
+        "arn:aws:s3:::pn-log-analytics-athena-results-${aws_region}-${aws_account_id_confinfo}-001",
+        "arn:aws:s3:::pn-log-analytics-athena-results-${aws_region}-${aws_account_id_confinfo}-001/*"
+      ]
+    }
+  ]
+}

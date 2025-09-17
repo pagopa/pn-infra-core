@@ -73,7 +73,8 @@ resource "aws_iam_role_policy" "inline" {
     jsondecode(
       templatefile(each.value.policy_file, {
         aws_region     = var.aws_region
-        aws_account_id = var.pn_core_aws_account_id
+        aws_account_id_core = var.pn_core_aws_account_id
+        aws_account_id_confinfo = var.pn_confinfo_aws_account_id
       })
     )
   )

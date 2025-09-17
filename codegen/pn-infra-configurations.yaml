@@ -43,8 +43,10 @@ envs:
               managed_policies:
                 - "ReadOnlyAccess"
               inline_policies:
-                - name: kms-decrypt.json
+                - name: KmsDecrypt
                   file: "./policies/kms-decrypt.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
             SendExtPowerUser:
               managed_policies:
                 - "ReadOnlyAccess"
@@ -54,10 +56,12 @@ envs:
                 - "AmazonDynamoDBFullAccess"
                 - "AWSLambda_FullAccess"
               inline_policies:
-                - name: kms-decrypt.json
+                - name: KmsDecrypt
                   file: "./policies/kms-decrypt.json"
-                - name: cfn-upload.json
+                - name: CfnUpload
                   file: "./policies/cfn-upload.json"
+                - name: AthenaRead
+                  file: "./policies/athena-read.json"
           
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
