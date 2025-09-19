@@ -98,7 +98,6 @@ resource "aws_route53_record" "pagopa_cname_dns_entry" {
   records  = [each.value]
 }
 
-# DNS Records managed via pn_dns_records variable
 resource "aws_route53_record" "pn_dns_records" {
   for_each = var.pn_dns_records
 
