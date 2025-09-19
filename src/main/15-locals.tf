@@ -118,4 +118,15 @@ locals {
   
   Simulator_VPC_DNS_Server =  var.vpc_pn_simulator_is_enabled ? (replace(local.Simulator_VPC_IP_No_CIDR, "/.0$/", ".2")) : ""
   
+  Simulator_Services_SubnetsCidrs = var.vpc_pn_simulator_is_enabled ? [
+      for idx, cidr in module.vpc_pn_simulator["enabled"].intra_subnets_cidr_blocks:
+          cidr
+            if contains( var.vpc_pn_simulator_aws_subnets_cidrs, cidr)
+    ] : []
+  
+  Simulator_Services_Subnet_IDs = var.vpc_pn_simulator_is_enabled ? [
+    for idx, cidr in module.vpc_pn_simulator["enabled"].intra_subnets_cidr_blocks :
+      module.vpc_pn_simulator["enabled"].intra_subnets[idx]
+      if contains(var.vpc_pn_simulator_aws_subnets_cidrs, cidr)
+  ] : []
 }

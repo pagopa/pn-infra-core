@@ -65,6 +65,7 @@ vpc_pn_simulator_public_subnets_names = []
 vpc_pn_simulator_internal_subnets_cidr = ["10.20.70.0/24","10.20.71.0/24","10.20.72.0/24","10.20.3.0/24","10.20.4.0/24","10.20.5.0/24"]
 vpc_pn_simulator_internal_subnets_names = ["PN Simulator - AWS Services Subnet (dev) AZ 0","PN Simulator - AWS Services Subnet (dev) AZ 1","PN Simulator - AWS Services Subnet (dev) AZ 2","PN Simulator - VPN Subnet (dev) AZ 0","PN Simulator - VPN Subnet (dev) AZ 1","PN Simulator - VPN Subnet (dev) AZ 2"]
 
+vpc_pn_simulator_aws_subnets_cidrs = ["10.20.70.0/24","10.20.71.0/24","10.20.72.0/24"]
 vpc_pn_simulator_vpn_subnets_cidrs = ["10.20.3.0/24","10.20.4.0/24","10.20.5.0/24"]
 
 

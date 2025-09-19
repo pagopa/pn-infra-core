@@ -74,10 +74,10 @@ resource "aws_ec2_client_vpn_endpoint" "vpn" {
 # Client VPN - Subnet association
 ###########################################################
 resource "aws_ec2_client_vpn_network_association" "vpn_subnet" {
-  for_each = { for id in local.Simulator_VPN_Subnet_IDs : id => id }
-  
+  count = length(local.Simulator_VPN_Subnet_IDs)
+
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn[0].id
-  subnet_id              = each.value
+  subnet_id              = local.Simulator_VPN_Subnet_IDs[count.index]
 }
 
 ###########################################################

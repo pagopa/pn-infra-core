@@ -257,7 +257,7 @@ resource "aws_security_group" "vpc_pn_simulator_secgrp_tls" {
   for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
 
   name_prefix = "pn-simulator_vpc-tls-secgrp"
-  description = "Allow TLS inbound traffic"
+  description = "Allow TLS inbound traffic from VPN"
   vpc_id      = module.vpc_pn_simulator["enabled"].vpc_id
 
   ingress {
@@ -267,9 +267,7 @@ resource "aws_security_group" "vpc_pn_simulator_secgrp_tls" {
     protocol    = "tcp"
     cidr_blocks = [var.vpc_pn_simulator_primary_cidr]
   }
-
 }
-
 
 module "vpc_endpoints_pn_simulator" {
   for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
@@ -296,7 +294,7 @@ module "vpc_endpoints_pn_simulator" {
         svc_name => {
           service             = svc_name
           private_dns_enabled = true  
-          tags                = { Name = "AWS Endpoint ${svc_name} - pn-core - ${var.environment}"}
+          tags                = { Name = "AWS Endpoint ${svc_name} - pn-simulator - ${var.environment}"}
         }
     },
     {
@@ -306,7 +304,7 @@ module "vpc_endpoints_pn_simulator" {
         route_table_ids = flatten([
           module.vpc_pn_simulator["enabled"].intra_route_table_ids
         ])
-        tags                = { Name = "AWS Endpoint s3 - pn-core - ${var.environment}"}
+        tags                = { Name = "AWS Endpoint s3 - pn-simulator - ${var.environment}"}
       },
     }
   )

@@ -378,6 +378,7 @@ accounts:
             first_net_ip: 10.<vpc_idx>.70.0
             net_size: 256
             has_iface_endpoints: true
+            export_cidrs: true
 
           - code: vpn
             name: VPN

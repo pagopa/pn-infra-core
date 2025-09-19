@@ -301,6 +301,12 @@ variable "vpc_pn_simulator_vpn_subnets_cidrs" {
   description = "Internal subnets list of cidr"
 }
 
+variable "vpc_pn_simulator_aws_subnets_cidrs" {
+  type        = list(string)
+  description = "Internal subnets list of cidr"
+}
+
+
 variable "vpc_pn_simulator_is_enabled" {
   type        = bool
   description = "If true, enable the creation of vpc for simulator."
