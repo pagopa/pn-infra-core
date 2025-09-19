@@ -35,6 +35,20 @@ envs:
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          pn_dns_records:
+            "test-dns.dev.notifichedigitali.it":
+              type: "TXT"
+              ttl: 300
+              value: ["TEST"]
+            "test-dns2.dev.notifichedigitali.it":
+              type: "TXT" 
+              ttl: 250
+              value: ["TEST"]
+            "cname-test.dev.notifichedigitali.it":
+              type: "CNAME"
+              ttl: 300
+              value: ["test-dns2.dev.notifichedigitali.it."]
+
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
