@@ -1,4 +1,3 @@
-  
 data "aws_route53_zone" "base_domain_name" {
   name         = "${var.dns_zone}."
   private_zone = false
@@ -99,10 +98,10 @@ resource "aws_route53_record" "pagopa_cname_dns_entry" {
 }
 
 resource "aws_route53_record" "pn_dns_records" {
-  for_each = var.pn_dns_records
+  for_each = local.pn_dns_records_map
 
   zone_id = data.aws_route53_zone.base_domain_name.zone_id
-  name    = each.key
+  name    = each.value.name
   type    = each.value.type
   ttl     = each.value.ttl
   records = each.value.value

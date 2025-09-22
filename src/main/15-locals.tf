@@ -133,4 +133,8 @@ locals {
       policy_file = tuple.policy_file
     }
   }
+
+  pn_dns_records_map = {
+    for record in var.pn_dns_records : "${record.name}_${record.type}" => record
+  }
 }

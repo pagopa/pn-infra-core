@@ -54,13 +54,14 @@ variable "pagopa_dns_extra_cname_entries" {
 }
 
 variable "pn_dns_records" {
-  type = map(object({
+  type = list(object({
+    name  = string
     type  = string
     ttl   = number
     value = list(string)
   }))
-  description = "Map of DNS records to create. Key is the record name, value contains type, ttl and list of values."
-  default     = {}
+  description = "List of DNS records to create. Each record is an object with name, type, ttl, and value."
+  default     = []
 }
 
 variable "pn_core_to_data_vault_vpcse" {
