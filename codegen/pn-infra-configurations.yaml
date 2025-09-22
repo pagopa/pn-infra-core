@@ -35,6 +35,28 @@ envs:
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          iam_ext_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: AthenaRead
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: CfnUpload
+                - name: AthenaRead
           pn_dns_records:
             "test-dns.dev.notifichedigitali.it":
               type: "TXT"
@@ -48,7 +70,6 @@ envs:
               type: "CNAME"
               ttl: 300
               value: ["test-dns2.dev.notifichedigitali.it."]
-
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -58,6 +79,8 @@ envs:
       - code: pn-radd
         aws_id: "830192246553"  # Stringhe non numeri
       - code: pn-servicedesk
+        aws_id: "911845998067"  # Stringhe non numeri
+      - code: pn-cicd
         aws_id: "911845998067"  # Stringhe non numeri
 
   test:
@@ -90,6 +113,28 @@ envs:
             - "test.notifichedigitali.pagopa.it"
             - "www.test.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          iam_ext_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: AthenaRead
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: CfnUpload
+                - name: AthenaRead
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
@@ -99,6 +144,8 @@ envs:
         aws_id: "654090169999"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
+      - code: pn-cicd
+        aws_id: "911845998067"  # Stringhe non numeri
         
   uat:
     vpcs:
@@ -130,6 +177,28 @@ envs:
             - "uat.notifichedigitali.pagopa.it"
             - "www.uat.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          iam_ext_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: AthenaRead
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: CfnUpload
+                - name: AthenaRead
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
         aws_id: "956319218727"  # Stringhe non numeri
@@ -139,6 +208,8 @@ envs:
         aws_id: "554102482368"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
+      - code: pn-cicd
+        aws_id: "911845998067"  # Stringhe non numeri
 
 
   prod:
@@ -212,6 +283,28 @@ envs:
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          iam_ext_roles_config:
+            "SendExtAdmin":
+              managed_policies:
+                - "AdministratorAccess"
+            SendExtReadOnly:
+              managed_policies:
+                - "ReadOnlyAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: AthenaRead
+            SendExtPowerUser:
+              managed_policies:
+                - "ReadOnlyAccess"
+                - "AmazonSSMFullAccess"
+                - "SecretsManagerReadWrite"
+                - "AWSCodeBuildDeveloperAccess"
+                - "AmazonDynamoDBFullAccess"
+                - "AWSLambda_FullAccess"
+              inline_policies:
+                - name: KmsDecrypt
+                - name: CfnUpload
+                - name: AthenaRead
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
@@ -221,6 +314,8 @@ envs:
         aws_id: "515674411184"  # Stringhe non numeri
       - code: pn-servicedesk
         aws_id: "533236674075"  # Stringhe non numeri
+      - code: pn-cicd
+        aws_id: "911845998067"  # Stringhe non numeri
 
 
 accounts:
