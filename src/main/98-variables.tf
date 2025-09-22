@@ -53,6 +53,16 @@ variable "pagopa_dns_extra_cname_entries" {
   description = "Additional CNAME DNS entries for pagopa domain"
 }
 
+variable "pn_dns_records" {
+  type = map(object({
+    type  = string
+    ttl   = number
+    value = list(string)
+  }))
+  description = "Map of DNS records to create. Key is the record name, value contains type, ttl and list of values."
+  default     = {}
+}
+
 variable "pn_core_to_data_vault_vpcse" {
   type        = string
   description = "Confinfo VPC Service endpoint exposing DataVault services"
