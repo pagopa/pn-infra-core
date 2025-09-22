@@ -19,7 +19,7 @@ landing_cdn_allowed_internal_zones = ["uat.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.uat.notifichedigitali.it","www.uat.notifichedigitali.it","uat.notifichedigitali.pagopa.it","www.uat.notifichedigitali.pagopa.it"]
 landing_single_domain = "showcase"
-vpc_pn_simulator_is_enabled = false
+vpc_pn_vpn_is_enabled = false
 pn_confinfo_aws_account_id = "956319218727"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-956319218727"
 pn_radd_aws_account_id = "554102482368"
@@ -50,19 +50,19 @@ vpc_pn_core_servicedesk_subnets_cidrs = ["10.7.7.0/28","10.7.7.16/28","10.7.7.32
 
 
 
-vpc_pn_simulator_name = "PN Simulator"
-vpc_pn_simulator_primary_cidr = "10.22.0.0/16"
-vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
-vpc_endpoints_pn_simulator = ["logs","elasticloadbalancing","ecr.api","ecr.dkr","lambda"]
+vpc_pn_vpn_name = "PN VPN"
+vpc_pn_vpn_primary_cidr = "10.22.0.0/16"
+vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
+vpc_endpoints_pn_vpn = ["logs","elasticloadbalancing","ecr.api","ecr.dkr","lambda"]
 
-vpc_pn_simulator_private_subnets_cidr = []
-vpc_pn_simulator_private_subnets_names = []
-vpc_pn_simulator_public_subnets_cidr = []
-vpc_pn_simulator_public_subnets_names = []
-vpc_pn_simulator_internal_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24","10.22.3.0/24","10.22.4.0/24","10.22.5.0/24"]
-vpc_pn_simulator_internal_subnets_names = ["PN Simulator - AWS Services Subnet (uat) AZ 0","PN Simulator - AWS Services Subnet (uat) AZ 1","PN Simulator - AWS Services Subnet (uat) AZ 2","PN Simulator - VPN Subnet (uat) AZ 0","PN Simulator - VPN Subnet (uat) AZ 1","PN Simulator - VPN Subnet (uat) AZ 2"]
+vpc_pn_vpn_private_subnets_cidr = []
+vpc_pn_vpn_private_subnets_names = []
+vpc_pn_vpn_public_subnets_cidr = []
+vpc_pn_vpn_public_subnets_names = []
+vpc_pn_vpn_internal_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24","10.22.3.0/24","10.22.4.0/24","10.22.5.0/24"]
+vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (uat) AZ 0","PN VPN - AWS Services Subnet (uat) AZ 1","PN VPN - AWS Services Subnet (uat) AZ 2","PN VPN - private Subnet (uat) AZ 0","PN VPN - private Subnet (uat) AZ 1","PN VPN - private Subnet (uat) AZ 2"]
 
-vpc_pn_simulator_aws_subnets_cidrs = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
-vpc_pn_simulator_vpn_subnets_cidrs = ["10.22.3.0/24","10.22.4.0/24","10.22.5.0/24"]
+vpc_pn_vpn_aws_subnets_cidrs = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
+vpc_pn_vpn_pvt_subnets_cidrs = ["10.22.3.0/24","10.22.4.0/24","10.22.5.0/24"]
 
 

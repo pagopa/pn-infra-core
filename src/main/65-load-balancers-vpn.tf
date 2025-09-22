@@ -1,20 +1,20 @@
 ###########################################################
 #####       Application Load Balancer (Internal)      #####
 ###########################################################
-resource "aws_lb" "pn_simulator_ecs_alb" {
+resource "aws_lb" "pn_vpn_ecs_alb" {
   name_prefix        = "EcsA-"
   internal           = true
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb_simulator_sg["enabled"].id]
-  subnets            = local.Simulator_Services_Subnet_IDs
+  security_groups    = [aws_security_group.alb_vpn_sg.id]
+  subnets            = local.VPN_Services_Subnet_IDs
 
   enable_deletion_protection = false
   drop_invalid_header_fields = true
 
   tags = {
-    Name                         = "PN Simulator - ECS Cluster - ALB"
+    Name                         = "PN VPN - ECS Cluster - ALB"
     pn-eni-related               = "true"
-    pn-eni-related-groupName-regexp = base64encode("^pn-simulator_vpc-webapp-.*$")
+    pn-eni-related-groupName-regexp = base64encode("^pn-vpn_vpc-webapp-.*$")
   }
 }
 
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "simulator_tg" {
   name                 = "simulator"
   port                 = 8080                    
   protocol             = "HTTP"
-  vpc_id               = module.vpc_pn_simulator["enabled"].vpc_id
+  vpc_id               = module.vpc_pn_vpn["enabled"].vpc_id
   target_type          = "ip"                    
 
   health_check {
@@ -45,11 +45,11 @@ resource "aws_lb_target_group" "simulator_tg" {
 #####                Listener HTTPS                   #####
 ###########################################################
 resource "aws_lb_listener" "https_listener" {
-  load_balancer_arn = aws_lb.pn_simulator_ecs_alb.arn
+  load_balancer_arn = aws_lb.pn_vpn_ecs_alb.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn   = aws_acm_certificate.simulator_app["enabled"].arn
+  certificate_arn   = aws_acm_certificate.simulator_app.arn
 
   default_action {
     type             = "forward"
@@ -61,7 +61,7 @@ resource "aws_lb_listener" "https_listener" {
 ####       Listener HTTP (redirect verso HTTPS)        ####
 ###########################################################
 resource "aws_lb_listener" "http_redirect" {
-  load_balancer_arn = aws_lb.pn_simulator_ecs_alb.arn
+  load_balancer_arn = aws_lb.pn_vpn_ecs_alb.arn
   port              = 80
   protocol          = "HTTP"
 
@@ -79,18 +79,16 @@ resource "aws_lb_listener" "http_redirect" {
 ###########################################################
 ######             Security Group per ALB            ######
 ###########################################################
-resource "aws_security_group" "alb_simulator_sg" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
-
-  name        = format("%s_alb_simulator_sg", var.environment)
+resource "aws_security_group" "alb_vpn_sg" {
+  name        = format("%s_alb_vpn_sg", var.environment)
   description = "Allow HTTPS/HTTP from VPN"
-  vpc_id      = module.vpc_pn_simulator["enabled"].vpc_id
+  vpc_id      = module.vpc_pn_vpn["enabled"].vpc_id
 
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_pn_simulator_primary_cidr]
+    cidr_blocks = [var.vpc_pn_vpn_primary_cidr]
     description = "Allow HTTPS from VPN"
   }
 
@@ -98,7 +96,7 @@ resource "aws_security_group" "alb_simulator_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_pn_simulator_primary_cidr]
+    cidr_blocks = [var.vpc_pn_vpn_primary_cidr]
     description = "Allow HTTP (redirect)"
   }
 

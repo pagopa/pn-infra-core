@@ -1,10 +1,8 @@
 resource "aws_route53_zone" "vpn" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
-
   name    = format("vpn.%s", var.dns_zone)
   comment = "Hosted zone privata per VPN e routing ALB"
   vpc {
-    vpc_id = module.vpc_pn_simulator["enabled"].vpc_id
+    vpc_id = module.vpc_pn_vpn["enabled"].vpc_id
   }
 }
 
@@ -12,8 +10,6 @@ resource "aws_route53_zone" "vpn" {
 ######          ACM Certificate for vpn.<>           ######
 ###########################################################
 resource "aws_acm_certificate" "vpn" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
-
   domain_name       = format("vpn.%s", var.dns_zone)
   validation_method = "DNS"
 
@@ -23,8 +19,8 @@ resource "aws_acm_certificate" "vpn" {
 }
 
 resource "aws_route53_record" "vpn_cert_validation" {
-  for_each = var.vpc_pn_simulator_is_enabled ? {
-    for dvo in aws_acm_certificate.vpn["enabled"].domain_validation_options : dvo.domain_name => {
+  for_each = var.vpc_pn_vpn_is_enabled ? {
+    for dvo in aws_acm_certificate.vpn.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -39,9 +35,9 @@ resource "aws_route53_record" "vpn_cert_validation" {
 }
 
 resource "aws_acm_certificate_validation" "vpn" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
+  for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
 
-  certificate_arn         = aws_acm_certificate.vpn["enabled"].arn
+  certificate_arn         = aws_acm_certificate.vpn.arn
   validation_record_fqdns = [for record in aws_route53_record.vpn_cert_validation : record.fqdn]
 }
 
@@ -49,15 +45,15 @@ resource "aws_acm_certificate_validation" "vpn" {
 #####       simulator.vpn.<domain> → ALB internal     #####
 ###########################################################
 resource "aws_route53_record" "simulator_record" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
+  for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
 
-  zone_id = aws_route53_zone.vpn["enabled"].zone_id
+  zone_id = aws_route53_zone.vpn.zone_id
   name    = "simulator"
   type    = "A"
 
   alias {
-    name                   = aws_lb.pn_simulator_ecs_alb.dns_name
-    zone_id                = aws_lb.pn_simulator_ecs_alb.zone_id
+    name                   = aws_lb.pn_vpn_ecs_alb.dns_name
+    zone_id                = aws_lb.pn_vpn_ecs_alb.zone_id
     evaluate_target_health = true
   }
 }
@@ -66,8 +62,6 @@ resource "aws_route53_record" "simulator_record" {
 #####    ACM Certificare for simulator.vpn.<domain>   ##### 
 ###########################################################
 resource "aws_acm_certificate" "simulator_app" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
-
   domain_name       = format("simulator.vpn.%s", var.dns_zone)
   validation_method = "DNS"
 
@@ -77,8 +71,8 @@ resource "aws_acm_certificate" "simulator_app" {
 }
 
 resource "aws_route53_record" "simulator_app_cert_validation" {
-  for_each = var.vpc_pn_simulator_is_enabled ? {
-    for dvo in aws_acm_certificate.simulator_app["enabled"].domain_validation_options : dvo.domain_name => {
+  for_each = var.vpc_pn_vpn_is_enabled ? {
+    for dvo in aws_acm_certificate.simulator_app.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -93,8 +87,8 @@ resource "aws_route53_record" "simulator_app_cert_validation" {
 }
 
 resource "aws_acm_certificate_validation" "simulator_app" {
-  for_each = var.vpc_pn_simulator_is_enabled ? { "enabled" = true } : {}
+  for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
 
-  certificate_arn         = aws_acm_certificate.simulator_app["enabled"].arn
+  certificate_arn         = aws_acm_certificate.simulator_app.arn
   validation_record_fqdns = [for record in aws_route53_record.simulator_app_cert_validation : record.fqdn]
 }

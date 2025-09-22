@@ -4,7 +4,7 @@ envs:
     vpcs:
       - code: pn-core
         idx: 1 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
-      - code: pn-simulator
+      - code: pn-vpn
         idx: 20 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
@@ -38,8 +38,8 @@ envs:
             - "www.dev.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-dev.xml"
-          vpc_pn_simulator_is_enabled: true
-          vpn_simulator_cidr: "10.100.0.0/22"
+          vpc_pn_vpn_is_enabled: true
+          vpc_pn_vpn_cidr: "10.100.0.0/22"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
@@ -55,7 +55,7 @@ envs:
     vpcs:
       - code: pn-core
         idx: 6
-      - code: pn-simulator
+      - code: pn-vpn
         idx: 21
     azs: 3
     accounts:
@@ -83,7 +83,7 @@ envs:
             - "test.notifichedigitali.pagopa.it"
             - "www.test.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
-          vpc_pn_simulator_is_enabled: false
+          vpc_pn_vpn_is_enabled: false
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
@@ -98,7 +98,7 @@ envs:
     vpcs:
       - code: pn-core
         idx: 7
-      - code: pn-simulator
+      - code: pn-vpn
         idx: 22 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
@@ -126,7 +126,7 @@ envs:
             - "uat.notifichedigitali.pagopa.it"
             - "www.uat.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
-          vpc_pn_simulator_is_enabled: false
+          vpc_pn_vpn_is_enabled: false
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
         aws_id: "956319218727"  # Stringhe non numeri
@@ -142,7 +142,7 @@ envs:
     vpcs:
       - code: pn-core
         idx: 10
-      - code: pn-simulator
+      - code: pn-vpn
         idx: 23 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
@@ -170,9 +170,9 @@ envs:
             - "notifichedigitali.pagopa.it"
             - "www.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
-          vpc_pn_simulator_is_enabled: true
+          vpc_pn_vpn_is_enabled: true
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
-          vpn_simulator_cidr: "10.100.0.0/22"
+          pn_vpn_cird: "10.100.0.0/22"
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri
@@ -188,7 +188,7 @@ envs:
     vpcs:
       - code: pn-core
         idx: 15
-      - code: pn-simulator
+      - code: pn-vpn
         idx: 24
     azs: 3
     accounts:
@@ -216,7 +216,7 @@ envs:
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
-          vpc_pn_simulator_is_enabled: false
+          vpc_pn_vpn_is_enabled: false
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
@@ -360,8 +360,8 @@ accounts:
         #   - from: core
         #     to: opensearch
 
-      - code: pn-simulator
-        name: PN Simulator
+      - code: pn-vpn
+        name: PN VPN
         primary_cidr: 10.<vpc_idx>.0.0/16
         aws_svc:
           net: aws
@@ -380,8 +380,8 @@ accounts:
             has_iface_endpoints: true
             export_cidrs: true
 
-          - code: vpn
-            name: VPN
+          - code: pvt
+            name: private
             gateway: null
             first_net_ip: 10.<vpc_idx>.3.0
             net_size: 256

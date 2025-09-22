@@ -254,71 +254,71 @@ variable "vpn_saml_metadata_path" {
   default     = null
 }
 
-variable "vpc_pn_simulator_name" {
+variable "vpc_pn_vpn_name" {
   type        = string
   description = "Name of the PN Simulator VPC"
 }
 
-variable "vpn_simulator_cidr" {
+variable "vpc_pn_vpn_cidr" {
   type        = string
   description = "CIDR of the PN Simulator VPN"
 }
 
-variable "vpc_pn_simulator_primary_cidr" {
+variable "vpc_pn_vpn_primary_cidr" {
   type        = string
   description = "Primary CIDR of the PN Simulator VPC"
 }
 
-variable "vpc_pn_simulator_private_subnets_cidr" {
+variable "vpc_pn_vpn_private_subnets_cidr" {
   type        = list(string)
   description = "Private subnets list of cidr."
 }
-variable "vpc_pn_simulator_private_subnets_names" {
+variable "vpc_pn_vpn_private_subnets_names" {
   type        = list(string)
   description = "Private subnets list of names."
 }
 
-variable "vpc_pn_simulator_public_subnets_cidr" {
+variable "vpc_pn_vpn_public_subnets_cidr" {
   type        = list(string)
   description = "Public subnets list of cidr."
 }
-variable "vpc_pn_simulator_public_subnets_names" {
+variable "vpc_pn_vpn_public_subnets_names" {
   type        = list(string)
   description = "Public subnets list of names."
 }
 
-variable "vpc_pn_simulator_internal_subnets_cidr" {
+variable "vpc_pn_vpn_internal_subnets_cidr" {
   type        = list(string)
   description = "Internal subnets list of cidr"
 }
-variable "vpc_pn_simulator_internal_subnets_names" {
+variable "vpc_pn_vpn_internal_subnets_names" {
   type        = list(string)
   description = "Internal subnets list of names"
 }
 
-variable "vpc_pn_simulator_vpn_subnets_cidrs" {
+variable "vpc_pn_vpn_pvt_subnets_cidrs" {
   type        = list(string)
   description = "Internal subnets list of cidr"
 }
 
-variable "vpc_pn_simulator_aws_subnets_cidrs" {
+variable "vpc_pn_vpn_aws_subnets_cidrs" {
   type        = list(string)
   description = "Internal subnets list of cidr"
 }
 
 
-variable "vpc_pn_simulator_is_enabled" {
+variable "vpc_pn_vpn_is_enabled" {
   type        = bool
-  description = "If true, enable the creation of vpc for simulator."
+  description = "If true, enable the creation of vpc for vpn."
   default     = false
 }
 
-variable "vpc_pn_simulator_aws_services_interface_endpoints_subnets_cidr" {
+variable "vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr" {
   type        = list(string)
   description = "AWS services interfaces endpoints list of cidr."
 }
 
-variable "vpc_endpoints_pn_simulator" {
+variable "vpc_endpoints_pn_vpn" {
   type        = list(string)
   description = "Endpoint List"
 }
