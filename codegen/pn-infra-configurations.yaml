@@ -57,22 +57,6 @@ envs:
                 - name: CfnUpload
                 - name: AthenaRead
           pn_zone_dns_records:
-            - name: "test-dns.dev.notifichedigitali.it"
-              type: "TXT"
-              ttl: 300
-              value:
-                - "TEST"
-            - name: "test-dns2.dev.notifichedigitali.it"
-              type: "TXT"
-              ttl: 250
-              value:
-                - "TEST"
-                - "TEST2"
-            - name: "cname-test.dev.notifichedigitali.it"
-              type: "CNAME"
-              ttl: 300
-              value:
-                - "test-dns2.dev.notifichedigitali.it."
             - name: "4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
