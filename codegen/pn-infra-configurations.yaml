@@ -1,4 +1,3 @@
-
 envs:
   dev:
     vpcs:
@@ -57,16 +56,16 @@ envs:
                 - name: KmsDecrypt
                 - name: CfnUpload
                 - name: AthenaRead
-          pn_dns_records:
-            "test-dns.dev.notifichedigitali.it":
+          pn_zone_dns_records:
+            - name: "test-dns.dev.notifichedigitali.it"
               type: "TXT"
               ttl: 300
               value: ["TEST"]
-            "test-dns2.dev.notifichedigitali.it":
-              type: "TXT" 
+            - name: "test-dns2.dev.notifichedigitali.it"
+              type: "TXT"
               ttl: 250
-              value: ["TEST"]
-            "cname-test.dev.notifichedigitali.it":
+              value: ["TEST", "TEST2"]
+            - name: "cname-test.dev.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
               value: ["test-dns2.dev.notifichedigitali.it."]
@@ -449,4 +448,3 @@ accounts:
         #     to: conf-info
         #   - from: core
         #     to: opensearch
-  
