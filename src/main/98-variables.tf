@@ -53,14 +53,25 @@ variable "pagopa_dns_extra_cname_entries" {
   description = "Additional CNAME DNS entries for pagopa domain"
 }
 
-variable "pn_dns_records" {
+variable "pn_zone_dns_records" {
   type = list(object({
     name  = string
     type  = string
     ttl   = number
     value = list(string)
   }))
-  description = "List of DNS records to create. Each record is an object with name, type, ttl, and value."
+  description = "List of DNS records to create in the PN route53 zone. Each record is an object with name, type, ttl, and value."
+  default     = []
+}
+
+variable "pagopa_zone_dns_records" {
+  type = list(object({
+    name  = string
+    type  = string
+    ttl   = number
+    value = list(string)
+  }))
+  description = "List of DNS records to createin the 'notifichedigitali.pagopa.it' delegated zone. Each record is an object with name, type, ttl, and value."
   default     = []
 }
 

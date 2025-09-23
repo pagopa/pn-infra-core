@@ -135,6 +135,10 @@ locals {
   }
 
   pn_dns_records_map = {
-    for record in var.pn_dns_records : "${record.name}_${record.type}" => record
+    for record in var.pn_zone_dns_records : "${record.name}_${record.type}" => record
+  }
+
+  pagopa_zone_dns_records_map = {
+    for record in var.pagopa_zone_dns_records : "${record.name}_${record.type}" => record
   }
 }

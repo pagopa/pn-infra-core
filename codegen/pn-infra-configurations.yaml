@@ -56,7 +56,7 @@ envs:
                 - name: KmsDecrypt
                 - name: CfnUpload
                 - name: AthenaRead
-          pn_dns_records:
+          pn_zone_dns_records:
             - name: "test-dns.dev.notifichedigitali.it"
               type: "TXT"
               ttl: 300
