@@ -60,15 +60,50 @@ envs:
             - name: "test-dns.dev.notifichedigitali.it"
               type: "TXT"
               ttl: 300
-              value: ["TEST"]
+              value:
+                - "TEST"
             - name: "test-dns2.dev.notifichedigitali.it"
               type: "TXT"
               ttl: 250
-              value: ["TEST", "TEST2"]
+              value:
+                - "TEST"
+                - "TEST2"
             - name: "cname-test.dev.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
-              value: ["test-dns2.dev.notifichedigitali.it."]
+              value:
+                - "test-dns2.dev.notifichedigitali.it."
+            - name: "4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "4nrumbeqx2zgef22hosjkwuxdfubess3.dkim.eu-south-1.amazonses.com"
+            - name: "nhw5hdrtn5bh3paxodxhnwzc5qkue33d._domainkey.dev.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "nhw5hdrtn5bh3paxodxhnwzc5qkue33d.dkim.eu-south-1.amazonses.com"
+            - name: "ufdxabswg6emrc3ohqqtfdrrdmdiaoa4._domainkey.dev.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"
+
+            - name: "mail.dev.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 feedback-smtp.eu-south-1.amazonses.com"
+            - name: "mail.dev.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:amazonses.com ~all"
+            - name: "test.dev.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "Test entry for dev.notifichedigitali.it zone"
       - code: pn-confinfo
         base_dns: spid.dev.notifichedigitali.it
         aws_id: "089813480515"  # Stringhe non numeri
