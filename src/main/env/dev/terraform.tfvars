@@ -23,10 +23,13 @@ landing_single_domain = "showcase"
 vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-dev.xml"
 vpc_pn_vpn_is_enabled = true
 vpc_pn_vpn_cidr = "10.100.0.0/22"
+iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSLambda_FullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"CfnUpload"},{"name":"AthenaRead"}]}}
+pn_dns_records = {"test-dns.dev.notifichedigitali.it":{"type":"TXT","ttl":300,"value":["TEST"]},"test-dns2.dev.notifichedigitali.it":{"type":"TXT","ttl":250,"value":["TEST"]},"cname-test.dev.notifichedigitali.it":{"type":"CNAME","ttl":300,"value":["test-dns2.dev.notifichedigitali.it."]}}
 pn_confinfo_aws_account_id = "089813480515"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-089813480515"
 pn_radd_aws_account_id = "830192246553"
 pn_servicedesk_aws_account_id = "911845998067"
+pn_cicd_aws_account_id = "911845998067"
 
 
 vpc_pn_core_name = "PN Core"

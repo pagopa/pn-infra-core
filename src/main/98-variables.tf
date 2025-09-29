@@ -36,6 +36,11 @@ variable "pn_servicedesk_aws_account_id" {
   description = "pn-servicedesk current environment AWS Account id"
 }
 
+variable "pn_cicd_aws_account_id" {
+  description = "Cicd AWS Account id"
+  type        = string
+}
+
 variable "pn_dns_extra_cname_entries" {
   type        = string
   default     = "{}"
@@ -46,6 +51,16 @@ variable "pagopa_dns_extra_cname_entries" {
   type        = string
   default     = "{}"
   description = "Additional CNAME DNS entries for pagopa domain"
+}
+
+variable "pn_dns_records" {
+  type = map(object({
+    type  = string
+    ttl   = number
+    value = list(string)
+  }))
+  description = "Map of DNS records to create. Key is the record name, value contains type, ttl and list of values."
+  default     = {}
 }
 
 variable "pn_core_to_data_vault_vpcse" {
@@ -321,4 +336,13 @@ variable "vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr" {
 variable "vpc_endpoints_pn_vpn" {
   type        = list(string)
   description = "Endpoint List"
+}
+
+variable "iam_ext_roles_config" {
+  type = map(object({
+    managed_policies = list(string)
+    inline_policies  = optional(list(object({
+      name = string
+    })), [])
+  }))
 }
