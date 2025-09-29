@@ -16,13 +16,14 @@ resource "aws_cloudwatch_log_group" "pn_vpn" {
 
   name             = format("/aws/client-vpn/pn-vpn-%s/connections", var.environment)
   retention_in_days = var.environment == "prod" ? 90 : 30
-  skip_destroy      = true
 }
 
 ###########################################################
 # Security Group for VPN Client
 ###########################################################
 resource "aws_security_group" "vpc_pn_vpn_clients" {
+  count       = var.vpc_pn_vpn_is_enabled ? 1 : 0
+
   name        = format("client-vpn/pn-vpn-%s", var.environment)
   description = "SG for VPN clients"
   vpc_id      = module.vpc_pn_vpn["enabled"].vpc_id
@@ -41,13 +42,14 @@ resource "aws_security_group" "vpc_pn_vpn_clients" {
 # Endpoint Client VPN
 ###########################################################
 resource "aws_ec2_client_vpn_endpoint" "vpn" {
+  count = var.vpc_pn_vpn_is_enabled ? 1 : 0
 
   description            = format("pn-vpn-%s", var.environment)
   server_certificate_arn = aws_acm_certificate.vpn.arn
-  client_cidr_block      = var.vpc_pn_vpn_cidr
+  client_cidr_block      = var.pn_vpn_cidr
 
   vpc_id             = module.vpc_pn_vpn["enabled"].vpc_id
-  security_group_ids = [aws_security_group.vpc_pn_vpn_clients.id]
+  security_group_ids = [aws_security_group.vpc_pn_vpn_clients[0].id]
 
   split_tunnel = true
   dns_servers  = [local.VPC_DNS_Server]
@@ -74,7 +76,7 @@ resource "aws_ec2_client_vpn_endpoint" "vpn" {
 resource "aws_ec2_client_vpn_network_association" "vpn_subnet" {
   count = length(local.VPN_Subnet_IDs)
 
-  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn.id
+  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn[0].id
   subnet_id              = local.VPN_Subnet_IDs[count.index]
 }
 
@@ -82,8 +84,8 @@ resource "aws_ec2_client_vpn_network_association" "vpn_subnet" {
 # Authorization Rule VPN
 ###########################################################
 resource "aws_ec2_client_vpn_authorization_rule" "vpc_only" {
-
-  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn.id
+  count                   = var.vpc_pn_vpn_is_enabled ? 1 : 0
+  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn[0].id
   target_network_cidr    = module.vpc_pn_vpn["enabled"].vpc_cidr_block
   authorize_all_groups   = true
 }

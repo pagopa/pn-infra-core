@@ -286,7 +286,7 @@ variable "vpc_pn_vpn_name" {
   description = "Name of the PN Simulator VPC"
 }
 
-variable "vpc_pn_vpn_cidr" {
+variable "pn_vpn_cidr" {
   type        = string
   description = "CIDR of the PN Simulator VPN"
 }

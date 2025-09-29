@@ -22,7 +22,7 @@ landing_multi_domain_cert_domains = ["showcase.dev.notifichedigitali.it","www.de
 landing_single_domain = "showcase"
 vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-dev.xml"
 vpc_pn_vpn_is_enabled = true
-vpc_pn_vpn_cidr = "10.100.0.0/22"
+pn_vpn_cidr = "10.100.0.0/22"
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSLambda_FullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"CfnUpload"},{"name":"AthenaRead"}]}}
 pn_zone_dns_records = [{"name":"4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["4nrumbeqx2zgef22hosjkwuxdfubess3.dkim.eu-south-1.amazonses.com"]},{"name":"nhw5hdrtn5bh3paxodxhnwzc5qkue33d._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["nhw5hdrtn5bh3paxodxhnwzc5qkue33d.dkim.eu-south-1.amazonses.com"]},{"name":"ufdxabswg6emrc3ohqqtfdrrdmdiaoa4._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]},{"name":"test.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["Test entry for dev.notifichedigitali.it zone"]}]
 pn_confinfo_aws_account_id = "089813480515"

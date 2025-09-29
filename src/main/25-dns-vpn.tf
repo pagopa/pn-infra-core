@@ -1,4 +1,6 @@
 resource "aws_route53_zone" "vpn" {
+  count = var.vpc_pn_vpn_is_enabled ? 1 : 0
+
   name    = format("vpn.%s", var.dns_zone)
   comment = "Hosted zone privata per VPN e routing ALB"
   vpc {
@@ -47,13 +49,13 @@ resource "aws_acm_certificate_validation" "vpn" {
 resource "aws_route53_record" "simulator_record" {
   for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
 
-  zone_id = aws_route53_zone.vpn.zone_id
+  zone_id = aws_route53_zone.vpn[0].zone_id
   name    = "simulator"
   type    = "A"
 
   alias {
-    name                   = aws_lb.pn_vpn_ecs_alb.dns_name
-    zone_id                = aws_lb.pn_vpn_ecs_alb.zone_id
+    name                   = aws_lb.pn_vpn_ecs_alb[0].dns_name
+    zone_id                = aws_lb.pn_vpn_ecs_alb[0].zone_id
     evaluate_target_health = true
   }
 }

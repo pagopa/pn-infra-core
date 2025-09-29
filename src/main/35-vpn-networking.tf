@@ -5,7 +5,7 @@ module "vpc_pn_vpn" {
   version = "5.17.0"
 
   name = var.vpc_pn_vpn_name
-  cidr = var.vpc_pn_vpn_cidr
+  cidr = var.vpc_pn_vpn_primary_cidr
 
   azs                 = local.azs_names
   intra_subnets       = var.vpc_pn_vpn_internal_subnets_cidr
@@ -52,6 +52,8 @@ module "vpc_pn_vpn" {
 
 
 resource "aws_security_group" "vpc_pn_vpn_secgrp_tls" {
+  count       = var.vpc_pn_vpn_is_enabled ? 1 : 0
+
   name_prefix = "pn-vpn_vpc-tls-secgrp"
   description = "Allow TLS inbound traffic from VPN"
   vpc_id      = module.vpc_pn_vpn["enabled"].vpc_id
@@ -69,8 +71,10 @@ module "vpc_endpoints_pn_vpn" {
   source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
   version = "5.17.0"
 
+  count       = var.vpc_pn_vpn_is_enabled ? 1 : 0
+
   vpc_id             = module.vpc_pn_vpn["enabled"].vpc_id
-  security_group_ids = [ aws_security_group.vpc_pn_vpn_secgrp_tls.id ]
+  security_group_ids = [ aws_security_group.vpc_pn_vpn_secgrp_tls[0].id ]
   subnet_ids         = [ 
         for idx, cidr in module.vpc_pn_vpn["enabled"].intra_subnets_cidr_blocks :
           module.vpc_pn_vpn["enabled"].intra_subnets[idx]
