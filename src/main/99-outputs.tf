@@ -53,10 +53,24 @@ output "Core_ApplicationLoadBalancerMetricsDimensionName" {
   description = "ECS cluster Application Load Balancer name used for metrics"
 }
 
+output "Core_VPNApplicationLoadBalancerArn" {
+  value = aws_lb.pn_vpn_ecs_alb.arn
+  description = "VPN ECS cluster Application Load Balancer ARN, attach microservice listeners here"
+}
+
+output "Core_VPNApplicationLoadBalancerMetricsDimensionName" {
+  value = replace( aws_lb.pn_vpn_ecs_alb.arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1")
+  description = "VPN ECS cluster Application Load Balancer name used for metrics"
+}
 
 output "Core_ApplicationLoadBalancerAwsDns" {
   value = aws_lb.pn_core_ecs_alb.dns_name 
   description = "ECS cluster Application Load Balancer AWS released DNS, can be used to call microservices"
+}
+
+output "Core_VPNApplicationLoadBalancerAwsDns" {
+  value = aws_lb.pn_vpn_ecs_alb.dns_name 
+  description = "VPN ECS cluster Application Load Balancer AWS released DNS, can be used to call microservices"
 }
 
 output "Core_ApplicationLoadBalancerAwsDnsZoneId" {
@@ -64,11 +78,24 @@ output "Core_ApplicationLoadBalancerAwsDnsZoneId" {
   description = "ECS cluster Application Load Balancer AWS hosted Zone, usefull for aliases"
 }
 
+output "Core_VPNApplicationLoadBalancerAwsDnsZoneId" {
+  value = aws_lb.pn_vpn_ecs_alb.zone_id 
+  description = "VPN ECS cluster Application Load Balancer AWS hosted Zone, usefull for aliases"
+}
+
 output "Core_ApplicationLoadBalancerListenerArn" {
   value = aws_lb_listener.pn_core_ecs_alb_8080.arn
   description = "ECS cluster Application Load Balancer Listener ARN, attach here new microservice routing rule"
 }
+output "Core_ApplicationLoadBalancerHttpsVPNListenerArn" {
+  value = aws_lb_listener.https_listener.arn
+  description = "Https ECS cluster Application Load Balancer Listener ARN, attach here new microservice routing rule in VPN"
+}
 
+ output "Core_ApplicationLoadBalancerHttpVPNListenerArn" {
+  value = aws_lb_listener.http_redirect.arn
+  description = "Redirect ECS cluster Application Load Balancer Listener ARN, attach here new microservice routing rule in VPN"
+}
 
 output "Core_WebappSecurityGroupId" {
   value = aws_security_group.vpc_pn_core__secgrp_webapp.id
@@ -88,7 +115,6 @@ output "Core_CustomDomainsRequired" {
   value = "false"
   description = "Cloudformation neet to build API-GW custom domain"
 }
-
 
 output "Core_SafeStorageAccountId" {
   value = var.pn_confinfo_aws_account_id
