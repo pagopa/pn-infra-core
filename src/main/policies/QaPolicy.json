@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+        "Sid": "S3AccessConditionalBucket",
+        "Effect": "Allow",
+        "Action": "s3:",
+        "Resource": [
+        "arn:aws:s3:::*-test-delayer-bucket",
+        "arn:aws:s3:::*-test-delayer-bucket/"
+        ]
+        },
+        {
+        "Sid": "AllowLambdaAccess",
+        "Effect": "Allow",
+        "Action": "lambda:*",
+        "Resource": "arn:aws:lambda:${aws_region}:${aws_account_id_core}:function:pn-testDelayerLambda"
+        }
+    ]
+}

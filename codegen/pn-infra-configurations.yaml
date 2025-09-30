@@ -41,6 +41,7 @@ envs:
             SendExtReadOnly:
               managed_policies:
                 - "ReadOnlyAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: AthenaRead
@@ -51,10 +52,10 @@ envs:
                 - "SecretsManagerReadWrite"
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
-                - "AWSLambda_FullAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
-                - name: CfnUpload
+                - name: QaPolicy
                 - name: AthenaRead
           pn_zone_dns_records:
             - name: "4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it"
@@ -138,6 +139,7 @@ envs:
             SendExtReadOnly:
               managed_policies:
                 - "ReadOnlyAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: AthenaRead
@@ -148,10 +150,10 @@ envs:
                 - "SecretsManagerReadWrite"
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
-                - "AWSLambda_FullAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
-                - name: CfnUpload
+                - name: QaPolicy
                 - name: AthenaRead
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
@@ -202,6 +204,7 @@ envs:
             SendExtReadOnly:
               managed_policies:
                 - "ReadOnlyAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: AthenaRead
@@ -212,10 +215,10 @@ envs:
                 - "SecretsManagerReadWrite"
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
-                - "AWSLambda_FullAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
-                - name: CfnUpload
+                - name: QaPolicy
                 - name: AthenaRead
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
@@ -308,6 +311,7 @@ envs:
             SendExtReadOnly:
               managed_policies:
                 - "ReadOnlyAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: AthenaRead
@@ -318,10 +322,10 @@ envs:
                 - "SecretsManagerReadWrite"
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
-                - "AWSLambda_FullAccess"
+                - "AWSCloudShellFullAccess"
               inline_policies:
                 - name: KmsDecrypt
-                - name: CfnUpload
+                - name: QaPolicy
                 - name: AthenaRead
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
