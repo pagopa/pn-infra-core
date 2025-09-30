@@ -275,7 +275,7 @@ envs:
           landing_single_domain: "www"
           vpc_pn_vpn_is_enabled: true
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
-          pn_vpn_cird: "10.100.0.0/22"
+          pn_vpn_cidr: "10.100.0.0/22"
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri

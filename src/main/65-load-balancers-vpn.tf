@@ -111,20 +111,27 @@ resource "aws_security_group" "alb_vpn_sg" {
   }
 
   egress {
-    from_port   = 443
-    to_port     = 443
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = [module.vpc_pn_vpn["enabled"].vpc_cidr_block]
   }
 }
 
 ###########################################################
-# ECS Service -> ALB Target Group binding (da inserire nel service)
+#####       simulator.vpn.<domain> → ALB internal     #####
 ###########################################################
-# Esempio da mettere nella definizione ECS service:
-#
-# load_balancer {
-#   target_group_arn = aws_lb_target_group.simulator_tg.arn
-#   container_name   = "django"        # deve combaciare col nome nel task definition
-#   container_port   = 8000            # porta container Django
-# }
+resource "aws_route53_record" "simulator_record" {
+  for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
+
+  zone_id = aws_route53_zone.vpn[0].zone_id
+  name    = "simulator"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.pn_vpn_ecs_alb[0].dns_name
+    zone_id                = aws_lb.pn_vpn_ecs_alb[0].zone_id
+    evaluate_target_health = true
+  }
+}
+

@@ -44,23 +44,6 @@ resource "aws_acm_certificate_validation" "vpn" {
 }
 
 ###########################################################
-#####       simulator.vpn.<domain> → ALB internal     #####
-###########################################################
-resource "aws_route53_record" "simulator_record" {
-  for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
-
-  zone_id = aws_route53_zone.vpn[0].zone_id
-  name    = "simulator"
-  type    = "A"
-
-  alias {
-    name                   = aws_lb.pn_vpn_ecs_alb[0].dns_name
-    zone_id                = aws_lb.pn_vpn_ecs_alb[0].zone_id
-    evaluate_target_health = true
-  }
-}
-
-###########################################################
 #####    ACM Certificare for simulator.vpn.<domain>   ##### 
 ###########################################################
 resource "aws_acm_certificate" "simulator_app" {
