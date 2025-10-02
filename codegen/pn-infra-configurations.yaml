@@ -493,8 +493,6 @@ accounts:
         aws_svc:
           net: aws
           interfaces_endpoints:
-            - "logs"
-            - "elasticloadbalancing"
             - "ecr.api"
             - "ecr.dkr"
             - "lambda"

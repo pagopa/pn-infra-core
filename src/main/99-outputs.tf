@@ -299,7 +299,7 @@ output "Core_HubLoginDomain" {
 
 ## vpn output
 output "Core_VPNVpcId" {
-  value = module.vpc_pn_vpn.vpc_id
+  value = module.vpc_pn_vpn["enabled"].vpc_id
   description = "VPC Id of VPN"
 }
 
@@ -309,7 +309,7 @@ output "Core_VPNVpcCidr" {
 }
 
 output "Core_VPNDefaultSecurityGroup" {
-  value = module.vpc_pn_vpn.default_security_group_id
+  value = module.vpc_pn_vpn["enabled"].default_security_group_id
   description = "Default VPN VPC security group"
 }
 
@@ -322,54 +322,48 @@ output "Core_VPNSubnetsCidrs" {
 }
 
 output "Core_VPNApplicationLoadBalancerArn" {
-  value = aws_lb.pn_vpn_ecs_alb.arn
+  value = aws_lb.pn_vpn_ecs_alb[0].arn
   description = "ECS cluster Application Load Balancer ARN, attach microservice listeners here"
 }
 
 output "Core_VPNApplicationLoadBalancerMetricsDimensionName" {
-  value = replace( aws_lb.pn_vpn_ecs_alb.arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1")
+  value = replace( aws_lb.pn_vpn_ecs_alb[0].arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1")
   description = "ECS cluster Application Load Balancer name used for metrics"
 }
 
 
 output "Core_VPNApplicationLoadBalancerAwsDns" {
-  value = aws_lb.pn_vpn_ecs_alb.dns_name
+  value = aws_lb.pn_vpn_ecs_alb[0].dns_name
   description = "ECS cluster Application Load Balancer AWS released DNS, can be used to call microservices"
 }
 
 output "Core_VPNApplicationLoadBalancerAwsDnsZoneId" {
-  value = aws_lb.pn_vpn_ecs_alb.zone_id
+  value = aws_lb.pn_vpn_ecs_alb[0].zone_id
   description = "ECS cluster Application Load Balancer AWS hosted Zone, usefull for aliases"
 }
 
 output "Core_VPNApplicationLoadBalancerListenerArn" {
-  value = aws_lb_listener.https_listener.arn
+  value = aws_lb_listener.https_listener[0].arn
   description = "ECS cluster Application Load Balancer Listener ARN, attach here new microservice routing rule"
 }
 
 
 output "Core_VPNWebappSecurityGroupId" {
-  value = aws_security_group.alb_vpn_sg.id
+  value = aws_security_group.alb_vpn_sg[0].id
   description = "WebApp security group id"
 }
 
 output "Core_VPNWebappSecurityGroupArn" {
-  value = aws_security_group.alb_vpn_sg.arn
+  value = aws_security_group.alb_vpn_sg[0].arn
   description = "WebApp security group ARN"
 }
 
-
-output "Core_VPNServiceEndpointToPdfRaster" {
-  value = aws_vpc_endpoint.to_pdfraster.dns_entry[0].dns_name
-  description = "Service endpoint for PdfRaster connections"
+output "Core_VPNServiceLambdaEndpointId" {
+  description = "Lambda VPC Endpoint id for VPN"
+  value = module.vpc_endpoints_pn_vpn[0].endpoints["lambda"].id
 }
 
-output "Core_VPNServiceECSEndpointId" {
-  description = "ECS VPC Endpoint id for VPN"
-  value       = module.vpc_endpoints_pn_vpn[0].endpoints["ecs"].id
-}
-
-output "Core_VPNServiceECSEndpointArn" {
-  description = "ECS VPC Endpoint ARN for VPN"
-  value       = module.vpc_endpoints_pn_vpn[0].endpoints["ecs"].arn
+output "Core_VPNServiceLambdaEndpointArn" {
+  description = "Lambda VPC Endpoint ARN for VPN"
+  value = module.vpc_endpoints_pn_vpn[0].endpoints["lambda"].arn
 }
