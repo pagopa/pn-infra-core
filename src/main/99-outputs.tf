@@ -357,13 +357,3 @@ output "Core_VPNWebappSecurityGroupArn" {
   value = aws_security_group.alb_vpn_sg[0].arn
   description = "WebApp security group ARN"
 }
-
-output "Core_VPNServiceLambdaEndpointId" {
-  description = "Lambda VPC Endpoint id for VPN"
-  value = module.vpc_endpoints_pn_vpn[0].endpoints["lambda"].id
-}
-
-output "Core_VPNServiceLambdaEndpointArn" {
-  description = "Lambda VPC Endpoint ARN for VPN"
-  value = module.vpc_endpoints_pn_vpn[0].endpoints["lambda"].arn
-}
