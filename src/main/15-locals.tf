@@ -102,6 +102,34 @@ locals {
           "${cdn}.${var.dns_zone}"
    ]
   
+  VPN_SubnetsCidrs = var.vpc_pn_vpn_is_enabled ? [
+      for idx, cidr in module.vpc_pn_vpn["enabled"].intra_subnets_cidr_blocks:
+          cidr
+            if contains( var.vpc_pn_vpn_pvt_subnets_cidrs, cidr)
+    ] : []
+  
+  VPN_Subnet_IDs = var.vpc_pn_vpn_is_enabled ? [
+    for idx, cidr in module.vpc_pn_vpn["enabled"].intra_subnets_cidr_blocks :
+      module.vpc_pn_vpn["enabled"].intra_subnets[idx]
+      if contains(var.vpc_pn_vpn_pvt_subnets_cidrs, cidr)
+  ] : []
+  
+  VPC_IP_No_CIDR = var.vpc_pn_vpn_is_enabled ? (split("/", module.vpc_pn_vpn["enabled"].vpc_cidr_block))[0] : ""
+  
+  VPC_DNS_Server =  var.vpc_pn_vpn_is_enabled ? (replace(local.VPC_IP_No_CIDR, "/.0$/", ".2")) : ""
+  
+  VPN_Services_SubnetsCidrs = var.vpc_pn_vpn_is_enabled ? [
+      for idx, cidr in module.vpc_pn_vpn["enabled"].intra_subnets_cidr_blocks:
+          cidr
+            if contains( var.vpc_pn_vpn_aws_subnets_cidrs, cidr)
+    ] : []
+  
+  VPN_Services_Subnet_IDs = var.vpc_pn_vpn_is_enabled ? [
+    for idx, cidr in module.vpc_pn_vpn["enabled"].intra_subnets_cidr_blocks :
+      module.vpc_pn_vpn["enabled"].intra_subnets[idx]
+      if contains(var.vpc_pn_vpn_aws_subnets_cidrs, cidr)
+  ] : []
+  
   iam_managed_policy_attachments = {
     for tuple in flatten([
       for role_name, config in var.iam_ext_roles_config : [

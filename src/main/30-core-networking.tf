@@ -196,6 +196,3 @@ resource "aws_route53_record" "dev-ns" {
   ttl     = "60"
   records = [ aws_vpc_endpoint.to_data_vault.dns_entry[0].dns_name ]
 }
-
-
-
