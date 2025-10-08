@@ -501,6 +501,11 @@ accounts:
             - "ecr.dkr"
             - "lambda"
             - "logs"
+            - "monitoring"
+            - "events"
+            - "ecs"
+            - "ecs-agent"
+            - "ecs-telemetry"
         networks:
           - code: aws
             name: AWS Services
