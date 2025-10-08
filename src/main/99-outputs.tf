@@ -308,13 +308,13 @@ output "Core_VPNVpcCidr" {
   description = "VPC CIDR of VPN"
 }
 
-output "Core_VPNDefaultSecurityGroup" {
+output "Core_VPNDefaultSecurityGroupId" {
   value = module.vpc_pn_vpn["enabled"].default_security_group_id
   description = "Default VPN VPC security group"
 }
 
-output "Core_VPNServicesSubnets" {
-   value = local.VPN_Services_Subnet_IDs
+output "Core_VPNSubnetsIds" {
+   value = local.VPN_Subnet_IDs
 }
 
 output "Core_VPNSubnetsCidrs" {
@@ -325,6 +325,15 @@ output "Core_VPNApplicationLoadBalancerArn" {
   value = aws_lb.pn_vpn_ecs_alb[0].arn
   description = "ECS cluster Application Load Balancer ARN, attach microservice listeners here"
 }
+
+output "Core_VPNServicesSubnetsIds" {
+   value = local.VPN_Services_Subnet_IDs
+}
+
+output "Core_VPNServicesSubnetsCidrs" {
+   value = local.VPN_Services_SubnetsCidrs
+}
+
 
 output "Core_VPNApplicationLoadBalancerMetricsDimensionName" {
   value = replace( aws_lb.pn_vpn_ecs_alb[0].arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1")
