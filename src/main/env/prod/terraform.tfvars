@@ -19,7 +19,7 @@ enable_landing_cdn_redirect_function = true
 landing_cdn_allowed_internal_zones = ["notifichedigitali.it","notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.notifichedigitali.it","www.notifichedigitali.it","notifichedigitali.pagopa.it","www.notifichedigitali.pagopa.it"]
 landing_single_domain = "www"
-vpc_pn_vpn_is_enabled = true
+vpc_pn_vpn_is_enabled = false
 vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-prod.xml"
 pn_vpn_cidr = "10.100.0.0/22"
 pn_confinfo_aws_account_id = "350578575906"
@@ -55,7 +55,7 @@ vpc_pn_core_servicedesk_subnets_cidrs = ["10.10.7.0/28","10.10.7.16/28","10.10.7
 vpc_pn_vpn_name = "PN VPN"
 vpc_pn_vpn_primary_cidr = "10.23.0.0/16"
 vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24"]
-vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda"]
+vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs"]
 
 vpc_pn_vpn_private_subnets_cidr = []
 vpc_pn_vpn_private_subnets_names = []

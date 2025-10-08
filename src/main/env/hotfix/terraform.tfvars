@@ -55,7 +55,7 @@ vpc_pn_core_servicedesk_subnets_cidrs = ["10.15.7.0/28","10.15.7.16/28","10.15.7
 vpc_pn_vpn_name = "PN VPN"
 vpc_pn_vpn_primary_cidr = "10.24.0.0/16"
 vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.24.70.0/24","10.24.71.0/24","10.24.72.0/24"]
-vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda"]
+vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs"]
 
 vpc_pn_vpn_private_subnets_cidr = []
 vpc_pn_vpn_private_subnets_names = []

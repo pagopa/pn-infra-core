@@ -276,7 +276,7 @@ envs:
             - "notifichedigitali.pagopa.it"
             - "www.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
-          vpc_pn_vpn_is_enabled: true
+          vpc_pn_vpn_is_enabled: false
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
           pn_vpn_cidr: "10.100.0.0/22"
       - code: pn-confinfo
@@ -500,6 +500,7 @@ accounts:
             - "ecr.api"
             - "ecr.dkr"
             - "lambda"
+            - "logs"
         networks:
           - code: aws
             name: AWS Services
