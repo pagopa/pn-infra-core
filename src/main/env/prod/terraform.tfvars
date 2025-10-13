@@ -46,3 +46,25 @@ vpc_pn_core_opensearch_subnets_cidrs = ["10.10.80.0/24","10.10.81.0/24","10.10.8
 vpc_pn_core_servicedesk_subnets_cidrs = ["10.10.7.0/28","10.10.7.16/28","10.10.7.32/28"]
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+vpc_pn_vpn_name = "PN VPN"
+vpc_pn_vpn_primary_cidr = "10.23.0.0/16"
+vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24"]
+vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs","monitoring","events","ecs","ecs-agent","ecs-telemetry","secretsmanager"]
+
+vpc_pn_vpn_private_subnets_cidr = []
+vpc_pn_vpn_private_subnets_names = []
+vpc_pn_vpn_public_subnets_cidr = []
+vpc_pn_vpn_public_subnets_names = []
+vpc_pn_vpn_internal_subnets_cidr = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24","10.23.3.0/24","10.23.4.0/24","10.23.5.0/24"]
+vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (prod) AZ 0","PN VPN - AWS Services Subnet (prod) AZ 1","PN VPN - AWS Services Subnet (prod) AZ 2","PN VPN - private Subnet (prod) AZ 0","PN VPN - private Subnet (prod) AZ 1","PN VPN - private Subnet (prod) AZ 2"]
+
+vpc_pn_vpn_aws_subnets_cidrs = ["10.23.70.0/24","10.23.71.0/24","10.23.72.0/24"]
+vpc_pn_vpn_pvt_subnets_cidrs = ["10.23.3.0/24","10.23.4.0/24","10.23.5.0/24"]
+
+
+>>>>>>> Stashed changes

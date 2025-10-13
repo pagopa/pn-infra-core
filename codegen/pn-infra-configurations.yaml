@@ -471,3 +471,35 @@ accounts:
         #     to: conf-info
         #   - from: core
         #     to: opensearch
+
+      - code: pn-vpn
+        name: PN VPN
+        primary_cidr: 10.<vpc_idx>.0.0/16
+        aws_svc:
+          net: aws
+          interfaces_endpoints:
+            - "ecr.api"
+            - "ecr.dkr"
+            - "lambda"
+            - "logs"
+            - "monitoring"
+            - "events"
+            - "ecs"
+            - "ecs-agent"
+            - "ecs-telemetry"
+            - "secretsmanager"
+        networks:
+          - code: aws
+            name: AWS Services
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.70.0
+            net_size: 256
+            has_iface_endpoints: true
+            export_cidrs: true
+
+          - code: pvt
+            name: private
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.3.0
+            net_size: 256
+            nlb: true
