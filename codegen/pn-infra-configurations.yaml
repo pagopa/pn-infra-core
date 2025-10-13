@@ -506,6 +506,7 @@ accounts:
             - "ecs"
             - "ecs-agent"
             - "ecs-telemetry"
+            - "secretsmanager"
         networks:
           - code: aws
             name: AWS Services
