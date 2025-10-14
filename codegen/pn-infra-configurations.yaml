@@ -155,6 +155,57 @@ envs:
                 - name: KmsDecrypt
                 - name: QaPolicy
                 - name: AthenaRead
+          pn_zone_dns_records:
+            # DKIM records
+            - name: "2fmtkux2qgmh4wbo74uenqsljowelytr._domainkey.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "2fmtkux2qgmh4wbo74uenqsljowelytr.dkim.amazonses.com."
+            - name: "fkjn45smqcpjuu7jcydfuufxfzu2bdys._domainkey.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "fkjn45smqcpjuu7jcydfuufxfzu2bdys.dkim.eu-south-1.amazonses.com."
+            - name: "g3buyq7jwlfowossgxu43th7g7j5tq4v._domainkey.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "g3buyq7jwlfowossgxu43th7g7j5tq4v.dkim.eu-south-1.amazonses.com."
+            - name: "m2emwlvwlfbaijdy6o2vyaejwffxn62n._domainkey.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "m2emwlvwlfbaijdy6o2vyaejwffxn62n.dkim.amazonses.com."
+            - name: "riyrm6wwrk2rlhawi7px3i3uxfqwrmwj._domainkey.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "riyrm6wwrk2rlhawi7px3i3uxfqwrmwj.dkim.amazonses.com."
+            - name: "stsejqc5fiire7ouza35ojqib4z73hvs._domainkey.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "stsejqc5fiire7ouza35ojqib4z73hvs.dkim.eu-south-1.amazonses.com."
+
+            # Mail records
+            - name: "mail.test.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 feedback-smtp.eu-south-1.amazonses.com."
+            - name: "mail.test.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:amazonses.com ~all"
+
+            # Other records
+            - name: "testdns.test.notifichedigitali.it"
+              type: "TXT"
+              ttl: 120
+              value:
+                - "Test DNS entry for PN test"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
