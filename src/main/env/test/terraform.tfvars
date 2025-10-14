@@ -20,6 +20,7 @@ landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.test.notifichedigitali.it","www.test.notifichedigitali.it","test.notifichedigitali.pagopa.it","www.test.notifichedigitali.pagopa.it"]
 landing_single_domain = "showcase"
 vpc_pn_vpn_is_enabled = false
+vpn_is_enabled = false
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
 pn_confinfo_aws_account_id = "771887334808"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-771887334808"

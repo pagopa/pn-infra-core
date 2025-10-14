@@ -340,6 +340,12 @@ variable "vpc_pn_vpn_is_enabled" {
   default     = false
 }
 
+variable "vpn_is_enabled" {
+  type        = bool
+  description = "If true, enable the creation of vpn."
+  default     = false
+}
+
 variable "vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr" {
   type        = list(string)
   description = "AWS services interfaces endpoints list of cidr."

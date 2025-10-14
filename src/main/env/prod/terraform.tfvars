@@ -20,6 +20,7 @@ landing_cdn_allowed_internal_zones = ["notifichedigitali.it","notifichedigitali.
 landing_multi_domain_cert_domains = ["showcase.notifichedigitali.it","www.notifichedigitali.it","notifichedigitali.pagopa.it","www.notifichedigitali.pagopa.it"]
 landing_single_domain = "www"
 vpc_pn_vpn_is_enabled = false
+vpn_is_enabled = false
 vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-prod.xml"
 pn_vpn_cidr = "10.100.0.0/22"
 pn_confinfo_aws_account_id = "350578575906"
