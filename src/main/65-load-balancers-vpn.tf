@@ -20,30 +20,6 @@ resource "aws_lb" "pn_vpn_ecs_alb" {
   }
 }
 
-###########################################################
-#####              Target Group per ECS               #####
-###########################################################
-resource "aws_lb_target_group" "simulator_tg" {
-  count       = var.vpc_pn_vpn_is_enabled ? 1 : 0
-
-  name                 = "simulator"
-  port                 = 8080                    
-  protocol             = "HTTP"
-  vpc_id               = module.vpc_pn_vpn["enabled"].vpc_id
-  target_type          = "ip"                    
-
-  health_check {
-    enabled             = true
-    healthy_threshold   = 3
-    unhealthy_threshold = 3
-    interval            = 30
-    timeout             = 5
-    path                = "/"                    
-    matcher             = "200-399"
-  }
-
-  deregistration_delay = 30
-}
 
 ###########################################################
 #####                Listener HTTPS                   #####
@@ -58,8 +34,13 @@ resource "aws_lb_listener" "https_listener" {
   certificate_arn   = aws_acm_certificate.simulator_app.arn
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.simulator_tg[0].arn
+    type = "fixed-response"
+    
+    fixed_response {
+      content_type = "application/json"
+      message_body = "{ \"error\": \"404\", \"message\": \"Load balancer rule not configured\" }"
+      status_code  = "404"
+    }
   }
 }
 

@@ -509,6 +509,8 @@ accounts:
             - "monitoring"
             - "events"
             - "ecs"
+            - "ssm"
+            - "ssmmessages"
             - "ecs-agent"
             - "ecs-telemetry"
             - "secretsmanager"
