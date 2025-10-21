@@ -161,7 +161,7 @@ envs:
               type: "CNAME"
               ttl: 300
               value:
-                - "2fmtkux2qgmh4wbo74uenqsljowelytr.dkim.amazonses.com."
+                - "2fmtkux2qgmh4wbo74uenqsljowelytr.dkim.amazonses.com"
             - name: "fkjn45smqcpjuu7jcydfuufxfzu2bdys._domainkey.test.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
@@ -176,12 +176,12 @@ envs:
               type: "CNAME"
               ttl: 300
               value:
-                - "m2emwlvwlfbaijdy6o2vyaejwffxn62n.dkim.amazonses.com."
+                - "m2emwlvwlfbaijdy6o2vyaejwffxn62n.dkim.amazonses.com"
             - name: "riyrm6wwrk2rlhawi7px3i3uxfqwrmwj._domainkey.test.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
               value:
-                - "riyrm6wwrk2rlhawi7px3i3uxfqwrmwj.dkim.amazonses.com."
+                - "riyrm6wwrk2rlhawi7px3i3uxfqwrmwj.dkim.amazonses.com"
             - name: "stsejqc5fiire7ouza35ojqib4z73hvs._domainkey.test.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
@@ -200,12 +200,6 @@ envs:
               value:
                 - "v=spf1 include:amazonses.com ~all"
 
-            # Other records
-            - name: "testdns.test.notifichedigitali.it"
-              type: "TXT"
-              ttl: 120
-              value:
-                - "Test DNS entry for PN test"
       - code: pn-confinfo
         base_dns: spid.test.notifichedigitali.it
         aws_id: "771887334808"  # Stringhe non numeri
