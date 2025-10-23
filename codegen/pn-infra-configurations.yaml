@@ -3,6 +3,8 @@ envs:
     vpcs:
       - code: pn-core
         idx: 1 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-vpn
+        idx: 20 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
       - code: pn-core
@@ -34,6 +36,10 @@ envs:
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-dev.xml"
+          vpc_pn_vpn_is_enabled: true
+          vpn_is_enabled: false
+          pn_vpn_cidr: "10.100.0.0/22"
           iam_ext_roles_config:
             "SendExtAdmin":
               managed_policies:
@@ -106,6 +112,8 @@ envs:
     vpcs:
       - code: pn-core
         idx: 6
+      - code: pn-vpn
+        idx: 21
     azs: 3
     accounts:
       - code: pn-core
@@ -132,6 +140,8 @@ envs:
             - "test.notifichedigitali.pagopa.it"
             - "www.test.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          vpc_pn_vpn_is_enabled: false
+          vpn_is_enabled: false
           iam_ext_roles_config:
             "SendExtAdmin":
               managed_policies:
@@ -216,6 +226,8 @@ envs:
     vpcs:
       - code: pn-core
         idx: 7
+      - code: pn-vpn
+        idx: 22 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
       - code: pn-core
@@ -242,6 +254,8 @@ envs:
             - "uat.notifichedigitali.pagopa.it"
             - "www.uat.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          vpc_pn_vpn_is_enabled: false
+          vpn_is_enabled: false
           iam_ext_roles_config:
             "SendExtAdmin":
               managed_policies:
@@ -318,6 +332,8 @@ envs:
     vpcs:
       - code: pn-core
         idx: 10
+      - code: pn-vpn
+        idx: 23 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
       - code: pn-core
@@ -344,6 +360,10 @@ envs:
             - "notifichedigitali.pagopa.it"
             - "www.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
+          vpc_pn_vpn_is_enabled: false
+          vpn_is_enabled: false
+          vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
+          pn_vpn_cidr: "10.100.0.0/22"
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri
@@ -359,6 +379,8 @@ envs:
     vpcs:
       - code: pn-core
         idx: 15
+      - code: pn-vpn
+        idx: 24
     azs: 3
     accounts:
       - code: pn-core
@@ -385,6 +407,8 @@ envs:
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
           landing_single_domain: "showcase"
+          vpc_pn_vpn_is_enabled: false
+          vpn_is_enabled: false
           iam_ext_roles_config:
             "SendExtAdmin":
               managed_policies:
@@ -552,3 +576,37 @@ accounts:
         #     to: conf-info
         #   - from: core
         #     to: opensearch
+
+      - code: pn-vpn
+        name: PN VPN
+        primary_cidr: 10.<vpc_idx>.0.0/16
+        aws_svc:
+          net: aws
+          interfaces_endpoints:
+            - "ecr.api"
+            - "ecr.dkr"
+            - "lambda"
+            - "logs"
+            - "monitoring"
+            - "events"
+            - "ecs"
+            - "ssm"
+            - "ssmmessages"
+            - "ecs-agent"
+            - "ecs-telemetry"
+            - "secretsmanager"
+        networks:
+          - code: aws
+            name: AWS Services
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.70.0
+            net_size: 256
+            has_iface_endpoints: true
+            export_cidrs: true
+
+          - code: pvt
+            name: private
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.3.0
+            net_size: 256
+            nlb: true
