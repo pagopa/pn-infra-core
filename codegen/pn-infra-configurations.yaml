@@ -396,6 +396,35 @@ envs:
                 - name: KmsDecrypt
                 - name: QaPolicy
                 - name: AthenaRead
+          pn_zone_dns_records:
+            # DKIM records
+            - name: "3ucmy7dsyknmedqspbyh6svxgvkcqh37._domainkey.hotfix.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "3ucmy7dsyknmedqspbyh6svxgvkcqh37.dkim.eu-south-1.amazonses.com"
+            - name: "4j25vsj6vwqtpynvd2w6mcef76gyjmhh._domainkey.hotfix.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "4j25vsj6vwqtpynvd2w6mcef76gyjmhh.dkim.eu-south-1.amazonses.com"
+            - name: "ahx572wktlhbg3h7mqs7cdaomk6esp7c._domainkey.hotfix.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "ahx572wktlhbg3h7mqs7cdaomk6esp7c.dkim.eu-south-1.amazonses.com"
+
+            # Mail records
+            - name: "mail.hotfix.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 feedback-smtp.eu-south-1.amazonses.com"
+            - name: "mail.hotfix.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:amazonses.com ~all"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
