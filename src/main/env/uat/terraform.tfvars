@@ -19,6 +19,8 @@ landing_cdn_allowed_internal_zones = ["uat.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.uat.notifichedigitali.it","www.uat.notifichedigitali.it","uat.notifichedigitali.pagopa.it","www.uat.notifichedigitali.pagopa.it"]
 landing_single_domain = "showcase"
+vpc_pn_vpn_is_enabled = false
+vpn_is_enabled = false
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
 pn_confinfo_aws_account_id = "956319218727"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-956319218727"
@@ -46,5 +48,24 @@ vpc_pn_core_core_egress_subnets_cidrs = ["10.7.40.0/24","10.7.41.0/24","10.7.42.
 vpc_pn_core_to_confinfo_subnets_cidrs = ["10.7.60.0/24","10.7.61.0/24","10.7.62.0/24"]
 vpc_pn_core_opensearch_subnets_cidrs = ["10.7.80.0/24","10.7.81.0/24","10.7.82.0/24"]
 vpc_pn_core_servicedesk_subnets_cidrs = ["10.7.7.0/28","10.7.7.16/28","10.7.7.32/28"]
+
+
+
+
+
+vpc_pn_vpn_name = "PN VPN"
+vpc_pn_vpn_primary_cidr = "10.22.0.0/16"
+vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
+vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs","monitoring","events","ecs","ssm","ssmmessages","ecs-agent","ecs-telemetry","secretsmanager"]
+
+vpc_pn_vpn_private_subnets_cidr = []
+vpc_pn_vpn_private_subnets_names = []
+vpc_pn_vpn_public_subnets_cidr = []
+vpc_pn_vpn_public_subnets_names = []
+vpc_pn_vpn_internal_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24","10.22.3.0/24","10.22.4.0/24","10.22.5.0/24"]
+vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (uat) AZ 0","PN VPN - AWS Services Subnet (uat) AZ 1","PN VPN - AWS Services Subnet (uat) AZ 2","PN VPN - private Subnet (uat) AZ 0","PN VPN - private Subnet (uat) AZ 1","PN VPN - private Subnet (uat) AZ 2"]
+
+vpc_pn_vpn_aws_subnets_cidrs = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
+vpc_pn_vpn_pvt_subnets_cidrs = ["10.22.3.0/24","10.22.4.0/24","10.22.5.0/24"]
 
 
