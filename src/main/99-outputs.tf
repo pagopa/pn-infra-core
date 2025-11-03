@@ -299,17 +299,17 @@ output "Core_HubLoginDomain" {
 
 ## vpn output
 output "Core_VPNVpcId" {
-  value = module.vpc_pn_vpn["enabled"].vpc_id
+  value = try(module.vpc_pn_vpn["enabled"].vpc_id, null)
   description = "VPC Id of VPN"
 }
 
 output "Core_VPNVpcCidr" {
-  value = var.vpc_pn_vpn_primary_cidr
+  value = try(var.vpc_pn_vpn_primary_cidr, null)
   description = "VPC CIDR of VPN"
 }
 
 output "Core_VPNDefaultSecurityGroupId" {
-  value = module.vpc_pn_vpn["enabled"].default_security_group_id
+  value = try(module.vpc_pn_vpn["enabled"].default_security_group_id, null)
   description = "Default VPN VPC security group"
 }
 
@@ -322,7 +322,7 @@ output "Core_VPNSubnetsCidrs" {
 }
 
 output "Core_VPNApplicationLoadBalancerArn" {
-  value = aws_lb.pn_vpn_ecs_alb[0].arn
+  value = try(aws_lb.pn_vpn_ecs_alb[0].arn, null)
   description = "ECS cluster Application Load Balancer ARN, attach microservice listeners here"
 }
 
@@ -336,33 +336,33 @@ output "Core_VPNServicesSubnetsCidrs" {
 
 
 output "Core_VPNApplicationLoadBalancerMetricsDimensionName" {
-  value = replace( aws_lb.pn_vpn_ecs_alb[0].arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1")
+  value = try(replace(aws_lb.pn_vpn_ecs_alb[0].arn, "/.*:[0-9]{12}:loadbalancer.app.(.*)/", "app/$1"), null)
   description = "ECS cluster Application Load Balancer name used for metrics"
 }
 
 
 output "Core_VPNApplicationLoadBalancerAwsDns" {
-  value = aws_lb.pn_vpn_ecs_alb[0].dns_name
+  value = try(aws_lb.pn_vpn_ecs_alb[0].dns_name, null) 
   description = "ECS cluster Application Load Balancer AWS released DNS, can be used to call microservices"
 }
 
 output "Core_VPNApplicationLoadBalancerAwsDnsZoneId" {
-  value = aws_lb.pn_vpn_ecs_alb[0].zone_id
+  value = try(aws_lb.pn_vpn_ecs_alb[0].zone_id, null)
   description = "ECS cluster Application Load Balancer AWS hosted Zone, usefull for aliases"
 }
 
 output "Core_VPNApplicationLoadBalancerListenerArn" {
-  value = aws_lb_listener.https_listener[0].arn
+  value = try(aws_lb_listener.https_listener[0].arn, null)
   description = "ECS cluster Application Load Balancer Listener ARN, attach here new microservice routing rule"
 }
 
 
 output "Core_VPNWebappSecurityGroupId" {
-  value = aws_security_group.alb_vpn_sg[0].id
+  value = try(aws_security_group.alb_vpn_sg[0].id, null)
   description = "WebApp security group id"
 }
 
 output "Core_VPNWebappSecurityGroupArn" {
-  value = aws_security_group.alb_vpn_sg[0].arn
+  value = try(aws_security_group.alb_vpn_sg[0].arn, null)
   description = "WebApp security group ARN"
 }
