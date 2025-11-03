@@ -45,7 +45,7 @@ resource "aws_ec2_client_vpn_endpoint" "vpn" {
   count = var.vpn_is_enabled ? 1 : 0
 
   description            = format("pn-vpn-%s", var.environment)
-  server_certificate_arn = aws_acm_certificate.vpn.arn
+  server_certificate_arn = aws_acm_certificate.vpn[0].arn
   client_cidr_block      = var.pn_vpn_cidr
 
   vpc_id             = module.vpc_pn_vpn["enabled"].vpc_id
