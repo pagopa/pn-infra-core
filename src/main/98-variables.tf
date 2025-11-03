@@ -289,7 +289,7 @@ variable "vpc_pn_vpn_name" {
 variable "pn_vpn_cidr" {
   type        = string
   description = "CIDR of the PN Simulator VPN"
-  default     = "10.100.0.0/22"
+  default     = ""
 }
 
 variable "vpc_pn_vpn_primary_cidr" {
