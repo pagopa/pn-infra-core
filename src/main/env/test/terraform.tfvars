@@ -19,10 +19,15 @@ landing_cdn_allowed_internal_zones = ["test.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.test.notifichedigitali.it","www.test.notifichedigitali.it","test.notifichedigitali.pagopa.it","www.test.notifichedigitali.pagopa.it"]
 landing_single_domain = "showcase"
+vpc_pn_vpn_is_enabled = false
+vpn_is_enabled = false
+iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
+pn_zone_dns_records = [{"name":"2fmtkux2qgmh4wbo74uenqsljowelytr._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["2fmtkux2qgmh4wbo74uenqsljowelytr.dkim.amazonses.com"]},{"name":"fkjn45smqcpjuu7jcydfuufxfzu2bdys._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["fkjn45smqcpjuu7jcydfuufxfzu2bdys.dkim.eu-south-1.amazonses.com."]},{"name":"g3buyq7jwlfowossgxu43th7g7j5tq4v._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["g3buyq7jwlfowossgxu43th7g7j5tq4v.dkim.eu-south-1.amazonses.com."]},{"name":"m2emwlvwlfbaijdy6o2vyaejwffxn62n._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["m2emwlvwlfbaijdy6o2vyaejwffxn62n.dkim.amazonses.com"]},{"name":"riyrm6wwrk2rlhawi7px3i3uxfqwrmwj._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["riyrm6wwrk2rlhawi7px3i3uxfqwrmwj.dkim.amazonses.com"]},{"name":"stsejqc5fiire7ouza35ojqib4z73hvs._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["stsejqc5fiire7ouza35ojqib4z73hvs.dkim.eu-south-1.amazonses.com."]},{"name":"mail.test.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com."]},{"name":"mail.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]}]
 pn_confinfo_aws_account_id = "771887334808"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-771887334808"
 pn_radd_aws_account_id = "654090169999"
 pn_servicedesk_aws_account_id = "533236674075"
+pn_cicd_aws_account_id = "911845998067"
 
 
 vpc_pn_core_name = "PN Core"
@@ -44,5 +49,24 @@ vpc_pn_core_core_egress_subnets_cidrs = ["10.6.40.0/24","10.6.41.0/24","10.6.42.
 vpc_pn_core_to_confinfo_subnets_cidrs = ["10.6.60.0/24","10.6.61.0/24","10.6.62.0/24"]
 vpc_pn_core_opensearch_subnets_cidrs = ["10.6.80.0/24","10.6.81.0/24","10.6.82.0/24"]
 vpc_pn_core_servicedesk_subnets_cidrs = ["10.6.7.0/28","10.6.7.16/28","10.6.7.32/28"]
+
+
+
+
+
+vpc_pn_vpn_name = "PN VPN"
+vpc_pn_vpn_primary_cidr = "10.21.0.0/16"
+vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.21.70.0/24","10.21.71.0/24","10.21.72.0/24"]
+vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs","monitoring","events","ecs","ssm","ssmmessages","ecs-agent","ecs-telemetry","secretsmanager"]
+
+vpc_pn_vpn_private_subnets_cidr = []
+vpc_pn_vpn_private_subnets_names = []
+vpc_pn_vpn_public_subnets_cidr = []
+vpc_pn_vpn_public_subnets_names = []
+vpc_pn_vpn_internal_subnets_cidr = ["10.21.70.0/24","10.21.71.0/24","10.21.72.0/24","10.21.3.0/24","10.21.4.0/24","10.21.5.0/24"]
+vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (test) AZ 0","PN VPN - AWS Services Subnet (test) AZ 1","PN VPN - AWS Services Subnet (test) AZ 2","PN VPN - private Subnet (test) AZ 0","PN VPN - private Subnet (test) AZ 1","PN VPN - private Subnet (test) AZ 2"]
+
+vpc_pn_vpn_aws_subnets_cidrs = ["10.21.70.0/24","10.21.71.0/24","10.21.72.0/24"]
+vpc_pn_vpn_pvt_subnets_cidrs = ["10.21.3.0/24","10.21.4.0/24","10.21.5.0/24"]
 
 

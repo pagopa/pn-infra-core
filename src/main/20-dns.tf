@@ -1,4 +1,3 @@
-  
 data "aws_route53_zone" "base_domain_name" {
   name         = "${var.dns_zone}."
   private_zone = false
@@ -96,6 +95,25 @@ resource "aws_route53_record" "pagopa_cname_dns_entry" {
   ttl      = 300
   zone_id  = data.aws_route53_zone.pagopa_domain_name[0].zone_id
   records  = [each.value]
+}
+
+resource "aws_route53_record" "pn_zone_dns_records" {
+  for_each = local.pn_zone_dns_records_map
+
+  zone_id = data.aws_route53_zone.base_domain_name.zone_id
+  name    = each.value.name
+  type    = each.value.type
+  ttl     = each.value.ttl
+  records = each.value.value
+}
+
+resource "aws_route53_record" "pagopa_zone_dns_records" {
+  for_each = var.pagopa_zone_delegation_enabled ? local.pagopa_zone_dns_records_map : {}
+  zone_id = data.aws_route53_zone.pagopa_domain_name[0].zone_id
+  name    = each.value.name
+  type    = each.value.type
+  ttl     = each.value.ttl
+  records = each.value.value
 }
 
 module "acm_cdn" {
