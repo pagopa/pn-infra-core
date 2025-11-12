@@ -12,6 +12,7 @@ resource "aws_route53_zone" "vpn" {
 ######          ACM Certificate for vpn.<>           ######
 ###########################################################
 resource "aws_acm_certificate" "vpn" {
+  count = var.vpc_pn_vpn_is_enabled || var.vpc_pn_vpn_is_enabled ? 1 : 0
   domain_name       = format("vpn.%s", var.dns_zone)
   validation_method = "DNS"
 
@@ -22,7 +23,7 @@ resource "aws_acm_certificate" "vpn" {
 
 resource "aws_route53_record" "vpn_cert_validation" {
   for_each = var.vpc_pn_vpn_is_enabled ? {
-    for dvo in aws_acm_certificate.vpn.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.vpn[0].domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -39,7 +40,7 @@ resource "aws_route53_record" "vpn_cert_validation" {
 resource "aws_acm_certificate_validation" "vpn" {
   for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
 
-  certificate_arn         = aws_acm_certificate.vpn.arn
+  certificate_arn         = aws_acm_certificate.vpn[0].arn
   validation_record_fqdns = [for record in aws_route53_record.vpn_cert_validation : record.fqdn]
 }
 
@@ -47,6 +48,8 @@ resource "aws_acm_certificate_validation" "vpn" {
 #####    ACM Certificare for simulator.vpn.<domain>   ##### 
 ###########################################################
 resource "aws_acm_certificate" "simulator_app" {
+  count = var.vpc_pn_vpn_is_enabled || var.vpc_pn_vpn_is_enabled ? 1 : 0
+
   domain_name       = format("simulator.vpn.%s", var.dns_zone)
   validation_method = "DNS"
 
@@ -57,7 +60,7 @@ resource "aws_acm_certificate" "simulator_app" {
 
 resource "aws_route53_record" "simulator_app_cert_validation" {
   for_each = var.vpc_pn_vpn_is_enabled ? {
-    for dvo in aws_acm_certificate.simulator_app.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.simulator_app[0].domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -74,6 +77,6 @@ resource "aws_route53_record" "simulator_app_cert_validation" {
 resource "aws_acm_certificate_validation" "simulator_app" {
   for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
 
-  certificate_arn         = aws_acm_certificate.simulator_app.arn
+  certificate_arn         = aws_acm_certificate.simulator_app[0].arn
   validation_record_fqdns = [for record in aws_route53_record.simulator_app_cert_validation : record.fqdn]
 }
