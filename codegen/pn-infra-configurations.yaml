@@ -297,7 +297,7 @@ envs:
               value:
                 - "vt4thzuk4irmgv5yu7colyhmcxcbiwww.dkim.eu-south-1.amazonses.com."
 
-            #mail records
+            # Mail records
             - name: "mail.uat.notifichedigitali.it"
               type: "MX"
               ttl: 300
@@ -308,13 +308,6 @@ envs:
               ttl: 300
               value:
                 - "v=spf1 include:amazonses.com ~all"
-
-            #other records
-            - name: "testdns.uat.notifichedigitali.it"
-              type: "TXT"
-              ttl: 120
-              value:
-                - "Test DNS entry for PN uat"
       - code: pn-confinfo
         base_dns: spid.uat.notifichedigitali.it
         aws_id: "956319218727"  # Stringhe non numeri
