@@ -39,6 +39,7 @@ variable "pn_servicedesk_aws_account_id" {
 variable "pn_cicd_aws_account_id" {
   description = "Cicd AWS Account id"
   type        = string
+  default     = ""
 }
 
 variable "pn_dns_extra_cname_entries" {
@@ -364,4 +365,5 @@ variable "iam_ext_roles_config" {
       name = string
     })), [])
   }))
+  default     = {}
 }
