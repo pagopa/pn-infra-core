@@ -33,7 +33,7 @@ pn_cicd_aws_account_id = "911845998067"
 vpc_pn_core_name = "PN Core"
 vpc_pn_core_primary_cidr = "10.7.0.0/16"
 vpc_pn_core_aws_services_interface_endpoints_subnets_cidr = ["10.7.70.0/24","10.7.71.0/24","10.7.72.0/24"]
-vpc_endpoints_pn_core = ["sqs","logs","sns","kms","kinesis-streams","elasticloadbalancing","events","ecr.api","ecr.dkr","ssmmessages","ssm","ec2messages","ecs-agent","ecs-telemetry","ecs","secretsmanager","monitoring","xray"]
+vpc_endpoints_pn_core = ["sqs","logs","sns","kms","kinesis-streams","elasticloadbalancing","events","ecr.api","ecr.dkr","ssmmessages","ssm","ec2messages","ecs-agent","ecs-telemetry","ecs","secretsmanager","monitoring","scheduler","xray"]
 
 vpc_pn_core_private_subnets_cidr = ["10.7.40.0/24","10.7.41.0/24","10.7.42.0/24"]
 vpc_pn_core_private_subnets_names = ["PN Core - PnCore Egress Subnet (uat) AZ 0","PN Core - PnCore Egress Subnet (uat) AZ 1","PN Core - PnCore Egress Subnet (uat) AZ 2"]
@@ -57,7 +57,7 @@ vpc_pn_core_servicedesk_subnets_cidrs = ["10.7.7.0/28","10.7.7.16/28","10.7.7.32
 vpc_pn_vpn_name = "PN VPN"
 vpc_pn_vpn_primary_cidr = "10.22.0.0/16"
 vpc_pn_vpn_aws_services_interface_endpoints_subnets_cidr = ["10.22.70.0/24","10.22.71.0/24","10.22.72.0/24"]
-vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs","monitoring","events","ecs","ssm","ssmmessages","ecs-agent","ecs-telemetry","secretsmanager"]
+vpc_endpoints_pn_vpn = ["ecr.api","ecr.dkr","lambda","logs","monitoring","events","ecs","ssm","ssmmessages","ecs-agent","ecs-telemetry","secretsmanager","scheduler"]
 
 vpc_pn_vpn_private_subnets_cidr = []
 vpc_pn_vpn_private_subnets_names = []

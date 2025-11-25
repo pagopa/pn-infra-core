@@ -486,6 +486,7 @@ accounts:
             - "ecs"
             - "secretsmanager"
             - "monitoring"
+            - "scheduler"
             - "xray"
         networks:
           - code: public
@@ -588,6 +589,7 @@ accounts:
             - "ecs-agent"
             - "ecs-telemetry"
             - "secretsmanager"
+            - "scheduler"
         networks:
           - code: aws
             name: AWS Services
