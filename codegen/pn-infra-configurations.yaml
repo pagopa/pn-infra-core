@@ -357,6 +357,144 @@ envs:
           vpn_is_enabled: false
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
           pn_vpn_cidr: "10.100.0.0/22"
+          pn_zone_dns_records:
+            # Google Site Verification
+            - name: "notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "google-site-verification=GjArcKkIQXiDHYgfNXlfjB844ZpsK-q8aQ98kxtONpI"
+            
+            # DMARC Policy
+            - name: "_dmarc.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=DMARC1; p=quarantine; rua=mailto:dmarc@0f1qy7b5.uriports.com; aspf=s; adkim=s"
+
+            # Main DKIM records
+            - name: "4jc3a4znq65kttxy46wr42myxlnlyhhl._domainkey.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "4jc3a4znq65kttxy46wr42myxlnlyhhl.dkim.eu-south-1.amazonses.com"
+            - name: "6dik3mjsoealm5wvr3pfiyc37bllztjg._domainkey.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "6dik3mjsoealm5wvr3pfiyc37bllztjg.dkim.eu-south-1.amazonses.com"
+            - name: "7t7zcabp3ezgx6mo5exxlhczrukhnzc2._domainkey.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 1800
+              value:
+                - "7t7zcabp3ezgx6mo5exxlhczrukhnzc2.dkim.eu-south-1.amazonses.com"
+            - name: "icubd3p2kqemljolkuhpjk4yubhzdeh4._domainkey.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "icubd3p2kqemljolkuhpjk4yubhzdeh4.dkim.eu-south-1.amazonses.com"
+            - name: "if64n7pzmzkkz2grcov3shafn37bjdwb._domainkey.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 1800
+              value:
+                - "if64n7pzmzkkz2grcov3shafn37bjdwb.dkim.eu-south-1.amazonses.com"
+            - name: "tngm2ojjoyci2tt5b7f57cnsldaczdjn._domainkey.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 1800
+              value:
+                - "tngm2ojjoyci2tt5b7f57cnsldaczdjn.dkim.eu-south-1.amazonses.com"
+
+            # PEC Aruba records
+            - name: "certificata.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 sendmx.sicurezzapostale.it"
+            - name: "certificata.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:_spf.sicurezzapostale.it -all"
+            - name: "certificatanoprod.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 sendmx.sicurezzapostale.it."
+            - name: "certificatanoprod.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:_spf.sicurezzapostale.it -all"
+            - name: "pec.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 mx.pec.aruba.it."
+            - name: "pec.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:pec.aruba.it -all"
+
+            # SES Verification for 'imprese' subdomain
+            - name: "imprese.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "amazonses:Y4NnNSxzmLAYbS/VikKn35MKUcrrCKb0Zbc0dMrmQBY="
+            - name: "_amazonses.imprese.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "Y4NnNSxzmLAYbS/VikKn35MKUcrrCKb0Zbc0dMrmQBY="
+
+            # DKIM for 'imprese' subdomain
+            - name: "36vkl46c3zzs6xl7xlbn4voq6qvtlcbv._domainkey.imprese.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "36vkl46c3zzs6xl7xlbn4voq6qvtlcbv.dkim.eu-south-1.amazonses.com"
+            - name: "uel6sb224kf5jgzkqwk43we6kxgn436s._domainkey.imprese.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "uel6sb224kf5jgzkqwk43we6kxgn436s.dkim.eu-south-1.amazonses.com"
+            - name: "xjgqlzfbblsbtgwvp46ni6uchbj7l3dy._domainkey.imprese.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "xjgqlzfbblsbtgwvp46ni6uchbj7l3dy.dkim.eu-south-1.amazonses.com"
+
+            # Mail for 'imprese' subdomain
+            - name: "email.imprese.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 feedback-smtp.eu-south-1.amazonses.com"
+            - name: "email.imprese.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:amazonses.com ~all"
+
+            # Main mail records
+            - name: "mail.notifichedigitali.it"
+              type: "MX"
+              ttl: 300
+              value:
+                - "10 feedback-smtp.eu-south-1.amazonses.com"
+            - name: "mail.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=spf1 include:amazonses.com ~all"
+
+            # Test record
+            - name: "testdns.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "Test entry for notifichedigitali.it zone"
       - code: pn-confinfo
         base_dns: spid.notifichedigitali.it
         aws_id: "350578575906"  # Stringhe non numeri
