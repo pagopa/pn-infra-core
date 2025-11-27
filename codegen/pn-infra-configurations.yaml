@@ -377,39 +377,39 @@ envs:
               type: "CNAME"
               ttl: 300
               value:
-                - "4jc3a4znq65kttxy46wr42myxlnlyhhl.dkim.eu-south-1.amazonses.com."
+                - "4jc3a4znq65kttxy46wr42myxlnlyhhl.dkim.eu-south-1.amazonses.com"
             - name: "6dik3mjsoealm5wvr3pfiyc37bllztjg._domainkey.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
               value:
-                - "6dik3mjsoealm5wvr3pfiyc37bllztjg.dkim.eu-south-1.amazonses.com."
+                - "6dik3mjsoealm5wvr3pfiyc37bllztjg.dkim.eu-south-1.amazonses.com"
             - name: "7t7zcabp3ezgx6mo5exxlhczrukhnzc2._domainkey.notifichedigitali.it"
               type: "CNAME"
               ttl: 1800
               value:
-                - "7t7zcabp3ezgx6mo5exxlhczrukhnzc2.dkim.eu-south-1.amazonses.com."
+                - "7t7zcabp3ezgx6mo5exxlhczrukhnzc2.dkim.eu-south-1.amazonses.com"
             - name: "icubd3p2kqemljolkuhpjk4yubhzdeh4._domainkey.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
               value:
-                - "icubd3p2kqemljolkuhpjk4yubhzdeh4.dkim.eu-south-1.amazonses.com."
+                - "icubd3p2kqemljolkuhpjk4yubhzdeh4.dkim.eu-south-1.amazonses.com"
             - name: "if64n7pzmzkkz2grcov3shafn37bjdwb._domainkey.notifichedigitali.it"
               type: "CNAME"
               ttl: 1800
               value:
-                - "if64n7pzmzkkz2grcov3shafn37bjdwb.dkim.eu-south-1.amazonses.com."
+                - "if64n7pzmzkkz2grcov3shafn37bjdwb.dkim.eu-south-1.amazonses.com"
             - name: "tngm2ojjoyci2tt5b7f57cnsldaczdjn._domainkey.notifichedigitali.it"
               type: "CNAME"
               ttl: 1800
               value:
-                - "tngm2ojjoyci2tt5b7f57cnsldaczdjn.dkim.eu-south-1.amazonses.com."
+                - "tngm2ojjoyci2tt5b7f57cnsldaczdjn.dkim.eu-south-1.amazonses.com"
 
             # PEC Aruba records
             - name: "certificata.notifichedigitali.it"
               type: "MX"
               ttl: 300
               value:
-                - "10 sendmx.sicurezzapostale.it."
+                - "10 sendmx.sicurezzapostale.it"
             - name: "certificata.notifichedigitali.it"
               type: "TXT"
               ttl: 300
@@ -453,24 +453,24 @@ envs:
               type: "CNAME"
               ttl: 300
               value:
-                - "36vkl46c3zzs6xl7xlbn4voq6qvtlcbv.dkim.eu-south-1.amazonses.com."
+                - "36vkl46c3zzs6xl7xlbn4voq6qvtlcbv.dkim.eu-south-1.amazonses.com"
             - name: "uel6sb224kf5jgzkqwk43we6kxgn436s._domainkey.imprese.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
               value:
-                - "uel6sb224kf5jgzkqwk43we6kxgn436s.dkim.eu-south-1.amazonses.com."
+                - "uel6sb224kf5jgzkqwk43we6kxgn436s.dkim.eu-south-1.amazonses.com"
             - name: "xjgqlzfbblsbtgwvp46ni6uchbj7l3dy._domainkey.imprese.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
               value:
-                - "xjgqlzfbblsbtgwvp46ni6uchbj7l3dy.dkim.eu-south-1.amazonses.com."
+                - "xjgqlzfbblsbtgwvp46ni6uchbj7l3dy.dkim.eu-south-1.amazonses.com"
 
             # Mail for 'imprese' subdomain
             - name: "email.imprese.notifichedigitali.it"
               type: "MX"
               ttl: 300
               value:
-                - "10 feedback-smtp.eu-south-1.amazonses.com."
+                - "10 feedback-smtp.eu-south-1.amazonses.com"
             - name: "email.imprese.notifichedigitali.it"
               type: "TXT"
               ttl: 300
@@ -482,7 +482,7 @@ envs:
               type: "MX"
               ttl: 300
               value:
-                - "10 feedback-smtp.eu-south-1.amazonses.com."
+                - "10 feedback-smtp.eu-south-1.amazonses.com"
             - name: "mail.notifichedigitali.it"
               type: "TXT"
               ttl: 300
