@@ -13,6 +13,17 @@ resource "aws_lb" "pn_vpn_ecs_alb" {
   enable_deletion_protection = false
   drop_invalid_header_fields = true
 
+  access_logs {
+    bucket  = aws_s3_bucket.pn_core_alb_logs_bucket.bucket
+    prefix  = "EcsA-access-logs"
+    enabled = var.enable_access_logs_alb_vpn
+  }
+
+  connection_logs {
+    bucket  = aws_s3_bucket.pn_core_alb_logs_bucket.bucket
+    prefix  = "EcsA-connection-logs"
+    enabled = var.enable_connection_logs_alb_vpn
+  }
   tags = {
     Name                         = "PN VPN - ECS Cluster - ALB"
     pn-eni-related               = "true"

@@ -21,6 +21,10 @@ envs:
           pn_cors_addictive_sources: "http://localhost:8090,https://pg-webapp.fe-prototype.dev.notifichedigitali.it,https://pa-webapp.fe-prototype.dev.notifichedigitali.it,https://pf-webapp.fe-prototype.dev.notifichedigitali.it"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          enable_access_logs_alb_ecsa: false
+          enable_connection_logs_alb_ecsa: false
+          enable_access_logs_alb_vpn: false
+          enable_connection_logs_alb_vpn: false
           pn_cost_anomaly_detection_threshold: "10"
           #Landing (pn-showcase) conf.
           pagopa_zone_delegation_enabled: false
@@ -127,6 +131,10 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          enable_access_logs_alb_ecsa: false
+          enable_connection_logs_alb_ecsa: false
+          enable_access_logs_alb_vpn: false
+          enable_connection_logs_alb_vpn: false
           #Landing (pn-showcase) conf.
           generate_landing_multi_domain_cdn_cert: false
           enable_landing_cdn_redirect_function: false
@@ -241,6 +249,10 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          enable_access_logs_alb_ecsa: false
+          enable_connection_logs_alb_ecsa: false
+          enable_access_logs_alb_vpn: false
+          enable_connection_logs_alb_vpn: false
           #Landing (pn-showcase) conf.
           generate_landing_multi_domain_cdn_cert: false
           enable_landing_cdn_redirect_function: false
@@ -340,6 +352,10 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://selfcare.pagopa.it,https://pnpg.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          enable_access_logs_alb_ecsa: false
+          enable_connection_logs_alb_ecsa: false
+          enable_access_logs_alb_vpn: false
+          enable_connection_logs_alb_vpn: false
           pn_dns_extra_cname_entries: '{\"assistenza\": \"hc-send.zendesk.com\"}'
           #Landing (pn-showcase) conf.
           generate_landing_multi_domain_cdn_cert: true
@@ -525,6 +541,10 @@ envs:
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it"
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
+          enable_access_logs_alb_ecsa: false
+          enable_connection_logs_alb_ecsa: false
+          enable_access_logs_alb_vpn: false
+          enable_connection_logs_alb_vpn: false
           #Landing (pn-showcase) conf.
           generate_landing_multi_domain_cdn_cert: false
           enable_landing_cdn_redirect_function: false

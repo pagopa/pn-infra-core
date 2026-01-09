@@ -36,6 +36,19 @@ resource "aws_lb" "pn_core_ecs_alb" {
 
   drop_invalid_header_fields = true
 
+  access_logs {
+    bucket  = aws_s3_bucket.pn_core_alb_logs_bucket.bucket
+    prefix  = "EcsA-access-logs"
+    enabled = var.enable_access_logs_alb_ecsa
+  }
+
+  connection_logs {
+    bucket  = aws_s3_bucket.pn_core_alb_logs_bucket.bucket
+    prefix  = "EcsA-connection-logs"
+    enabled = var.enable_connection_logs_alb_ecsa
+  }
+  
+
   tags = {
     "Name": "PN Core - ECS Cluster - ALB"
     "pn-eni-related" = "true"
@@ -391,4 +404,46 @@ resource "aws_lb_target_group_attachment" "pn_core_servicedeskin_nlb_http_to_alb
   port              = 8080
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
+}
+
+resource "aws_s3_bucket" "pn_core_alb_logs_bucket" {
+  bucket = "pn-core-alb-logs-${var.environment}-${var.aws_region}-${var.pn_core_aws_account_id}"
+  tags = {
+    Name = "PN Core - ALB Logs Bucket"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "pn_core_alb_logs_bucket_public_access_block" {
+  bucket = aws_s3_bucket.pn_core_alb_logs_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_policy" "pn_core_alb_logs_bucket_policy" {
+  bucket = aws_s3_bucket.pn_core_alb_logs_bucket.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AWSLoadBalancerWriteAccess"
+        Effect    = "Allow"
+        Principal = {
+          Service = "logdelivery.elasticloadbalancing.amazonaws.com"
+        }
+        Action   = "s3:PutObject"
+        Resource = "${aws_s3_bucket.pn_confinfo_alb_logs_bucket.arn}/*"
+        Condition = {
+          StringEquals = {
+            "aws:SourceAccount" = var.pn_core_aws_account_id
+          }
+          ArnLike = {
+            "aws:SourceArn" = "arn:aws:elasticloadbalancing:${var.aws_region}:${var.pn_core_aws_account_id}:loadbalancer/app/*"
+          }
+        }
+      }
+    ]
+  })
 }
