@@ -434,7 +434,7 @@ resource "aws_s3_bucket_policy" "pn_core_alb_logs_bucket_policy" {
           Service = "logdelivery.elasticloadbalancing.amazonaws.com"
         }
         Action   = "s3:PutObject"
-        Resource = "${aws_s3_bucket.pn_confinfo_alb_logs_bucket.arn}/*"
+        Resource = "${aws_s3_bucket.pn_core_alb_logs_bucket.arn}/*"
         Condition = {
           StringEquals = {
             "aws:SourceAccount" = var.pn_core_aws_account_id
