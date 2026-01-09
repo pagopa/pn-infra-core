@@ -367,3 +367,27 @@ variable "iam_ext_roles_config" {
   }))
   default     = {}
 }
+
+variable "enable_access_logs_alb_ecsa" {
+  type        = bool
+  description = "If true, enable access logs for the ECS ALB."
+  default     = false
+}
+
+variable "enable_connection_logs_alb_ecsa" {
+  type        = bool
+  description = "If true, enable connection logs for the ECS ALB."
+  default     = false
+}
+
+variable "enable_access_logs_alb_vpn" {
+  type        = bool
+  description = "If true, enable access logs for the VPN ALB."
+  default     = false
+}
+
+variable "enable_connection_logs_alb_vpn" {
+  type        = bool
+  description = "If true, enable connection logs for the VPN ALB."
+  default     = false
+}
