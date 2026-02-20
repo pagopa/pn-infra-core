@@ -504,6 +504,7 @@ envs:
               ttl: 300
               value:
                 - "v=spf1 include:amazonses.com ~all"
+                - "apple-domain-verification=aOHYYie5w7eJqyLIezoA1fiZWq1IDVZ9zP-FwQGFcww"
 
             # Test record
             - name: "testdns.notifichedigitali.it"
