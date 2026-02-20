@@ -369,10 +369,10 @@ envs:
             - "notifichedigitali.pagopa.it"
             - "www.notifichedigitali.pagopa.it"
           landing_single_domain: "www"
-          vpc_pn_vpn_is_enabled: false
-          vpn_is_enabled: false
+          vpc_pn_vpn_is_enabled: true
+          vpn_is_enabled: true
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-prod.xml"
-          pn_vpn_cidr: "10.100.0.0/22"
+          pn_vpn_cidr: "10.101.0.0/22"
           pn_zone_dns_records:
             # Google Site Verification
             - name: "notifichedigitali.it"
@@ -504,6 +504,7 @@ envs:
               ttl: 300
               value:
                 - "v=spf1 include:amazonses.com ~all"
+                - "apple-domain-verification=aOHYYie5w7eJqyLIezoA1fiZWq1IDVZ9zP-FwQGFcww"
 
             # Test record
             - name: "testdns.notifichedigitali.it"
