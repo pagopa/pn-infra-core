@@ -22,6 +22,7 @@ enable_landing_cdn_redirect_function = false
 landing_cdn_allowed_internal_zones = ["hotfix.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.hotfix.notifichedigitali.it","www.hotfix.notifichedigitali.it","hotfix.notifichedigitali.pagopa.it","www.hotfix.notifichedigitali.pagopa.it"]
+cdn_single_domain_cert_excluded_domains = ["www"]
 landing_single_domain = "showcase"
 vpc_pn_vpn_is_enabled = false
 vpn_is_enabled = false

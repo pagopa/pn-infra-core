@@ -116,6 +116,12 @@ variable "cdn_domains" {
   description = "List of CDN domains"
 }
 
+variable "cdn_single_domain_cert_excluded_domains" {
+  type        = set(string)
+  description = "List of CDN domains for which the single-domain ACM certificate must not be created"
+  default     = []
+}
+
 variable "apigw_custom_domains" {
   type        = set(string)
   description = "List of API-GW custom domains"
