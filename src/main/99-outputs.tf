@@ -157,7 +157,7 @@ output "Core_PortalePfLoginCertificateArn" {
 }
 
 output "Core_LandingCertificateArn" {
-  value = contains(setsubtract(var.cdn_domains, var.cdn_single_domain_cert_excluded_domains), var.landing_single_domain) ? module.acm_cdn[var.landing_single_domain].acm_certificate_arn : ""
+  value = try(module.acm_cdn[var.landing_single_domain].acm_certificate_arn, "")
 }
 
 output "Core_PortalePgCertificateArn" {
