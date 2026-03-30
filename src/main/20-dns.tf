@@ -120,7 +120,7 @@ module "acm_cdn" {
   source  = "terraform-aws-modules/acm/aws"
   version = "4.3.2"
 
-  for_each = var.cdn_domains
+  for_each = setsubtract(var.cdn_domains, var.cdn_single_domain_cert_excluded_domains)
 
   providers = {
     aws = aws.aws-us-east-1
