@@ -22,6 +22,7 @@ generate_landing_multi_domain_cdn_cert = true
 enable_landing_cdn_redirect_function = true
 landing_cdn_allowed_internal_zones = ["notifichedigitali.it","notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.notifichedigitali.it","www.notifichedigitali.it","notifichedigitali.pagopa.it","www.notifichedigitali.pagopa.it"]
+cdn_single_domain_cert_excluded_domains = ["www","showcase"]
 landing_single_domain = "www"
 vpc_pn_vpn_is_enabled = true
 vpn_is_enabled = true
