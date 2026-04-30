@@ -82,6 +82,26 @@ output "Core_NetworkLoadBalancerLink" {
   value = aws_api_gateway_vpc_link.pn_core_api_gw_vpc_lik.id
 }
 
+output "Core_VPCEExecuteApiId" {
+  value       = try(aws_vpc_endpoint.pn_core_execute_api[0].id, "")
+  description = "Id of the execute-api interface VPC endpoint used by the RADD private API Gateway proxy"
+}
+
+output "Core_RaddExecuteApiVPCEInterfaceIPs" {
+  value       = [for eni in data.aws_network_interface.pn_core_execute_api_vpce : eni.private_ip]
+  description = "Private IPs of the execute-api interface VPC endpoint ENIs registered in the RADD NLB target group"
+}
+
+output "Core_RaddPrivateApiDnsName" {
+  value       = contains(var.api_domains, "private-api.radd") ? "private-api.radd.${var.dns_zone}" : ""
+  description = "Dedicated private DNS name used to invoke the RADD private API through PrivateLink"
+}
+
+output "Core_RaddPrivateApiCertificateArn" {
+  value       = try(module.acm_api["private-api.radd"].acm_certificate_arn, "")
+  description = "ACM certificate ARN for the RADD private API Gateway custom domain"
+}
+
 output "Core_CustomDomainsRequired" {
   value = "false"
   description = "Cloudformation neet to build API-GW custom domain"

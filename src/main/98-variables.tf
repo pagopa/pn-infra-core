@@ -127,7 +127,6 @@ variable "apigw_custom_domains" {
   description = "List of API-GW custom domains"
 }
 
-
 variable "dns_record_ttl" {
   type        = number
   description = "Dns record ttl (in sec)"

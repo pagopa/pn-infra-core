@@ -177,6 +177,36 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
   }
 }
 
+# PRIVATE LINK ENDPOINT TO execute-api for RADD private proxy
+resource "aws_vpc_endpoint" "pn_core_execute_api" {
+  count = contains(var.api_domains, "private-api.radd") ? 1 : 0
+
+  vpc_id              = module.vpc_pn_core.vpc_id
+  service_name        = "com.amazonaws.${var.aws_region}.execute-api"
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = false
+
+  security_group_ids = [aws_security_group.vpc_pn_core__secgrp_tls.id]
+  subnet_ids = [
+    for cidr in var.vpc_pn_core_aws_services_interface_endpoints_subnets_cidr:
+      module.vpc_pn_core.intra_subnets[
+        index(module.vpc_pn_core.intra_subnets_cidr_blocks, cidr)
+      ]
+  ]
+
+  tags = {
+    Name                              = "Endpoint to execute-api for RADD private proxy"
+    "pn-eni-related"                 = "true"
+    "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-tls-.*$")
+  }
+}
+
+data "aws_network_interface" "pn_core_execute_api_vpce" {
+  count = contains(var.api_domains, "private-api.radd") ? var.how_many_az : 0
+
+  id = tolist(aws_vpc_endpoint.pn_core_execute_api[0].network_interface_ids)[count.index]
+}
+
 
 # FIXME Creo una zona per risolvere alb.confidential.pn.internal allo scopo di raggiungere pn-data-vault
 #   Andrebbero parametrizzati gli URL nei microservizi ma in attesa della parametrizzazione creiamo 

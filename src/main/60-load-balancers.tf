@@ -176,10 +176,21 @@ resource "aws_vpc_endpoint_service" "pn_core_radd_endpoint_svc" {
   acceptance_required        = false
   network_load_balancer_arns = [aws_lb.pn_core_radd_nlb.arn]
   allowed_principals         = ["arn:aws:iam::${var.pn_radd_aws_account_id}:root"]
+  private_dns_name           = contains(var.api_domains, "private-api.radd") ? "private-api.radd.${var.dns_zone}" : null
 
   tags = {
     "Name": "PN Core - RADD - SVC endpoint"
   }
+}
+
+resource "aws_vpc_endpoint_service_private_dns_verification" "pn_core_radd_endpoint_svc" {
+  count = contains(var.api_domains, "private-api.radd") ? 1 : 0
+
+  service_id = aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.id
+
+  depends_on = [
+    aws_route53_record.radd_private_api_endpoint_service_dns_verification
+  ]
 }
 # - RADD NLB listener for HTTP
 resource "aws_lb_listener" "pn_core_radd_nlb_http_to_alb_http" {
@@ -226,16 +237,16 @@ resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_alb_http" {
 # - RADD NLB listener for HTTPS
 resource "aws_lb_listener" "pn_core_radd_nlb_https_to_nlb_http" {
   load_balancer_arn = aws_lb.pn_core_radd_nlb.arn
-  protocol = "TLS"
-  port     = 8443
-  
-  alpn_policy = "None"
-  ssl_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn = module.acm_api["api.radd"].acm_certificate_arn
+  protocol = contains(var.api_domains, "private-api.radd") ? "TCP" : "TLS"
+  port     = contains(var.api_domains, "private-api.radd") ? 443 : 8443
+
+  alpn_policy     = contains(var.api_domains, "private-api.radd") ? null : "None"
+  ssl_policy      = contains(var.api_domains, "private-api.radd") ? null : "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn = contains(var.api_domains, "private-api.radd") ? null : module.acm_api["api.radd"].acm_certificate_arn
   
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_https_to_nlb_http.arn
+    target_group_arn = contains(var.api_domains, "private-api.radd") ? aws_lb_target_group.pn_core_radd_nlb_https_to_execute_api_vpce[0].arn : aws_lb_target_group.pn_core_radd_nlb_https_to_nlb_http.arn
   }
 }
 # - RADD NLB target group for HTTPS
@@ -267,6 +278,35 @@ resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_https_to_nlb_http" {
   availability_zone = local.azs_names[count.index]
 }
 
+resource "aws_lb_target_group" "pn_core_radd_nlb_https_to_execute_api_vpce" {
+  count = contains(var.api_domains, "private-api.radd") ? 1 : 0
+
+  name_prefix = "RaddP-"
+  vpc_id      = module.vpc_pn_core.vpc_id
+
+  port        = 443
+  protocol    = "TCP"
+  target_type = "ip"
+
+  tags = {
+    "Description": "PN Core - RADD NLB to execute-api VPCE - Target Group"
+  }
+
+  health_check {
+    enabled = true
+    port    = "443"
+  }
+}
+
+resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_https_to_execute_api_vpce" {
+  count = contains(var.api_domains, "private-api.radd") ? var.how_many_az : 0
+
+  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_https_to_execute_api_vpce[0].arn
+  port              = 443
+  target_id         = data.aws_network_interface.pn_core_execute_api_vpce[count.index].private_ip
+  availability_zone = data.aws_network_interface.pn_core_execute_api_vpce[count.index].availability_zone
+}
+
 
 
 resource "aws_network_acl" "call_8080_do_not_receive" {
@@ -282,6 +322,19 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
       cidr_block = egress.value
       from_port  = 8080
       to_port    = 8080
+    }
+  }
+
+  dynamic "egress" {
+    for_each = contains(var.api_domains, "private-api.radd") ? var.vpc_pn_core_aws_services_interface_endpoints_subnets_cidr : []
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 2000 + 100 * egress.key
+      action     = "allow"
+      cidr_block = egress.value
+      from_port  = 443
+      to_port    = 443
     }
   }
 
@@ -304,6 +357,45 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
     content {
       protocol   = "tcp"
       rule_no    = 2000 + 100 * ingress.key
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 8081
+      to_port    = 65535
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = contains(var.api_domains, "private-api.radd") ? local.Core_SubnetsCidrs : []
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 3000 + 100 * ingress.key
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 443
+      to_port    = 443
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = contains(var.api_domains, "private-api.radd") ? var.vpc_pn_core_aws_services_interface_endpoints_subnets_cidr : []
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 4000 + 100 * ingress.key
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 1024
+      to_port    = 8079
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = contains(var.api_domains, "private-api.radd") ? var.vpc_pn_core_aws_services_interface_endpoints_subnets_cidr : []
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 5000 + 100 * ingress.key
       action     = "allow"
       cidr_block = ingress.value
       from_port  = 8081
