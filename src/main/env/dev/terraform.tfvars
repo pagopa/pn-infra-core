@@ -23,6 +23,7 @@ enable_landing_cdn_redirect_function = false
 landing_cdn_allowed_internal_zones = ["dev.notifichedigitali.it"]
 landing_cdn_allowed_external_zones = ["notifichedigitali.pagopa.it"]
 landing_multi_domain_cert_domains = ["showcase.dev.notifichedigitali.it","www.dev.notifichedigitali.it","dev.notifichedigitali.pagopa.it","www.dev.notifichedigitali.pagopa.it"]
+cdn_single_domain_cert_excluded_domains = ["www"]
 landing_single_domain = "showcase"
 vpn_saml_metadata_path = "./assets/saml-metadata/pn-vpn-saml-dev.xml"
 vpc_pn_vpn_is_enabled = true

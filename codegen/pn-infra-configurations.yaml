@@ -39,6 +39,8 @@ envs:
             - "www.dev.notifichedigitali.it"
             - "dev.notifichedigitali.pagopa.it"
             - "www.dev.notifichedigitali.pagopa.it"
+          cdn_single_domain_cert_excluded_domains:
+            - "www"
           landing_single_domain: "showcase"
           vpn_saml_metadata_path: "./assets/saml-metadata/pn-vpn-saml-dev.xml"
           vpc_pn_vpn_is_enabled: true
@@ -147,6 +149,8 @@ envs:
             - "www.test.notifichedigitali.it"
             - "test.notifichedigitali.pagopa.it"
             - "www.test.notifichedigitali.pagopa.it"
+          cdn_single_domain_cert_excluded_domains:
+            - "www"
           landing_single_domain: "showcase"
           vpc_pn_vpn_is_enabled: false
           vpn_is_enabled: false
@@ -265,6 +269,8 @@ envs:
             - "www.uat.notifichedigitali.it"
             - "uat.notifichedigitali.pagopa.it"
             - "www.uat.notifichedigitali.pagopa.it"
+          cdn_single_domain_cert_excluded_domains:
+            - "www"
           landing_single_domain: "showcase"
           vpc_pn_vpn_is_enabled: false
           vpn_is_enabled: false
@@ -368,6 +374,9 @@ envs:
             - "www.notifichedigitali.it"
             - "notifichedigitali.pagopa.it"
             - "www.notifichedigitali.pagopa.it"
+          cdn_single_domain_cert_excluded_domains:
+            - "www"
+            - "showcase"
           landing_single_domain: "www"
           vpc_pn_vpn_is_enabled: true
           vpn_is_enabled: true
@@ -558,6 +567,8 @@ envs:
             - "www.hotfix.notifichedigitali.it"
             - "hotfix.notifichedigitali.pagopa.it"
             - "www.hotfix.notifichedigitali.pagopa.it"
+          cdn_single_domain_cert_excluded_domains:
+            - "www"
           landing_single_domain: "showcase"
           vpc_pn_vpn_is_enabled: false
           vpn_is_enabled: false
