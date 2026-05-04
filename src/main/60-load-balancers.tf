@@ -184,7 +184,7 @@ resource "aws_vpc_endpoint_service" "pn_core_radd_endpoint_svc" {
 }
 
 resource "aws_vpc_endpoint_service_private_dns_verification" "pn_core_radd_endpoint_svc" {
-  count = contains(var.api_domains, "private-api.radd") ? 1 : 0
+  count = try(length(aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.private_dns_name_configuration), 0) > 0 ? 1 : 0
 
   service_id = aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.id
 
@@ -303,8 +303,8 @@ resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_https_to_execute_api
 
   target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_https_to_execute_api_vpce[0].arn
   port              = 443
-  target_id         = data.aws_network_interface.pn_core_execute_api_vpce[count.index].private_ip
-  availability_zone = data.aws_network_interface.pn_core_execute_api_vpce[count.index].availability_zone
+  target_id         = data.aws_network_interface.pn_core_radd_execute_api_eni[count.index].private_ip
+  availability_zone = data.aws_network_interface.pn_core_radd_execute_api_eni[count.index].availability_zone
 }
 
 

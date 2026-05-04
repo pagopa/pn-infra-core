@@ -177,8 +177,8 @@ resource "aws_vpc_endpoint" "to_safestorage_extch" {
   }
 }
 
-# PRIVATE LINK ENDPOINT TO execute-api for RADD private proxy
-resource "aws_vpc_endpoint" "pn_core_execute_api" {
+# - RADD VPC endpoint to execute-api
+resource "aws_vpc_endpoint" "pn_core_radd_execute_api" {
   count = contains(var.api_domains, "private-api.radd") ? 1 : 0
 
   vpc_id              = module.vpc_pn_core.vpc_id
@@ -195,16 +195,16 @@ resource "aws_vpc_endpoint" "pn_core_execute_api" {
   ]
 
   tags = {
-    Name                              = "Endpoint to execute-api for RADD private proxy"
+    Name                              = "PN Core - RADD - execute-api VPCE"
     "pn-eni-related"                 = "true"
     "pn-eni-related-groupName-regexp" = base64encode("^pn-core_vpc-tls-.*$")
   }
 }
 
-data "aws_network_interface" "pn_core_execute_api_vpce" {
+data "aws_network_interface" "pn_core_radd_execute_api_eni" {
   count = contains(var.api_domains, "private-api.radd") ? var.how_many_az : 0
 
-  id = tolist(aws_vpc_endpoint.pn_core_execute_api[0].network_interface_ids)[count.index]
+  id = tolist(aws_vpc_endpoint.pn_core_radd_execute_api[0].network_interface_ids)[count.index]
 }
 
 

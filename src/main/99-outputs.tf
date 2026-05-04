@@ -83,12 +83,12 @@ output "Core_NetworkLoadBalancerLink" {
 }
 
 output "Core_VPCEExecuteApiId" {
-  value       = try(aws_vpc_endpoint.pn_core_execute_api[0].id, "")
+  value       = try(aws_vpc_endpoint.pn_core_radd_execute_api[0].id, "")
   description = "Id of the execute-api interface VPC endpoint used by the RADD private API Gateway proxy"
 }
 
 output "Core_RaddExecuteApiVPCEInterfaceIPs" {
-  value       = [for eni in data.aws_network_interface.pn_core_execute_api_vpce : eni.private_ip]
+  value       = [for eni in data.aws_network_interface.pn_core_radd_execute_api_eni : eni.private_ip]
   description = "Private IPs of the execute-api interface VPC endpoint ENIs registered in the RADD NLB target group"
 }
 

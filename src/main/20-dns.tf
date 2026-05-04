@@ -63,7 +63,7 @@ resource "aws_route53_record" "apigw_custom_domain_dns" {
 }
 
 resource "aws_route53_record" "radd_private_api_endpoint_service_dns_verification" {
-  count = contains(var.api_domains, "private-api.radd") ? 1 : 0
+  count = try(length(aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.private_dns_name_configuration), 0) > 0 ? 1 : 0
 
   zone_id = data.aws_route53_zone.base_domain_name.zone_id
   name    = aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.private_dns_name_configuration[0].name
