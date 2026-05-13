@@ -12,6 +12,14 @@ resource "aws_security_group" "vpc_pn_core__secgrp_webapp" {
     protocol    = "tcp"
     cidr_blocks = [var.vpc_pn_core_primary_cidr]
   }
+
+  ingress {
+    description = "8081 from VPC for RADD private proxy"
+    from_port   = 8081
+    to_port     = 8081
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_pn_core_primary_cidr]
+  }
   
   egress {
     from_port        = 0
@@ -59,6 +67,23 @@ resource "aws_lb" "pn_core_ecs_alb" {
 resource "aws_lb_listener" "pn_core_ecs_alb_8080" {
   load_balancer_arn = aws_lb.pn_core_ecs_alb.arn
   port              = "8080"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "application/json"
+      message_body = "{ \"error\": \"404\", \"message\": \"Load balancer rule not configured\" }"
+      status_code  = "404"
+    }
+  }
+}
+
+# - ECS cluster Application load balancer HTTP listener dedicated to RADD private proxy
+resource "aws_lb_listener" "pn_core_ecs_alb_radd_private_proxy" {
+  load_balancer_arn = aws_lb.pn_core_ecs_alb.arn
+  port              = "8081"
   protocol          = "HTTP"
 
   default_action {
@@ -223,6 +248,40 @@ resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_alb_http" {
   target_id         = aws_lb.pn_core_ecs_alb.arn
 }
 
+# - RADD NLB target group for the dedicated RADD private proxy ALB listener.
+#   The RADD NLB listener cutover remains a separate, explicit routing change.
+resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_http" {
+  name_prefix = "RaddL-"
+  vpc_id      = module.vpc_pn_core.vpc_id
+
+  port        = 8081
+  protocol    = "TCP"
+  target_type = "alb"
+  
+  depends_on = [
+    aws_lb.pn_core_radd_nlb,
+    aws_lb.pn_core_ecs_alb,
+    aws_lb_listener.pn_core_ecs_alb_radd_private_proxy
+  ]
+
+  tags = {
+    "Description": "PN Core - RADD NLB to dedicated RADD private proxy ALB listener - Target Group"
+  }
+
+  health_check {
+    enabled = true
+    matcher = "200-499"
+  }
+}
+
+# - RADD NLB target group attachment for the dedicated RADD private proxy ALB listener
+resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_http" {
+  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_http_to_radd_private_proxy_alb_http.arn
+  port              = 8081
+
+  target_id         = aws_lb.pn_core_ecs_alb.arn
+}
+
 # - RADD NLB listener for HTTPS
 resource "aws_lb_listener" "pn_core_radd_nlb_https_to_nlb_http" {
   load_balancer_arn = aws_lb.pn_core_radd_nlb.arn
@@ -281,7 +340,7 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
       action     = "allow"
       cidr_block = egress.value
       from_port  = 8080
-      to_port    = 8080
+      to_port    = 8081
     }
   }
 
