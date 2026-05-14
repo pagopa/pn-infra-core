@@ -214,7 +214,7 @@ resource "aws_lb_listener" "pn_core_radd_nlb_http_to_alb_http" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_http_to_alb_http.arn
+    target_group_arn = aws_lb_target_group.pn_core_radd_nlb_http_to_radd_private_proxy_alb_http.arn
   }
 }
 # - RADD NLB target group for HTTP
