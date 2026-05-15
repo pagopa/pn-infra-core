@@ -217,39 +217,7 @@ resource "aws_lb_listener" "pn_core_radd_nlb_http_to_alb_http" {
     target_group_arn = aws_lb_target_group.pn_core_radd_nlb_http_to_radd_private_proxy_alb_http.arn
   }
 }
-# - RADD NLB target group for HTTP
-resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_alb_http" {
-  name_prefix = "RaddI-"
-  vpc_id      = module.vpc_pn_core.vpc_id
-
-  port        = 8080
-  protocol    = "TCP"
-  target_type = "alb"
-  
-  depends_on = [
-    aws_lb.pn_core_radd_nlb,
-    aws_lb.pn_core_ecs_alb
-  ]
-
-  tags = {
-    "Description": "PN Core - RADD NLB to ALB - Target Group"
-  }
-
-  health_check {
-    enabled = true
-    matcher = "200-499"
-  }
-}
-# - RADD NLB target group for HTTP attachmet
-resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_alb_http" {
-  target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_http_to_alb_http.arn
-  port              = 8080
-
-  target_id         = aws_lb.pn_core_ecs_alb.arn
-}
-
-# - RADD NLB target group for the dedicated RADD private proxy ALB listener.
-#   The RADD NLB listener cutover remains a separate, explicit routing change.
+# - RADD NLB target group for private proxy ALB listener
 resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_http" {
   name_prefix = "RaddL-"
   vpc_id      = module.vpc_pn_core.vpc_id
@@ -274,7 +242,7 @@ resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_
   }
 }
 
-# - RADD NLB target group attachment for the dedicated RADD private proxy ALB listener
+# - RADD NLB target group attachment for private proxy ALB listener
 resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_http" {
   target_group_arn  = aws_lb_target_group.pn_core_radd_nlb_http_to_radd_private_proxy_alb_http.arn
   port              = 8081
@@ -443,7 +411,7 @@ resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
   port        = 8080
   protocol    = "TCP"
   target_type = "alb"
-  
+
   depends_on = [
     aws_lb.pn_core_servicedesk_nlb,
     aws_lb.pn_core_ecs_alb
