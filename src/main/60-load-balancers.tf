@@ -219,7 +219,7 @@ resource "aws_lb_listener" "pn_core_radd_nlb_http_to_alb_http" {
 }
 # - RADD NLB target group for private proxy ALB listener
 resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_http" {
-  name_prefix = "RaddL-"
+  name_prefix = "RaddI-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
   port        = 8081

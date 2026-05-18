@@ -87,11 +87,6 @@ output "Core_RaddPrivateProxyAlbListenerArn" {
   description = "Dedicated ALB listener ARN for the RADD private proxy"
 }
 
-output "Core_RaddPrivateProxyEndpointServiceId" {
-  value       = aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.id
-  description = "RADD VPC endpoint service id used by the RADD private proxy to validate technical VPCE Host headers"
-}
-
 output "Core_CustomDomainsRequired" {
   value = "false"
   description = "Cloudformation neet to build API-GW custom domain"
