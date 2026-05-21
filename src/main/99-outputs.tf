@@ -82,6 +82,11 @@ output "Core_NetworkLoadBalancerLink" {
   value = aws_api_gateway_vpc_link.pn_core_api_gw_vpc_lik.id
 }
 
+output "Core_RaddPrivateProxyAlbListenerArn" {
+  value       = aws_lb_listener.pn_core_ecs_alb_radd_private_proxy.arn
+  description = "Dedicated ALB listener ARN for the RADD private proxy"
+}
+
 output "Core_CustomDomainsRequired" {
   value = "false"
   description = "Cloudformation neet to build API-GW custom domain"
