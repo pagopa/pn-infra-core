@@ -20,7 +20,7 @@ envs:
         params:
           pn_cors_addictive_sources: "http://localhost:8090,https://pg-webapp.fe-prototype.dev.notifichedigitali.it,https://pa-webapp.fe-prototype.dev.notifichedigitali.it,https://pf-webapp.fe-prototype.dev.notifichedigitali.it"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
-          pn_auth_fleet_jwks_mapping: '{"PAGOPA":"https://uat.selfcare.pagopa.it/.well-known/jwks.json"}'
+          pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           enable_access_logs_alb_ecsa: false
           enable_connection_logs_alb_ecsa: false
@@ -132,7 +132,7 @@ envs:
         params:
           pn_cors_addictive_sources: "http://localhost:8090"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
-          pn_auth_fleet_jwks_mapping: '{"PAGOPA":"https://uat.selfcare.pagopa.it/.well-known/jwks.json"}'
+          pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           enable_access_logs_alb_ecsa: false
@@ -253,7 +253,7 @@ envs:
         params:
           pn_cors_addictive_sources: ""
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
-          pn_auth_fleet_jwks_mapping: '{"PAGOPA":"https://uat.selfcare.pagopa.it/.well-known/jwks.json"}'
+          pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           enable_access_logs_alb_ecsa: false
@@ -359,7 +359,7 @@ envs:
         params:
           pn_cors_addictive_sources: ""
           pn_auth_fleet_addictive_allowed_issuer: "https://selfcare.pagopa.it,https://pnpg.selfcare.pagopa.it,PAGOPA"
-          pn_auth_fleet_jwks_mapping: '{"PAGOPA":"https://selfcare.pagopa.it/.well-known/jwks.json"}'
+          pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://selfcare.pagopa.it/.well-known/jwks.json\"}'
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           enable_access_logs_alb_ecsa: false
@@ -553,7 +553,7 @@ envs:
         params:
           pn_cors_addictive_sources: ""
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
-          pn_auth_fleet_jwks_mapping: '{"PAGOPA":"https://uat.selfcare.pagopa.it/.well-known/jwks.json"}'
+          pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           pn_cost_anomaly_detection_threshold: "10"
           enable_access_logs_alb_ecsa: false
