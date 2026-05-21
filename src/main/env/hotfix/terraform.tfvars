@@ -11,6 +11,7 @@ pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-028e57d02d
 pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-09f2a367f89a819f3"
 pn_cors_addictive_sources = ""
 pn_auth_fleet_addictive_allowed_issuer = "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
+pn_auth_fleet_jwks_mapping = "{"PAGOPA":"https://uat.selfcare.pagopa.it/.well-known/jwks.json"}"
 pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 pn_cost_anomaly_detection_threshold = "10"
 enable_access_logs_alb_ecsa = false
