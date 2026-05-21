@@ -272,6 +272,11 @@ variable "pn_auth_fleet_addictive_allowed_issuer" {
   description = "Allowed issuer for PN authentication sources"
 }
 
+variable "pn_auth_fleet_jwks_mapping" {
+  type        = string
+  description = "JSON mapping for non-standard JWT issuers and JWKS endpoints"
+}
+
 variable "pn_cost_anomaly_detection_email" {
   type        = string
   description = "pn-core cost anomaly detection email"
