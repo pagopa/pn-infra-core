@@ -291,7 +291,7 @@ output "Core_TokenExchangeLambdaEnvironmentAudience" {
 }
 
 output "Core_TokenExchangeLambdaEnvironmentJwksMapping" {
-  value = jsonencode({ })
+  value = var.pn_auth_fleet_jwks_mapping
 }
 
 output "Core_ApikeyAuthorizerV2PDNDAudience" {
