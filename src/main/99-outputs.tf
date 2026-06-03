@@ -87,6 +87,11 @@ output "Core_RaddPrivateProxyAlbListenerArn" {
   description = "Dedicated ALB listener ARN for the RADD private proxy"
 }
 
+output "Core_ServiceDeskPrivateLinkAlbListenerArn" {
+  value       = aws_lb_listener.pn_core_ecs_alb_servicedesk_private_link_8082.arn
+  description = "Dedicated ALB listener ARN for the Service Desk PrivateLink channel"
+}
+
 output "Core_CustomDomainsRequired" {
   value = "false"
   description = "Cloudformation neet to build API-GW custom domain"

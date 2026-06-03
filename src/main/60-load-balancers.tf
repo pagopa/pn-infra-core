@@ -97,6 +97,23 @@ resource "aws_lb_listener" "pn_core_ecs_alb_radd_private_proxy" {
   }
 }
 
+# - ECS cluster Application load balancer HTTP listener dedicated to Service Desk PrivateLink
+resource "aws_lb_listener" "pn_core_ecs_alb_servicedesk_private_link_8082" {
+  load_balancer_arn = aws_lb.pn_core_ecs_alb.arn
+  port              = "8082"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "application/json"
+      message_body = "{ \"error\": \"404\", \"message\": \"Load balancer rule not configured\" }"
+      status_code  = "404"
+    }
+  }
+}
+
 
 
 # - NLB Di ingresso per le invocazioni dal web
@@ -308,7 +325,7 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
       action     = "allow"
       cidr_block = egress.value
       from_port  = 8080
-      to_port    = 8081
+      to_port    = 8082
     }
   }
 
@@ -339,7 +356,7 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
   }
 
   tags = {
-    Name = "Outbound 8080 to ALB not inbound"
+    Name = "Outbound 8080-8082 to ALB not inbound"
   }
 }
 
@@ -403,22 +420,23 @@ resource "aws_lb_listener" "pn_core_servicedesk_nlb_http_to_alb_http" {
     target_group_arn = aws_lb_target_group.pn_core_servicedeskin_nlb_http_to_alb_http.arn
   }
 }
-# - Service Desk NLB target group for HTTP
+# - Service Desk NLB target group for dedicated HTTP listener
 resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
   name_prefix = "SeDeI-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
-  port        = 8080
+  port        = 8082
   protocol    = "TCP"
   target_type = "alb"
 
   depends_on = [
     aws_lb.pn_core_servicedesk_nlb,
-    aws_lb.pn_core_ecs_alb
+    aws_lb.pn_core_ecs_alb,
+    aws_lb_listener.pn_core_ecs_alb_servicedesk_private_link_8082
   ]
 
   tags = {
-    "Description": "PN Core - Service Desk NLB to ALB - Target Group"
+    "Description": "PN Core - Service Desk NLB to dedicated ALB listener - Target Group"
   }
 
   health_check {
@@ -428,7 +446,7 @@ resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
 }
 resource "aws_lb_target_group_attachment" "pn_core_servicedeskin_nlb_http_to_alb_http" {
   target_group_arn  = aws_lb_target_group.pn_core_servicedeskin_nlb_http_to_alb_http.arn
-  port              = 8080
+  port              = 8082
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
 }
