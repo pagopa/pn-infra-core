@@ -71,6 +71,20 @@ envs:
                 - name: QaPolicy
                 - name: AthenaRead
           pn_zone_dns_records:
+            # DMARC Policy
+            - name: "_dmarc.dev.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=DMARC1; p=quarantine; aspf=s; adkim=s"
+
+            # BIMI record
+            - name: "default._bimi.dev.notifichedigitali.it"
+              type: "TXT"
+              ttl: 300
+              value:
+                - "v=BIMI1; l=https://showcase.dev.notifichedigitali.it/static/bimi/send.svg"
+
             - name: "4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it"
               type: "CNAME"
               ttl: 300
