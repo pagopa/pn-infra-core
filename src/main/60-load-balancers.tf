@@ -461,6 +461,10 @@ resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
   protocol    = "TCP"
   target_type = "alb"
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   depends_on = [
     aws_lb.pn_core_servicedesk_nlb,
     aws_lb.pn_core_ecs_alb,
@@ -481,6 +485,10 @@ resource "aws_lb_target_group_attachment" "pn_core_servicedeskin_nlb_http_to_alb
   port              = var.servicedesk_private_link_listener_port
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_s3_bucket" "pn_core_alb_logs_bucket" {
