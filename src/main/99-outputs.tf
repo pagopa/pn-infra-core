@@ -88,7 +88,7 @@ output "Core_RaddPrivateProxyAlbListenerArn" {
 }
 
 output "Core_ServiceDeskPrivateLinkAlbListenerArn" {
-  value       = aws_lb_listener.pn_core_ecs_alb_servicedesk_private_link_8082.arn
+  value       = aws_lb_listener.pn_core_ecs_alb_servicedesk_private_link.arn
   description = "Dedicated ALB listener ARN for the Service Desk PrivateLink channel"
 }
 

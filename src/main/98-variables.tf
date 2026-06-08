@@ -36,6 +36,20 @@ variable "pn_servicedesk_aws_account_id" {
   description = "pn-servicedesk current environment AWS Account id"
 }
 
+variable "servicedesk_private_link_listener_port" {
+  type        = number
+  description = "Dedicated ALB listener port for the Service Desk PrivateLink channel"
+  default     = 8082
+
+  validation {
+    condition = (
+      var.servicedesk_private_link_listener_port >= 8082 &&
+      var.servicedesk_private_link_listener_port <= 65535
+    )
+    error_message = "Service Desk PrivateLink listener port must be between 8082 and 65535. Port 8081 is reserved for RADD/Poste."
+  }
+}
+
 variable "pn_cicd_aws_account_id" {
   description = "Cicd AWS Account id"
   type        = string

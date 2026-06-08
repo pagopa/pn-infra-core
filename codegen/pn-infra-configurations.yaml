@@ -24,6 +24,7 @@ envs:
           pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
           enable_access_logs_alb_ecsa: false
           enable_connection_logs_alb_ecsa: false
+          servicedesk_private_link_listener_port: 8082
           enable_access_logs_alb_vpn: false
           enable_connection_logs_alb_vpn: false
           pn_cost_anomaly_detection_threshold: "10"
@@ -151,6 +152,7 @@ envs:
           pn_cost_anomaly_detection_threshold: "10"
           enable_access_logs_alb_ecsa: false
           enable_connection_logs_alb_ecsa: false
+          servicedesk_private_link_listener_port: 8082
           enable_access_logs_alb_vpn: false
           enable_connection_logs_alb_vpn: false
           #Landing (pn-showcase) conf.
