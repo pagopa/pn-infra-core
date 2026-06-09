@@ -76,7 +76,7 @@ envs:
               type: "TXT"
               ttl: 300
               value:
-                - "v=DMARC1; p=quarantine; aspf=s; adkim=s"
+                - "v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"
 
             # BIMI record
             - name: "default._bimi.dev.notifichedigitali.it"
@@ -199,7 +199,7 @@ envs:
               type: "TXT"
               ttl: 300
               value:
-                - "v=DMARC1; p=quarantine; aspf=s; adkim=s"
+                - "v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"
 
             # BIMI record
             - name: "default._bimi.test.notifichedigitali.it"
@@ -213,7 +213,7 @@ envs:
               type: "TXT"
               ttl: 300
               value:
-                - "v=DMARC1; p=quarantine; aspf=s; adkim=s"
+                - "v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"
 
             # BIMI record for mail subdomain
             - name: "default._bimi.mail.test.notifichedigitali.it"
