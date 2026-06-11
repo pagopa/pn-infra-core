@@ -20,6 +20,14 @@ resource "aws_security_group" "vpc_pn_core__secgrp_webapp" {
     protocol    = "tcp"
     cidr_blocks = [var.vpc_pn_core_primary_cidr]
   }
+
+  ingress {
+    description = "Service Desk PrivateLink listener from VPC"
+    from_port   = var.servicedesk_private_link_listener_port
+    to_port     = var.servicedesk_private_link_listener_port
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_pn_core_primary_cidr]
+  }
   
   egress {
     from_port        = 0
@@ -84,6 +92,23 @@ resource "aws_lb_listener" "pn_core_ecs_alb_8080" {
 resource "aws_lb_listener" "pn_core_ecs_alb_radd_private_proxy" {
   load_balancer_arn = aws_lb.pn_core_ecs_alb.arn
   port              = "8081"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "application/json"
+      message_body = "{ \"error\": \"404\", \"message\": \"Load balancer rule not configured\" }"
+      status_code  = "404"
+    }
+  }
+}
+
+# - ECS cluster Application load balancer HTTP listener dedicated to Service Desk PrivateLink
+resource "aws_lb_listener" "pn_core_ecs_alb_servicedesk_private_link" {
+  load_balancer_arn = aws_lb.pn_core_ecs_alb.arn
+  port              = var.servicedesk_private_link_listener_port
   protocol          = "HTTP"
 
   default_action {
@@ -312,6 +337,19 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
     }
   }
 
+  dynamic "egress" {
+    for_each = local.Core_SubnetsCidrs
+
+    content {
+      protocol   = "tcp"
+      rule_no    = 2000 + 100 * egress.key
+      action     = "allow"
+      cidr_block = egress.value
+      from_port  = var.servicedesk_private_link_listener_port
+      to_port    = var.servicedesk_private_link_listener_port
+    }
+  }
+
   dynamic "ingress" {
     for_each = local.Core_SubnetsCidrs
 
@@ -339,7 +377,7 @@ resource "aws_network_acl" "call_8080_do_not_receive" {
   }
 
   tags = {
-    Name = "Outbound 8080 to ALB not inbound"
+    Name = "Outbound 8080, 8081 and ${var.servicedesk_private_link_listener_port} to ALB not inbound"
   }
 }
 
@@ -429,6 +467,38 @@ resource "aws_lb_target_group" "pn_core_servicedeskin_nlb_http_to_alb_http" {
 resource "aws_lb_target_group_attachment" "pn_core_servicedeskin_nlb_http_to_alb_http" {
   target_group_arn  = aws_lb_target_group.pn_core_servicedeskin_nlb_http_to_alb_http.arn
   port              = 8080
+
+  target_id         = aws_lb.pn_core_ecs_alb.arn
+}
+
+# - Service Desk NLB target group for dedicated PrivateLink ALB listener
+resource "aws_lb_target_group" "pn_core_servicedesk_nlb_http_to_private_link_alb_http" {
+  name_prefix = "SeDeP-"
+  vpc_id      = module.vpc_pn_core.vpc_id
+
+  port        = var.servicedesk_private_link_listener_port
+  protocol    = "TCP"
+  target_type = "alb"
+
+  depends_on = [
+    aws_lb.pn_core_servicedesk_nlb,
+    aws_lb.pn_core_ecs_alb,
+    aws_lb_listener.pn_core_ecs_alb_servicedesk_private_link
+  ]
+
+  tags = {
+    "Description": "PN Core - Service Desk NLB to dedicated PrivateLink ALB listener - Target Group"
+  }
+
+  health_check {
+    enabled = true
+    matcher = "200-499"
+  }
+}
+
+resource "aws_lb_target_group_attachment" "pn_core_servicedesk_nlb_http_to_private_link_alb_http" {
+  target_group_arn  = aws_lb_target_group.pn_core_servicedesk_nlb_http_to_private_link_alb_http.arn
+  port              = var.servicedesk_private_link_listener_port
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
 }
