@@ -437,19 +437,8 @@ resource "aws_lb_listener" "pn_core_servicedesk_nlb_http_to_alb_http" {
   port     = 8080
 
   default_action {
-    type = "forward"
-
-    forward {
-      target_group {
-        arn    = aws_lb_target_group.pn_core_servicedeskin_nlb_http_to_alb_http.arn
-        weight = 90
-      }
-
-      target_group {
-        arn    = aws_lb_target_group.pn_core_servicedesk_nlb_http_to_dedicated_alb_listener_http.arn
-        weight = 10
-      }
-    }
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.pn_core_servicedesk_nlb_http_to_dedicated_alb_listener_http.arn
   }
 }
 # - Service Desk NLB target group for HTTP
