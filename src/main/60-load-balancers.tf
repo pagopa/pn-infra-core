@@ -471,8 +471,8 @@ resource "aws_lb_target_group_attachment" "pn_core_servicedeskin_nlb_http_to_alb
   target_id         = aws_lb.pn_core_ecs_alb.arn
 }
 
-# - Service Desk NLB target group for dedicated PrivateLink ALB listener
-resource "aws_lb_target_group" "pn_core_servicedesk_nlb_http_to_private_link_alb_http" {
+# - Service Desk NLB target group for dedicated ALB listener
+resource "aws_lb_target_group" "pn_core_servicedesk_nlb_http_to_dedicated_alb_listener_http" {
   name_prefix = "SeDeP-"
   vpc_id      = module.vpc_pn_core.vpc_id
 
@@ -487,7 +487,7 @@ resource "aws_lb_target_group" "pn_core_servicedesk_nlb_http_to_private_link_alb
   ]
 
   tags = {
-    "Description": "PN Core - Service Desk NLB to dedicated PrivateLink ALB listener - Target Group"
+    "Description": "PN Core - Service Desk NLB to dedicated ALB listener - Target Group"
   }
 
   health_check {
@@ -496,8 +496,8 @@ resource "aws_lb_target_group" "pn_core_servicedesk_nlb_http_to_private_link_alb
   }
 }
 
-resource "aws_lb_target_group_attachment" "pn_core_servicedesk_nlb_http_to_private_link_alb_http" {
-  target_group_arn  = aws_lb_target_group.pn_core_servicedesk_nlb_http_to_private_link_alb_http.arn
+resource "aws_lb_target_group_attachment" "pn_core_servicedesk_nlb_http_to_dedicated_alb_listener_http" {
+  target_group_arn  = aws_lb_target_group.pn_core_servicedesk_nlb_http_to_dedicated_alb_listener_http.arn
   port              = var.servicedesk_private_link_listener_port
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
