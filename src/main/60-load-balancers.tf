@@ -250,6 +250,10 @@ resource "aws_lb_target_group" "pn_core_radd_nlb_http_to_radd_private_proxy_alb_
   port        = 8081
   protocol    = "TCP"
   target_type = "alb"
+
+  lifecycle {
+    create_before_destroy = true
+  }
   
   depends_on = [
     aws_lb.pn_core_radd_nlb,
@@ -273,6 +277,10 @@ resource "aws_lb_target_group_attachment" "pn_core_radd_nlb_http_to_radd_private
   port              = 8081
 
   target_id         = aws_lb.pn_core_ecs_alb.arn
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # - RADD NLB listener for HTTPS
