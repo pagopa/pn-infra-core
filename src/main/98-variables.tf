@@ -247,6 +247,24 @@ variable "vpc_pn_core_servicedesk_subnets_cidrs" {
   description = "Cidr list of Service Desk ingress NLB subnets in VPC pn-core"
 }
 
+variable "servicedesk_private_link_listener_port" {
+  type        = number
+  description = "Dedicated ALB listener port for the Service Desk PrivateLink channel"
+  default     = 8082
+}
+
+variable "servicedesk_private_link_legacy_weight" {
+  type        = number
+  description = "Legacy NLB target group weight for the Service Desk PrivateLink channel"
+  default     = 100
+}
+
+variable "servicedesk_private_link_dedicated_weight" {
+  type        = number
+  description = "Dedicated NLB target group weight for the Service Desk PrivateLink channel"
+  default     = 0
+}
+
 variable "vpc_pn_core_opensearch_subnets_cidrs" {
   type        = list(string)
   description = "Cidr list of OpenSearch subnets in VPC pn-core"
