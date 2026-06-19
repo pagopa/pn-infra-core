@@ -42,6 +42,12 @@ variable "pn_cicd_aws_account_id" {
   default     = ""
 }
 
+variable "pn_core_private_link_additional_allowed_principal_account_ids" {
+  description = "Additional allowed principal account ids for core PrivateLink endpoint services"
+  type        = list(string)
+  default     = []
+}
+
 variable "pn_dns_extra_cname_entries" {
   type        = string
   default     = "{}"

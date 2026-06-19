@@ -9,6 +9,7 @@ apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"
 pn_core_aws_account_id = "644374009812"
 pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-0137ff603c40224ec"
 pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-0d3e538b0b0956de4"
+pn_core_private_link_additional_allowed_principal_account_ids = ["911845998067","830192246553"]
 pn_cors_addictive_sources = ""
 pn_auth_fleet_addictive_allowed_issuer = "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
 pn_auth_fleet_jwks_mapping = "{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}"
