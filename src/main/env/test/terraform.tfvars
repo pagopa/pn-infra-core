@@ -9,6 +9,7 @@ apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"
 pn_core_aws_account_id = "151559006927"
 pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-0c61021a745c4c6c7"
 pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-06e9167128c810a62"
+pn_core_private_link_additional_allowed_principal_account_ids = ["911845998067","830192246553"]
 pn_cors_addictive_sources = "http://localhost:8090"
 pn_auth_fleet_addictive_allowed_issuer = "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
 pn_auth_fleet_jwks_mapping = "{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}"
@@ -16,6 +17,9 @@ pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 pn_cost_anomaly_detection_threshold = "10"
 enable_access_logs_alb_ecsa = false
 enable_connection_logs_alb_ecsa = false
+servicedesk_private_link_listener_port = 8082
+servicedesk_private_link_legacy_weight = 0
+servicedesk_private_link_dedicated_weight = 100
 enable_access_logs_alb_vpn = false
 enable_connection_logs_alb_vpn = false
 generate_landing_multi_domain_cdn_cert = false
@@ -28,7 +32,7 @@ landing_single_domain = "showcase"
 vpc_pn_vpn_is_enabled = false
 vpn_is_enabled = false
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
-pn_zone_dns_records = [{"name":"2fmtkux2qgmh4wbo74uenqsljowelytr._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["2fmtkux2qgmh4wbo74uenqsljowelytr.dkim.amazonses.com"]},{"name":"fkjn45smqcpjuu7jcydfuufxfzu2bdys._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["fkjn45smqcpjuu7jcydfuufxfzu2bdys.dkim.eu-south-1.amazonses.com."]},{"name":"g3buyq7jwlfowossgxu43th7g7j5tq4v._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["g3buyq7jwlfowossgxu43th7g7j5tq4v.dkim.eu-south-1.amazonses.com."]},{"name":"m2emwlvwlfbaijdy6o2vyaejwffxn62n._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["m2emwlvwlfbaijdy6o2vyaejwffxn62n.dkim.amazonses.com"]},{"name":"riyrm6wwrk2rlhawi7px3i3uxfqwrmwj._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["riyrm6wwrk2rlhawi7px3i3uxfqwrmwj.dkim.amazonses.com"]},{"name":"stsejqc5fiire7ouza35ojqib4z73hvs._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["stsejqc5fiire7ouza35ojqib4z73hvs.dkim.eu-south-1.amazonses.com."]},{"name":"mail.test.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com."]},{"name":"mail.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]}]
+pn_zone_dns_records = [{"name":"_dmarc.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.test.notifichedigitali.it/static/bimi/send.svg"]},{"name":"_dmarc.mail.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.mail.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.test.notifichedigitali.it/static/bimi/send.svg"]},{"name":"2fmtkux2qgmh4wbo74uenqsljowelytr._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["2fmtkux2qgmh4wbo74uenqsljowelytr.dkim.amazonses.com"]},{"name":"fkjn45smqcpjuu7jcydfuufxfzu2bdys._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["fkjn45smqcpjuu7jcydfuufxfzu2bdys.dkim.eu-south-1.amazonses.com."]},{"name":"g3buyq7jwlfowossgxu43th7g7j5tq4v._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["g3buyq7jwlfowossgxu43th7g7j5tq4v.dkim.eu-south-1.amazonses.com."]},{"name":"m2emwlvwlfbaijdy6o2vyaejwffxn62n._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["m2emwlvwlfbaijdy6o2vyaejwffxn62n.dkim.amazonses.com"]},{"name":"riyrm6wwrk2rlhawi7px3i3uxfqwrmwj._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["riyrm6wwrk2rlhawi7px3i3uxfqwrmwj.dkim.amazonses.com"]},{"name":"stsejqc5fiire7ouza35ojqib4z73hvs._domainkey.test.notifichedigitali.it","type":"CNAME","ttl":300,"value":["stsejqc5fiire7ouza35ojqib4z73hvs.dkim.eu-south-1.amazonses.com."]},{"name":"mail.test.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com."]},{"name":"mail.test.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]}]
 pn_confinfo_aws_account_id = "771887334808"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-771887334808"
 pn_radd_aws_account_id = "654090169999"
