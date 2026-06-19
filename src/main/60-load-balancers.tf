@@ -225,7 +225,10 @@ resource "aws_lb" "pn_core_radd_nlb" {
 resource "aws_vpc_endpoint_service" "pn_core_radd_endpoint_svc" {
   acceptance_required        = false
   network_load_balancer_arns = [aws_lb.pn_core_radd_nlb.arn]
-  allowed_principals         = ["arn:aws:iam::${var.pn_radd_aws_account_id}:root"]
+  allowed_principals         = distinct(concat(
+    ["arn:aws:iam::${var.pn_radd_aws_account_id}:root"],
+    [for account_id in var.pn_core_private_link_additional_allowed_principal_account_ids : "arn:aws:iam::${account_id}:root"]
+  ))
 
   tags = {
     "Name": "PN Core - RADD - SVC endpoint"
@@ -432,7 +435,10 @@ resource "aws_lb" "pn_core_servicedesk_nlb" {
 resource "aws_vpc_endpoint_service" "pn_core_servicedesk_endpoint_svc" {
   acceptance_required        = false
   network_load_balancer_arns = [aws_lb.pn_core_servicedesk_nlb.arn]
-  allowed_principals         = ["arn:aws:iam::${var.pn_servicedesk_aws_account_id}:root"]
+  allowed_principals         = distinct(concat(
+    ["arn:aws:iam::${var.pn_servicedesk_aws_account_id}:root"],
+    [for account_id in var.pn_core_private_link_additional_allowed_principal_account_ids : "arn:aws:iam::${account_id}:root"]
+  ))
 
   tags = {
     "Name": "PN Core - Service Desk - SVC endpoint"

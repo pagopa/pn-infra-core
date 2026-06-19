@@ -18,6 +18,8 @@ envs:
           #   terraform "main" dell'account pn-confinfo dello stesso ambiente
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
         params:
+          pn_core_private_link_additional_allowed_principal_account_ids:
+            - "911845998067"
           pn_cors_addictive_sources: "http://localhost:8090,https://pg-webapp.fe-prototype.dev.notifichedigitali.it,https://pa-webapp.fe-prototype.dev.notifichedigitali.it,https://pf-webapp.fe-prototype.dev.notifichedigitali.it"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
           pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
@@ -147,6 +149,9 @@ envs:
           to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-0c61021a745c4c6c7"
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-06e9167128c810a62"
         params:
+          pn_core_private_link_additional_allowed_principal_account_ids:
+            - "911845998067"
+            - "830192246553"
           pn_cors_addictive_sources: "http://localhost:8090"
           pn_auth_fleet_addictive_allowed_issuer: "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
           pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
@@ -299,6 +304,9 @@ envs:
           to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-0137ff603c40224ec" 
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-0d3e538b0b0956de4"
         params:
+          pn_core_private_link_additional_allowed_principal_account_ids:
+            - "911845998067"
+            - "830192246553"
           pn_cors_addictive_sources: ""
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
           pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
@@ -605,6 +613,9 @@ envs:
           to_data_vault: "com.amazonaws.vpce.eu-south-1.vpce-svc-028e57d02dfd2ba53" 
           to_extch_safestorage: "com.amazonaws.vpce.eu-south-1.vpce-svc-09f2a367f89a819f3"
         params:
+          pn_core_private_link_additional_allowed_principal_account_ids:
+            - "911845998067"
+            - "830192246553"
           pn_cors_addictive_sources: ""
           pn_auth_fleet_addictive_allowed_issuer: "https://uat.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
           pn_auth_fleet_jwks_mapping: '{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}'
