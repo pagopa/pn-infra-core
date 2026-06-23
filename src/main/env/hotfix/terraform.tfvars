@@ -32,6 +32,7 @@ landing_single_domain = "showcase"
 vpc_pn_vpn_is_enabled = false
 vpn_is_enabled = false
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
+pn_zone_dns_records = [{"name":"_dmarc.hotfix.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.hotfix.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.hotfix.notifichedigitali.it/static/bimi/send.svg"]},{"name":"_dmarc.mail.hotfix.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.mail.hotfix.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.hotfix.notifichedigitali.it/static/bimi/send.svg"]}]
 pn_confinfo_aws_account_id = "839620963891"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-839620963891"
 pn_radd_aws_account_id = "515674411184"
