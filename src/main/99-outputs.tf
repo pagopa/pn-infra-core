@@ -97,11 +97,6 @@ output "Core_CustomDomainsRequired" {
   description = "Cloudformation neet to build API-GW custom domain"
 }
 
-output "Core_SafeStorageAccountId" {
-  value = var.pn_confinfo_aws_account_id
-  description = "Safe Storage will be deployed into confinfo account"
-}
-
 output "Core_ConfidentialInfoAccountId" {
   value = var.pn_confinfo_aws_account_id
   description = "Confidential Information account id"
