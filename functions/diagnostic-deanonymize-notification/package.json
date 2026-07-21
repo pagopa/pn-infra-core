@@ -13,7 +13,7 @@
     "dependencies": {
         "@aws-sdk/client-dynamodb": "^3.1005.0",
         "@aws-sdk/lib-dynamodb": "^3.535.0",
-        "axios": ">=1.6.0",
+        "axios": ">=1.18.0",
         "compatibility-layer": "../diagnostic-compatibility-layer"
     }
 }
