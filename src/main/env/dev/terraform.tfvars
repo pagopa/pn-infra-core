@@ -9,12 +9,16 @@ apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg"
 pn_core_aws_account_id = "830192246553"
 pn_core_to_data_vault_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-05e7543f3ead0c903"
 pn_core_to_extch_safestorage_vpcse = "com.amazonaws.vpce.eu-south-1.vpce-svc-07d53855bfe7d3c4a"
+pn_core_private_link_additional_allowed_principal_account_ids = ["911845998067"]
 pn_cors_addictive_sources = "http://localhost:8090,https://pg-webapp.fe-prototype.dev.notifichedigitali.it,https://pa-webapp.fe-prototype.dev.notifichedigitali.it,https://pf-webapp.fe-prototype.dev.notifichedigitali.it"
 pn_auth_fleet_addictive_allowed_issuer = "https://dev.selfcare.pagopa.it,https://uat.selfcare.pagopa.it,https://pnpg.dev.selfcare.pagopa.it,https://pnpg.uat.selfcare.pagopa.it,PAGOPA"
 pn_auth_fleet_jwks_mapping = "{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.well-known/jwks.json\"}"
 pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 enable_access_logs_alb_ecsa = false
 enable_connection_logs_alb_ecsa = false
+servicedesk_private_link_listener_port = 8082
+servicedesk_private_link_legacy_weight = 0
+servicedesk_private_link_dedicated_weight = 100
 enable_access_logs_alb_vpn = false
 enable_connection_logs_alb_vpn = false
 pn_cost_anomaly_detection_threshold = "10"
@@ -31,7 +35,7 @@ vpc_pn_vpn_is_enabled = true
 vpn_is_enabled = false
 pn_vpn_cidr = "10.100.0.0/22"
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
-pn_zone_dns_records = [{"name":"4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["4nrumbeqx2zgef22hosjkwuxdfubess3.dkim.eu-south-1.amazonses.com"]},{"name":"nhw5hdrtn5bh3paxodxhnwzc5qkue33d._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["nhw5hdrtn5bh3paxodxhnwzc5qkue33d.dkim.eu-south-1.amazonses.com"]},{"name":"ufdxabswg6emrc3ohqqtfdrrdmdiaoa4._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]},{"name":"test.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["Test entry for dev.notifichedigitali.it zone"]}]
+pn_zone_dns_records = [{"name":"_dmarc.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.dev.notifichedigitali.it/static/bimi/send.svg"]},{"name":"4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["4nrumbeqx2zgef22hosjkwuxdfubess3.dkim.eu-south-1.amazonses.com"]},{"name":"nhw5hdrtn5bh3paxodxhnwzc5qkue33d._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["nhw5hdrtn5bh3paxodxhnwzc5qkue33d.dkim.eu-south-1.amazonses.com"]},{"name":"ufdxabswg6emrc3ohqqtfdrrdmdiaoa4._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]},{"name":"test.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["Test entry for dev.notifichedigitali.it zone"]}]
 pn_confinfo_aws_account_id = "089813480515"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-089813480515"
 pn_radd_aws_account_id = "830192246553"
@@ -77,3 +81,5 @@ vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (dev) AZ 0","
 
 vpc_pn_vpn_aws_subnets_cidrs = ["10.20.70.0/24","10.20.71.0/24","10.20.72.0/24"]
 vpc_pn_vpn_pvt_subnets_cidrs = ["10.20.3.0/24","10.20.4.0/24","10.20.5.0/24"]
+
+
