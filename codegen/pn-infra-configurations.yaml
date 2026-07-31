@@ -71,6 +71,7 @@ envs:
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
                 - "AWSCloudShellFullAccess"
+                - "AmazonS3FullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: QaPolicy
@@ -200,6 +201,7 @@ envs:
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
                 - "AWSCloudShellFullAccess"
+                - "AmazonS3FullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: QaPolicy
@@ -355,6 +357,7 @@ envs:
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
                 - "AWSCloudShellFullAccess"
+                - "AmazonS3FullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: QaPolicy
@@ -713,6 +716,7 @@ envs:
                 - "AWSCodeBuildDeveloperAccess"
                 - "AmazonDynamoDBFullAccess"
                 - "AWSCloudShellFullAccess"
+                - "AmazonS3FullAccess"
               inline_policies:
                 - name: KmsDecrypt
                 - name: QaPolicy
