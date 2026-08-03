@@ -87,6 +87,16 @@ output "Core_RaddPrivateProxyAlbListenerArn" {
   description = "Dedicated ALB listener ARN for the RADD private proxy"
 }
 
+output "Core_RaddNetworkLoadBalancerArn" {
+  value       = aws_lb.pn_core_radd_nlb.arn
+  description = "RADD Network Load Balancer ARN"
+}
+
+output "Core_RaddVpcEndpointServiceId" {
+  value       = aws_vpc_endpoint_service.pn_core_radd_endpoint_svc.id
+  description = "RADD VPC endpoint service ID"
+}
+
 output "Core_ServiceDeskPrivateLinkAlbListenerArn" {
   value       = aws_lb_listener.pn_core_ecs_alb_servicedesk_private_link.arn
   description = "Dedicated ALB listener ARN for the Service Desk PrivateLink channel"
