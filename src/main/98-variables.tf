@@ -426,3 +426,9 @@ variable "enable_connection_logs_alb_vpn" {
   description = "If true, enable connection logs for the VPN ALB."
   default     = false
 }
+
+variable "enable_cross_zone_load_balancing_api_gw_nlb" {
+  type        = bool
+  description = "Enable cross-zone load balancing on the CORE Web API Gateway ingress NLB (WebI-), which forwards to the shared ALB."
+  default     = false
+}

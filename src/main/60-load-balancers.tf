@@ -131,6 +131,7 @@ resource "aws_lb" "pn_core_api_gw_nlb" {
   internal = true
   ip_address_type = "ipv4"
   load_balancer_type = "network"
+  enable_cross_zone_load_balancing = var.enable_cross_zone_load_balancing_api_gw_nlb
 
 
   dynamic "subnet_mapping" {
