@@ -16,6 +16,7 @@ pn_auth_fleet_jwks_mapping = "{\"PAGOPA\": \"https://uat.selfcare.pagopa.it/.wel
 pn_cost_anomaly_detection_email = "pn-irt-team@pagopa.it"
 enable_access_logs_alb_ecsa = false
 enable_connection_logs_alb_ecsa = false
+enable_cross_zone_load_balancing_api_gw_nlb = true
 servicedesk_private_link_listener_port = 8082
 servicedesk_private_link_legacy_weight = 0
 servicedesk_private_link_dedicated_weight = 100
