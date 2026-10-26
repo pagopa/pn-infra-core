@@ -3,7 +3,7 @@ environment = "dev"
 how_many_az = 3
 dns_zone = "dev.notifichedigitali.it"
 api_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn","api.dest"]
-cdn_domains = ["selfcare","cittadini","login","imprese","www","showcase","maps","helpdesk"]
+cdn_domains = ["selfcare","cittadini","login","imprese","www","showcase","maps","helpdesk","partner"]
 apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn","api.dest"]
   
 pn_core_aws_account_id = "830192246553"
@@ -82,5 +82,4 @@ vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (dev) AZ 0","
 
 vpc_pn_vpn_aws_subnets_cidrs = ["10.20.70.0/24","10.20.71.0/24","10.20.72.0/24"]
 vpc_pn_vpn_pvt_subnets_cidrs = ["10.20.3.0/24","10.20.4.0/24","10.20.5.0/24"]
-
 
