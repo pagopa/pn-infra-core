@@ -432,9 +432,3 @@ variable "enable_cross_zone_load_balancing_api_gw_nlb" {
   description = "Enable cross-zone load balancing on the CORE Web API Gateway ingress NLB (WebI-), which forwards to the shared ALB."
   default     = false
 }
-
-variable "enable_deletion_protection_core_lbs" {
-  type        = bool
-  description = "Enable deletion protection on the CORE ECS ALB and the API Gateway, RADD and Service Desk ingress NLBs. Set to false before any planned removal or replacement."
-  default     = false
-}

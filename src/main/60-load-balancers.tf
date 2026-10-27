@@ -48,7 +48,7 @@ resource "aws_lb" "pn_core_ecs_alb" {
   security_groups    = [aws_security_group.vpc_pn_core__secgrp_webapp.id]
   subnets            = local.Core_SubnetsIds
 
-  enable_deletion_protection = var.enable_deletion_protection_core_lbs
+  enable_deletion_protection = true
 
   drop_invalid_header_fields = true
 
@@ -132,7 +132,7 @@ resource "aws_lb" "pn_core_api_gw_nlb" {
   ip_address_type = "ipv4"
   load_balancer_type = "network"
   enable_cross_zone_load_balancing = var.enable_cross_zone_load_balancing_api_gw_nlb
-  enable_deletion_protection = var.enable_deletion_protection_core_lbs
+  enable_deletion_protection = true
 
 
   dynamic "subnet_mapping" {
@@ -207,7 +207,7 @@ resource "aws_lb" "pn_core_radd_nlb" {
   internal = true
   ip_address_type = "ipv4"
   load_balancer_type = "network"
-  enable_deletion_protection = var.enable_deletion_protection_core_lbs
+  enable_deletion_protection = true
 
   dynamic "subnet_mapping" {
     for_each = range(var.how_many_az)
@@ -417,7 +417,7 @@ resource "aws_lb" "pn_core_servicedesk_nlb" {
   internal = true
   ip_address_type = "ipv4"
   load_balancer_type = "network"
-  enable_deletion_protection = var.enable_deletion_protection_core_lbs
+  enable_deletion_protection = true
 
   dynamic "subnet_mapping" {
     for_each = range(var.how_many_az)
