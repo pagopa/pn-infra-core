@@ -108,6 +108,23 @@ envs:
               value:
                 - "ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"
 
+            # DKIM records for mail subdomain
+            - name: "pvurxxlzs4drpktpavxgszo76uxhrxgf._domainkey.mail.dev.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "pvurxxlzs4drpktpavxgszo76uxhrxgf.dkim.eu-south-1.amazonses.com"
+            - name: "uoe6hgfs36zdof6env43inttoqo2kzib._domainkey.mail.dev.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "uoe6hgfs36zdof6env43inttoqo2kzib.dkim.eu-south-1.amazonses.com"
+            - name: "zwdy7whoaysd2r2bdl3e3rex55l6htrf._domainkey.mail.dev.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "zwdy7whoaysd2r2bdl3e3rex55l6htrf.dkim.eu-south-1.amazonses.com"
+
             - name: "mail.dev.notifichedigitali.it"
               type: "MX"
               ttl: 300
