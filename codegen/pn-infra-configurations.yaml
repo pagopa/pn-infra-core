@@ -286,6 +286,22 @@ envs:
               value:
                 - "stsejqc5fiire7ouza35ojqib4z73hvs.dkim.eu-south-1.amazonses.com."
 
+            - name: "4ck6zdbdkbrlzicjthbsw427okoqisvu._domainkey.mail.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "4ck6zdbdkbrlzicjthbsw427okoqisvu.dkim.eu-south-1.amazonses.com"
+            - name: "52qhwa7433lao3nryemrzhkjpn2pabu3._domainkey.mail.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "52qhwa7433lao3nryemrzhkjpn2pabu3.dkim.eu-south-1.amazonses.com"
+            - name: "li55qmsoyxjbeu45kgzlfb6zz5a5cnct._domainkey.mail.test.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "li55qmsoyxjbeu45kgzlfb6zz5a5cnct.dkim.eu-south-1.amazonses.com"
+
             # Mail records
             - name: "mail.test.notifichedigitali.it"
               type: "MX"
@@ -427,6 +443,22 @@ envs:
               ttl: 300
               value:
                 - "vt4thzuk4irmgv5yu7colyhmcxcbiwww.dkim.eu-south-1.amazonses.com."
+
+            - name: "3llryimlizuqyvqlp3sppgbkfcd5tnkn._domainkey.mail.uat.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "3llryimlizuqyvqlp3sppgbkfcd5tnkn.dkim.eu-south-1.amazonses.com"
+            - name: "5mkkxiir3eskppiavuplivehmrv6xmbx._domainkey.mail.uat.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "5mkkxiir3eskppiavuplivehmrv6xmbx.dkim.eu-south-1.amazonses.com"
+            - name: "hsyno3wvwrywt4hmfwazxolm4ywuxwpq._domainkey.mail.uat.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "hsyno3wvwrywt4hmfwazxolm4ywuxwpq.dkim.eu-south-1.amazonses.com"
 
             # Mail records
             - name: "mail.uat.notifichedigitali.it"
