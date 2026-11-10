@@ -599,6 +599,21 @@ envs:
               ttl: 1800
               value:
                 - "tngm2ojjoyci2tt5b7f57cnsldaczdjn.dkim.eu-south-1.amazonses.com"
+            - name: "hvrgswpp5v4ax7idduo7dax5kz4pwjyv._domainkey.mail.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "hvrgswpp5v4ax7idduo7dax5kz4pwjyv.dkim.eu-south-1.amazonses.com"
+            - name: "peizwojhzhbel37faavn4d3kaqwsulqa._domainkey.mail.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "peizwojhzhbel37faavn4d3kaqwsulqa.dkim.eu-south-1.amazonses.com"
+            - name: "rhxprgl5fju24gyzcuzfpbjvtuntp3eq._domainkey.mail.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "rhxprgl5fju24gyzcuzfpbjvtuntp3eq.dkim.eu-south-1.amazonses.com"
 
             # PEC Aruba records
             - name: "certificata.notifichedigitali.it"
@@ -803,6 +818,22 @@ envs:
               ttl: 300
               value:
                 - "v=BIMI1; l=https://showcase.hotfix.notifichedigitali.it/static/bimi/send.svg"
+
+            - name: "6ipl7ljuq32iu7jzh3zevfoy66jxfsqq._domainkey.mail.hotfix.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "6ipl7ljuq32iu7jzh3zevfoy66jxfsqq.dkim.eu-south-1.amazonses.com"
+            - name: "nopwisgep4lc6ujke4yksjrnqh2gbmtk._domainkey.mail.hotfix.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "nopwisgep4lc6ujke4yksjrnqh2gbmtk.dkim.eu-south-1.amazonses.com"
+            - name: "zji4iwfdvcsrk5evdg3kjp6etnky5qht._domainkey.mail.hotfix.notifichedigitali.it"
+              type: "CNAME"
+              ttl: 300
+              value:
+                - "zji4iwfdvcsrk5evdg3kjp6etnky5qht.dkim.eu-south-1.amazonses.com"
       - code: pn-confinfo
         base_dns: spid.hotfix.notifichedigitali.it
         aws_id: "839620963891"  # Stringhe non numeri
