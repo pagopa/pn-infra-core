@@ -163,6 +163,11 @@ output "Core_PortalePaCertificateArn" {
   value = module.acm_cdn["selfcare"].acm_certificate_arn
 }
 
+output "Core_PortalePtCertificateArn" {
+  description = "ACM certificate ARN for the PT portal, or '-' when the partner CDN domain is not enabled."
+  value       = contains(var.cdn_domains, "partner") ? module.acm_cdn["partner"].acm_certificate_arn : "-"
+}
+
 output "Core_PortalePfCertificateArn" {
   value = module.acm_cdn["cittadini"].acm_certificate_arn
 }
@@ -190,6 +195,11 @@ output "Core_PortaleHelpdeskCertificateArn" {
 
 output "Core_PortalePaDomain" {
   value = "selfcare.${var.dns_zone}"
+}
+
+output "Core_PortalePtDomain" {
+  description = "Domain for the PT portal, or '-' when the partner CDN domain is not enabled."
+  value       = contains(var.cdn_domains, "partner") ? "partner.${var.dns_zone}" : "-"
 }
 
 output "Core_PortalePfDomain" {

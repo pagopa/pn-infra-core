@@ -3,7 +3,7 @@ environment = "dev"
 how_many_az = 3
 dns_zone = "dev.notifichedigitali.it"
 api_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn","api.dest"]
-cdn_domains = ["selfcare","cittadini","login","imprese","www","showcase","maps","helpdesk"]
+cdn_domains = ["selfcare","cittadini","login","imprese","www","showcase","maps","helpdesk","partner"]
 apigw_custom_domains = ["api","webapi","api-io","api.radd","api.bo","api-selcpg","api.cn","api.dest"]
   
 pn_core_aws_account_id = "830192246553"
@@ -36,7 +36,7 @@ vpc_pn_vpn_is_enabled = true
 vpn_is_enabled = false
 pn_vpn_cidr = "10.100.0.0/22"
 iam_ext_roles_config = {"SendExtAdmin":{"managed_policies":["AdministratorAccess"]},"SendExtReadOnly":{"managed_policies":["ReadOnlyAccess","AWSCloudShellFullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"AthenaRead"}]},"SendExtPowerUser":{"managed_policies":["ReadOnlyAccess","AmazonSSMFullAccess","SecretsManagerReadWrite","AWSCodeBuildDeveloperAccess","AmazonDynamoDBFullAccess","AWSCloudShellFullAccess","AmazonS3FullAccess"],"inline_policies":[{"name":"KmsDecrypt"},{"name":"QaPolicy"},{"name":"AthenaRead"}]}}
-pn_zone_dns_records = [{"name":"_dmarc.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.dev.notifichedigitali.it/static/bimi/send.svg"]},{"name":"4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["4nrumbeqx2zgef22hosjkwuxdfubess3.dkim.eu-south-1.amazonses.com"]},{"name":"nhw5hdrtn5bh3paxodxhnwzc5qkue33d._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["nhw5hdrtn5bh3paxodxhnwzc5qkue33d.dkim.eu-south-1.amazonses.com"]},{"name":"ufdxabswg6emrc3ohqqtfdrrdmdiaoa4._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]},{"name":"test.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["Test entry for dev.notifichedigitali.it zone"]}]
+pn_zone_dns_records = [{"name":"_dmarc.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=DMARC1; p=quarantine; pct=100; aspf=s; adkim=s"]},{"name":"default._bimi.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=BIMI1; l=https://showcase.dev.notifichedigitali.it/static/bimi/send.svg"]},{"name":"4nrumbeqx2zgef22hosjkwuxdfubess3._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["4nrumbeqx2zgef22hosjkwuxdfubess3.dkim.eu-south-1.amazonses.com"]},{"name":"nhw5hdrtn5bh3paxodxhnwzc5qkue33d._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["nhw5hdrtn5bh3paxodxhnwzc5qkue33d.dkim.eu-south-1.amazonses.com"]},{"name":"ufdxabswg6emrc3ohqqtfdrrdmdiaoa4._domainkey.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["ufdxabswg6emrc3ohqqtfdrrdmdiaoa4.dkim.eu-south-1.amazonses.com"]},{"name":"pvurxxlzs4drpktpavxgszo76uxhrxgf._domainkey.mail.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["pvurxxlzs4drpktpavxgszo76uxhrxgf.dkim.eu-south-1.amazonses.com"]},{"name":"uoe6hgfs36zdof6env43inttoqo2kzib._domainkey.mail.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["uoe6hgfs36zdof6env43inttoqo2kzib.dkim.eu-south-1.amazonses.com"]},{"name":"zwdy7whoaysd2r2bdl3e3rex55l6htrf._domainkey.mail.dev.notifichedigitali.it","type":"CNAME","ttl":300,"value":["zwdy7whoaysd2r2bdl3e3rex55l6htrf.dkim.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"MX","ttl":300,"value":["10 feedback-smtp.eu-south-1.amazonses.com"]},{"name":"mail.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["v=spf1 include:amazonses.com ~all"]},{"name":"test.dev.notifichedigitali.it","type":"TXT","ttl":300,"value":["Test entry for dev.notifichedigitali.it zone"]}]
 pn_confinfo_aws_account_id = "089813480515"
 pn_safestorage_data_bucket_name = "pn-safestorage-eu-south-1-089813480515"
 pn_radd_aws_account_id = "830192246553"
@@ -82,5 +82,4 @@ vpc_pn_vpn_internal_subnets_names = ["PN VPN - AWS Services Subnet (dev) AZ 0","
 
 vpc_pn_vpn_aws_subnets_cidrs = ["10.20.70.0/24","10.20.71.0/24","10.20.72.0/24"]
 vpc_pn_vpn_pvt_subnets_cidrs = ["10.20.3.0/24","10.20.4.0/24","10.20.5.0/24"]
-
 
