@@ -869,6 +869,7 @@ accounts:
         - showcase
         - maps
         - helpdesk
+        - partner
     has_apigw: true
     has_landing: true
     vpcs:
