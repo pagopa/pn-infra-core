@@ -42,7 +42,7 @@ resource "aws_lb_listener" "https_listener" {
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn   = aws_acm_certificate.simulator_app[0].arn
+  certificate_arn   = aws_acm_certificate_validation.simulator_app["enabled"].certificate_arn
 
   default_action {
     type = "fixed-response"
