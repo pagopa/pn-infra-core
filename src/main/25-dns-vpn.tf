@@ -12,7 +12,7 @@ resource "aws_route53_zone" "vpn" {
 ######          ACM Certificate for vpn.<>           ######
 ###########################################################
 resource "aws_acm_certificate" "vpn" {
-  count = var.vpc_pn_vpn_is_enabled || var.vpc_pn_vpn_is_enabled ? 1 : 0
+  count             = var.vpn_is_enabled ? 1 : 0
   domain_name       = format("vpn.%s", var.dns_zone)
   validation_method = "DNS"
 
@@ -22,7 +22,7 @@ resource "aws_acm_certificate" "vpn" {
 }
 
 resource "aws_route53_record" "vpn_cert_validation" {
-  for_each = var.vpc_pn_vpn_is_enabled ? {
+  for_each = var.vpn_is_enabled ? {
     for dvo in aws_acm_certificate.vpn[0].domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
@@ -38,7 +38,7 @@ resource "aws_route53_record" "vpn_cert_validation" {
 }
 
 resource "aws_acm_certificate_validation" "vpn" {
-  for_each = var.vpc_pn_vpn_is_enabled ? { "enabled" = true } : {}
+  for_each = var.vpn_is_enabled ? { "enabled" = true } : {}
 
   certificate_arn         = aws_acm_certificate.vpn[0].arn
   validation_record_fqdns = [for record in aws_route53_record.vpn_cert_validation : record.fqdn]
